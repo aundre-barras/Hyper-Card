@@ -75,7 +75,9 @@ export default function SignUp() {
           }}
         >           
           <img src={logoCircle} style = {{ width: "150px", height: "150px" }}/> 
-          <Typography variant='h1' color="#5B7ABC">
+          <Typography variant='h1' color="#5B7ABC"
+          component={Link} to="/" 
+          style={{ textDecoration:"none"}}>
             hypr
             <span style={{color:"#1B1B1B"}}>crd</span>
           </Typography>
