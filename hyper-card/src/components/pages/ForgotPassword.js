@@ -51,7 +51,7 @@ const theme = createTheme({
   }
 });
 
-export default function Login() {
+export default function ForgotPassword() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -98,37 +98,23 @@ export default function Login() {
               autoComplete="email"
               autoFocus
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Login
+              email me reset
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link to="/forgotpassword" style={{
+                <Link to="/login" style={{
                   color:"rgba(0, 0, 0, 0.75)",
                   fontFamily:"Open Sans",
                   fontWeight:300,
                   fontSize:"12px"
                   }}>
-                  Forgot password?
+                  {"Know your password? Login"}
                 </Link>
               </Grid>
               <Grid item>
