@@ -1,33 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { GoogleAuth, LoginAuth, Register} from "./fb-components/authentication.js";
-import { AppWrapper } from "./fb-components/appwrapper.js";
-import Cookies from "universal-cookie";
-import "./App.css";
+import './App.css';
+import React from 'react';
+import ReactDOM from "react-dom/client";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {Landing} from "./components/pages/landing";
+import {SignUp} from "./components/pages/signup";
 
-const cookies = new Cookies();
-
-function HyprCrd() {
-  const [isAuth, setIsAuth] = useState(cookies.get("hyprcrd-auth"));
-
-  if (!isAuth) {
-    return (
-      <AppWrapper
-        isAuth={isAuth}
-        setIsAuth={setIsAuth}
-      >
-        <LoginAuth setIsAuth={setIsAuth}/>
-        <GoogleAuth setIsAuth={setIsAuth} />
-        <Register setIsAuth = {setIsAuth}/>
-        
-      </AppWrapper>
-    );
-  }
-
+export const HyprCrd = () => {
   return (
-    <AppWrapper isAuth={isAuth} setIsAuth={setIsAuth}>
-        Welcome back!
-    </AppWrapper>
-  );
+      <BrowserRouter>
+        <Routes>
+          <Route path = "/" element = {<Landing/>}/>
+          <Route path = "/signup" element = {<SignUp/>}/>
+        </Routes>
+      </BrowserRouter>
+
+  )
 }
 
-export default HyprCrd;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<HyprCrd/>);
