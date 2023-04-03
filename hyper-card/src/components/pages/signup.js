@@ -15,11 +15,36 @@ import {theme} from "./theme";
 
 // Backend integration imports
 import {React, useState} from "react";
-import {db} from "../firebase-config";
-import {collection, query, limit, where} from "firebase/firestore";
+
+import {useNavigate} from "react-router-dom";
+
+import {auth, 
+        db, 
+        googleProv
+        } from "../firebase-config";
+
+import {
+    getDocs, 
+    doc, 
+    collection, 
+    query, 
+    where,
+    setDoc,
+    Timestamp,
+    } from "firebase/firestore";
+
+import { 
+        createUserWithEmailAndPassword, 
+        onAuthStateChanged, 
+        signInWithPopup
+        } from 'firebase/auth';
+
+
+
 
 
 export const SignUp = () => {
+    const navigate = useNavigate();
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -29,12 +54,85 @@ export const SignUp = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const signup = async () => {
-        
-        try {
-            console.log(birthday);
-        } catch (error) {
+    const isDisplayNameInUse = async () => {
+
+        const usersRef = collection(db, "users");
+
+        const userQuery = query(usersRef, where("displayname", "==", username));
             
+        const userQuerySnapshot = await getDocs(userQuery);
+
+        if (userQuerySnapshot.empty) return true;
+
+        return false;
+    }
+
+    const isPasswordConfirmed= async () => {
+        return password === confirmPassword;
+    }
+
+    const signUpWithGoogle = async () => {
+
+        try {
+
+            await signInWithPopup(auth, googleProv);
+
+            onAuthStateChanged(auth, (user) => {
+                const users = collection(db, "users");
+                setDoc(doc(users, user.uid), {
+                    firstname: user.displayName.substring(0, user.displayName.indexOf(" ")),
+                    lastname: user.displayName.substring(user.displayName.indexOf(" ") + 1,user.displayName.length),
+                    birthday: Date.now(),
+                    displayname: user.email.substring(0, user.email.indexOf("@"))
+                });
+
+                navigate("/" + user.email.substring(0, user.email.indexOf("@")));
+
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    const signup = async () => {
+
+        try {
+            if (! await isDisplayNameInUse()){
+                window.confirm("username is already in use.");
+            }
+            else if (! await isPasswordConfirmed()){
+                window.confirm("Please confirm password.");
+            }
+            else {
+                await createUserWithEmailAndPassword(auth, email, password);
+
+                onAuthStateChanged(auth, (user) => {
+
+                    const users = collection(db, "users");
+
+                    setDoc(doc(users, user.uid), {
+                        firstname: firstName,
+                        lastname: lastName,
+                        birthday: Timestamp.fromDate(new Date(birthday)),
+                        displayname: username,
+                        description: "",
+                        colors: {
+
+                            button_color: "#d4dcdf",
+                            main_color: "#fbfcfd",
+                            secondary_color: "#aba8a0",
+                            text_color: "#3b3029"
+                        },
+                        profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png"
+                    });
+
+                    navigate("/" + username);
+                });
+            }
+
+        } catch (error) {
+            console.error(error);
         }
 
     }
@@ -160,11 +258,12 @@ export const SignUp = () => {
 
             <Button
                 type="submit"
-                fullWidth
+                halfWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick = {signUpWithGoogle}
             >
-                Create Account With Google
+                Sign up With Google
             </Button>
 
             <Button
