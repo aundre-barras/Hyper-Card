@@ -83,7 +83,14 @@ export const SignUp = () => {
                     firstname: user.displayName.substring(0, user.displayName.indexOf(" ")),
                     lastname: user.displayName.substring(user.displayName.indexOf(" ") + 1,user.displayName.length),
                     birthday: Date.now(),
-                    displayname: user.email.substring(0, user.email.indexOf("@"))
+                    displayname: user.email.substring(0, user.email.indexOf("@")),
+                    description: "",
+                    colors: {
+                        button_color: "#d4dcdf",
+                        main_color: "#fbfcfd",
+                        secondary_color: "#aba8a0",
+                        text_color: "#3b3029"
+                    },
                 });
 
                 navigate("/" + user.email.substring(0, user.email.indexOf("@")));
