@@ -44,6 +44,7 @@ import {
 
 
 export const SignUp = () => {
+
     const navigate = useNavigate();
 
     const [firstName, setFirstName] = useState("");
@@ -53,23 +54,6 @@ export const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
-    const isDisplayNameInUse = async () => {
-
-        const usersRef = collection(db, "users");
-
-        const userQuery = query(usersRef, where("displayname", "==", username));
-            
-        const userQuerySnapshot = await getDocs(userQuery);
-
-        if (userQuerySnapshot.empty) return true;
-
-        return false;
-    }
-
-    const isPasswordConfirmed= async () => {
-        return password === confirmPassword;
-    }
 
     const signUpWithGoogle = async () => {
 
@@ -82,7 +66,7 @@ export const SignUp = () => {
                 setDoc(doc(users, user.uid), {
                     firstname: user.displayName.substring(0, user.displayName.indexOf(" ")),
                     lastname: user.displayName.substring(user.displayName.indexOf(" ") + 1,user.displayName.length),
-                    birthday: Date.now(),
+                    birthday: Timestamp.fromDate(new Date(Date.now())),
                     displayname: user.email.substring(0, user.email.indexOf("@")),
                     description: "",
                     colors: {
@@ -91,6 +75,7 @@ export const SignUp = () => {
                         secondary_color: "#aba8a0",
                         text_color: "#3b3029"
                     },
+                    profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png"
                 });
 
                 navigate("/" + user.email.substring(0, user.email.indexOf("@")));
@@ -102,16 +87,35 @@ export const SignUp = () => {
 
     }
 
+    const isDisplayNameInUse = async () => {
+
+        const usersRef = collection(db, "users");
+        const userQuery = query(usersRef, where("displayname", "==", username));
+            
+        const userQuerySnapshot = await getDocs(userQuery);
+        if (userQuerySnapshot.empty) return true;
+        return false;
+    }
+
+    const isPasswordConfirmed= async () => { return password === confirmPassword}
+
+    const correctBirthday = async () => {
+        const date = new Date();
+        console.log(date)
+        date.setDate( date.getDate() - 6 );
+        const getBirthday = Timestamp.fromDate(new Date(birthday));
+        console.log(date.setFullYear( date.getFullYear() - 13 ));
+        console.log(date - getBirthday);
+    }
+
     const signup = async () => {
 
         try {
-            if (! await isDisplayNameInUse()){
-                window.confirm("username is already in use.");
-            }
-            else if (! await isPasswordConfirmed()){
-                window.confirm("Please confirm password.");
-            }
+            if (! await isDisplayNameInUse()) { return window.confirm("username is already in use."); }
+            else if (! await isPasswordConfirmed()) { return window.confirm("Please confirm password."); }
+
             else {
+                console.log(await correctBirthday());
                 await createUserWithEmailAndPassword(auth, email, password);
 
                 onAuthStateChanged(auth, (user) => {
