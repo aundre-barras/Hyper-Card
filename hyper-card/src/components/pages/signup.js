@@ -36,7 +36,8 @@ import {
 import { 
         createUserWithEmailAndPassword, 
         onAuthStateChanged, 
-        signInWithPopup
+        signInWithPopup,
+        sendEmailVerification
         } from 'firebase/auth';
 
 
@@ -60,9 +61,12 @@ export const SignUp = () => {
         try {
 
             await signInWithPopup(auth, googleProv);
+            await sendEmailVerification(auth.currentUser);
 
             onAuthStateChanged(auth, (user) => {
+                
                 const users = collection(db, "users");
+
                 setDoc(doc(users, user.uid), {
                     firstname: user.displayName.substring(0, user.displayName.indexOf(" ")),
                     lastname: user.displayName.substring(user.displayName.indexOf(" ") + 1,user.displayName.length),
@@ -82,7 +86,7 @@ export const SignUp = () => {
 
             });
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
 
     }
@@ -101,22 +105,22 @@ export const SignUp = () => {
 
     const correctBirthday = async () => {
         const date = new Date();
-        console.log(date)
         date.setDate( date.getDate() - 6 );
         const getBirthday = Timestamp.fromDate(new Date(birthday));
-        console.log(date.setFullYear( date.getFullYear() - 13 ));
-        console.log(date - getBirthday);
     }
 
     const signup = async () => {
 
         try {
+
             if (! await isDisplayNameInUse()) { return window.confirm("username is already in use."); }
+
             else if (! await isPasswordConfirmed()) { return window.confirm("Please confirm password."); }
 
-            else {
-                console.log(await correctBirthday());
+            else {                
                 await createUserWithEmailAndPassword(auth, email, password);
+
+                await sendEmailVerification(auth.currentUser);
 
                 onAuthStateChanged(auth, (user) => {
 
@@ -137,7 +141,7 @@ export const SignUp = () => {
                         },
                         profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png"
                     });
-
+                    
                     navigate("/" + username);
                 });
             }

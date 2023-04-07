@@ -111,20 +111,6 @@ export const UserPage = () => {
             <ThemeProvider theme={UserTheme(user.colors.main_color, user.colors.secondary_color,user.colors.text_color)}>
                 <Container component="main" maxWidth="xs">
                 <CssBaseline />
-
-                {/* <Box
-                    sx={{
-                        
-
-                    marginTop: 1,
-                    position: "absolute",
-                    left: "1000px",
-                    top: "26px"
-                    }}
-                >           
-                <img src={menu} style = {{ width: "75px", height: "75px" }}/> 
-                </Box> */}
-
                 <Box
                     sx={{
                         
@@ -147,6 +133,18 @@ export const UserPage = () => {
                     }}
                 >
                     <img src={getUserImage()} style = {{ width: "150px", height: "150px" }}/>   
+
+
+                    <text style={{
+                    fontFamily: "Montserrat",
+                    fontWeight: 800,
+                    fontSize: "24px",
+                    color: `${user.colors.text_color}`
+                    }}>
+                    /{user.displayname}
+                    
+                    </text>
+
                     <text style={{
                     fontFamily: "Montserrat",
                     fontWeight: 800,

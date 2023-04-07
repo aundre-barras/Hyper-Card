@@ -37,3 +37,18 @@ export const UserTheme = (main_color, secondary_color, text_color) => createThem
       }
     }
 });
+
+/**
+ * 
+ *       MuiCssBaseline: {
+        styleOverrides: {
+          body: {
+            background: `radial-gradient(circle, transparent 25%, ${main_color}  26%),linear-gradient(45deg, transparent 46%, ${secondary_color} 47%, ${secondary_color} 52%, transparent 53%), linear-gradient(135deg, transparent 46%, ${secondary_color} 47%, ${secondary_color} 52%, transparent 53%)`,
+            backgroundSize: '2em 2em',
+            backgroundColor: `${main_color}`,
+            opacity: 1,
+            backgroundAttachment: "fixed"
+          },
+        }
+      }
+ */

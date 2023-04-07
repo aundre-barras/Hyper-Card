@@ -7,7 +7,7 @@ import {SignUp} from "./components/pages/signup";
 import {Login} from "./components/pages/login";
 import {UserPage} from "./components/pages/userpage";
 import {NoPage} from "./components/pages/nopage";
-import {ForgotPassword} from "./components/pages/passwordreset";
+import {ForgotPassword} from "./components/pages/forgotpassword";
 
 export const HyprCrd = () => {
   return (

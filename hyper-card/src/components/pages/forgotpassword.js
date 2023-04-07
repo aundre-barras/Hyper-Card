@@ -1,3 +1,5 @@
+
+// front end imports 
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -12,8 +14,29 @@ import { Link } from 'react-router-dom';
 import {theme} from "./theme";
 
 
-export const ForgotPassword = () => {
+// backend imports 
+import {useState} from "react";
 
+import { sendPasswordResetEmail, getAuth } from 'firebase/auth';
+import {auth} from "../firebase-config";
+export const ForgotPassword = () => {
+    
+    const [email, setEmail] = useState("");
+    const auth = getAuth();
+
+    const sendEmail = async () => {
+
+        try {
+            console.log(email);
+            await sendPasswordResetEmail(auth, email);
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+        
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -51,10 +74,8 @@ export const ForgotPassword = () => {
                 alignItems: 'center',
                 }}
                 > 
-                <Grid container spacing={2}>
 
                     <TextField
-                    
                         autoComplete="email"
                         name="email"
                         required
@@ -62,31 +83,32 @@ export const ForgotPassword = () => {
                         id="enterEmail"
                         label="Email"
                         autoFocus
+                        onChange={(e) => setEmail(e.target.value)}
                     />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 2, mb: 1 }}
+                        onClick = {sendEmail}
+                    >
+                        Email Me Reset
+                    </Button>
 
 
-                </Grid>
+                        <Link to="/signup" style={{
+                            color:"rgba(0, 0, 0, 0.75)",
+                            fontFamily:"Open Sans",
+                            fontWeight:300,
+                            fontSize:"12px"
+                            }}>
+                            Don't have an account? Sign up
+                        </Link>
+
                 </Box>
 
-                <Button
-                    type="submit"
-                    halfWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                >
-                    Email Me Reset
-                </Button>
 
-                <Grid item>
-                    <Link to="/signup" style={{
-                        color:"rgba(0, 0, 0, 0.75)",
-                        fontFamily:"Open Sans",
-                        fontWeight:300,
-                        fontSize:"12px"
-                        }}>
-                        Don't have an account? Sign up
-                    </Link>
-                </Grid>
+
 
             </Box>
 
