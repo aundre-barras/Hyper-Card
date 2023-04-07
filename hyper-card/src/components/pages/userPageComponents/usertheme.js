@@ -1,6 +1,6 @@
 import { createTheme} from '@mui/material/styles';
 
-export const UserTheme = (main_color, secondary_color, text_color) => createTheme({
+export const UserTheme = (main_color, secondary_color, text_color, background_color) => createTheme({
     palette: {
         primary: {
             main: main_color
@@ -13,7 +13,8 @@ export const UserTheme = (main_color, secondary_color, text_color) => createThem
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            background: `${main_color}`,
+            background: background_color,
+            backgroundColor: background_color,
             backgroundAttachment: "fixed"
           },
         }

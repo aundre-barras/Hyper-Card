@@ -74,10 +74,10 @@ export const SignUp = () => {
                     displayname: user.email.substring(0, user.email.indexOf("@")),
                     description: "",
                     colors: {
-                        button_color: "#d4dcdf",
-                        main_color: "#fbfcfd",
-                        secondary_color: "#aba8a0",
-                        text_color: "#3b3029"
+                        button_color: "#c9d3d8",
+                        main_color: "#c9d3d8",
+                        secondary_color: "#504537",
+                        text_color: "#2d5374"
                     },
                     profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png",
                     content : [],
@@ -122,9 +122,9 @@ export const SignUp = () => {
 
         try {
 
-            if (! await isDisplayNameInUse()) { return window.confirm("username is already in use."); }
+            if (! await isDisplayNameInUse()) { return window.alert("username is already in use."); }
 
-            else if (! await isPasswordConfirmed()) { return window.confirm("Please confirm password."); }
+            else if (! await isPasswordConfirmed()) { return window.alert("Please confirm password."); }
 
             else {                
                 await createUserWithEmailAndPassword(auth, email, password);
@@ -142,11 +142,10 @@ export const SignUp = () => {
                         displayname: username,
                         description: "",
                         colors: {
-
-                            button_color: "#d4dcdf",
-                            main_color: "#fbfcfd",
-                            secondary_color: "#aba8a0",
-                            text_color: "#3b3029"
+                            button_color: "#c9d3d8",
+                            main_color: "#c9d3d8",
+                            secondary_color: "#504537",
+                            text_color: "#2d5374"
                         },
                         profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png",
                         content : [],

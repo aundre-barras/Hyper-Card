@@ -1,19 +1,18 @@
-
-// Frontend imports
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import {
+    Typography,
+    Button,
+    Box,
+    Grid,
+    Avatar,
+    Stack
+} from '@mui/material';
+import logo from '../media/logo-circle.png';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import ghost from '../media/ghost.png'
+import { Image } from 'mui-image'
 import {ThemeProvider } from '@mui/material/styles';
-import logoCircle from '../media/logo-no-circle.png';
-import menu from '../media/menu.png';
-//
 
-// Backend imports 
-import {React, useEffect, useState} from "react";
+import {React, Fragment, useState, useEffect} from "react";
 
 import {
     useParams,
@@ -30,19 +29,124 @@ import {UserTheme} from "./userPageComponents/usertheme";
 
 //
 
-/*
-    UserPage:
-        Used to pull data about user if a user displayname is found
-        Takes param from React Router to determine the display name
-        Will redirect user back to the home page with a notification that user does not exist
+const TopMenu = (props) => {
+    const {setSubMenu, } = props;
+    return (
+        <Grid container sx={{
+            height: 100,
+            justifyContent: 'center'
+        }}>
+            <Grid item xs={6}>
+                <Box display="flex" justifyContent="flex-start" alignItems="flex-start" sx={{
+                    height: '100%',
+                }}>
+                    <Box sx={{
+                        position: 'relative',
+                        height: 75,
+                        width: 75,
+                        left: 16,
+                        top: 13
+                    }}>
+                        <Avatar
+                            alt="HyperCard Logo"
+                            src={logo}
+                            sx={{ width: '100%', height: '100%' }}
+                        />
+                    </Box>
+                </Box>
+            </Grid>
+            <Grid item xs={6}>
+                <Box display="flex" justifyContent="flex-end" alignItems="flex-start" sx={{
+                    height: '100%',
+                }}>
+                    <Box sx={{
+                        position: 'relative',
+                        height: 75,
+                        width: 75,
+                        backgroundColor: 'white',
+                        top: 13,
+                        right: 16
+                    }}>
+                        <MenuRoundedIcon onClick={setSubMenu} sx={{
+                            fontSize: 75
+                        }}/>
+                    </Box>
+                </Box>
+            </Grid>
+        </Grid>
+    )
+}
 
-**/
+const ProfileArea = (props) => {
+    const {userData} = props;
+    return (
+        <div>
+            {userData.map((user) => (
+                <div key = {user}>
+                    <ThemeProvider theme={UserTheme(user.colors.main_color, user.colors.secondary_color,user.colors.text_color, user.theme.user_background_color)}>
+                    <Stack justifyContent={'center'}>
+                    <Grid container justifyContent="center" alignItems="center" columns={1}>
+                        <Grid item>
+                            <Box display="flex" justifyContent="center" alignItems="center" sx={{
+                                height: 150,
+                                width: 150,
+                                borderRadius: '50%',
+                                backgroundColor: '#D8D8D8',
+                            }}>
+                                <Box sx={{
+                                    position: 'relative',
+                                    height: '70%',
+                                }}>
+                                    <Image src={ghost}/>
+                                </Box>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                    <Box display="flex" justifyContent="center">
+                    <Typography variant='h4' sx = {{
+                        fontStyle: 'bold',
+                        color: `${user.colors.text_color}`
+                        }}>
+                        /{user.displayname}
 
-export const UserPage = () => {
+                       
+                    </Typography>
+                    </Box>
+                    <Box display="flex" justifyContent="center" alignItems="center" sx={{
+                        height: 200
+                    }}>
+                        <Typography align='center' variant='h2' sx={{
+                            fontStyle: 'bold',
+                            width: '60%',
+                            color: `${user.colors.text_color}`
+                        }}>
+                        it looks like your profile is empty :/
+                        </Typography>
+                    </Box>
+                    <Box display="flex" justifyContent="center" alignItems="center" sx={{
+                        height: 100
+                    }}>
+                        <Button variant="contained" sx={{
+                            backgroundColor: `${user.colors.button_color}`,
+                            borderRadius: 5,
+                            height: 40,
+                            width: 175,
+                            fontStyle: 'bold',
+                            color: `${user.colors.text_color}`
+                        }}>
+                        add some links
+                        </Button>
+                    </Box>
+                    </Stack>
+                    </ThemeProvider>
+            </div>
+            ))}
+        </div>
+    );
+}
 
-    // Navigation is used in routing back to home page
-    // userParams is taken from the React router to determine display name url
-
+export const UserPage = (props) => {
+    const [isMenuOpen , setMenuOpen] = useState(false);
     const navigate = useNavigate();
     const userContent = useParams();
 
@@ -64,9 +168,7 @@ export const UserPage = () => {
         getUserData();
     }, []);
 
-    // Gets the user's designated image from storage and holds it in userProfilePhoto
     const getUserImage = async () => {
-        console.log(userData[0].profile_image);
         const storageRef = ref(storage, );
         return;
 
@@ -85,7 +187,7 @@ export const UserPage = () => {
 
             if (userQuerySnapshot.empty){
                 navigate("/");
-                setTimeout(window.confirm("User does not exist!"), 1500);
+                setTimeout(window.alert("User does not exist!"), 1500);
                 return;
             }
 
@@ -103,85 +205,16 @@ export const UserPage = () => {
         }
     };
 
+    const setSubMenu = () => {
+        setMenuOpen(!isMenuOpen);
+        console.log('here');
+    }
 
-    return (
-        <div>
-        {userData.map((user) => (
-            <div key = {user}>
-            <ThemeProvider theme={UserTheme(user.colors.main_color, user.colors.secondary_color,user.colors.text_color)}>
-                <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        
-                    position: "absolute",
-                    marginTop: 1,
-                    left: "20px",
-                    top: "13px",
-                    }}
-                >           
-                <img src={logoCircle} style = {{ width: "50px"}}/> 
-                </Box>
-                
-
-                <Box
-                    sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    }}
-                >
-                    <img src={getUserImage()} style = {{ width: "150px", height: "150px" }}/>   
-
-
-                    <text style={{
-                    fontFamily: "Montserrat",
-                    fontWeight: 800,
-                    fontSize: "24px",
-                    color: `${user.colors.text_color}`
-                    }}>
-                    /{user.displayname}
-                    
-                    </text>
-
-                    <text style={{
-                    fontFamily: "Montserrat",
-                    fontWeight: 800,
-                    fontSize: "24px",
-                    color: `${user.colors.text_color}`
-                    }}>
-                    {user.firstname} {user.lastname}
-                    
-                    </text>
-
-                </Box>
-
-                <Box
-                    sx={{
-                    marginTop: 4,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    }}
-                >           
-                    <text style={{
-                    fontFamily: "Montserrat",
-                    fontWeight: 400,
-                    fontSize: "16px",
-                    color: `${user.colors.text_color}`
-                    }}>
-                    {user.description}
-                    
-                    </text>
-
-                </Box>
-
-                </Container>
-            </ThemeProvider>
-            </div>
-        ))}
-        </div>
-
-    );
-};
+    return(
+        <Fragment>
+            <TopMenu/>
+            <ProfileArea
+               userData = {userData}/>
+        </Fragment>
+    )
+}

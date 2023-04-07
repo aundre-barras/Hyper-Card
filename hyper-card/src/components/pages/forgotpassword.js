@@ -18,9 +18,9 @@ import {theme} from "./theme";
 import {useState} from "react";
 
 import { sendPasswordResetEmail, getAuth } from 'firebase/auth';
-import {auth} from "../firebase-config";
+
+
 export const ForgotPassword = () => {
-    
     const [email, setEmail] = useState("");
     const auth = getAuth();
 
@@ -29,6 +29,7 @@ export const ForgotPassword = () => {
         try {
             console.log(email);
             await sendPasswordResetEmail(auth, email);
+            window.alert("Please check your email and spam folder to follow the password reset process.");
 
         } catch (error) {
 
