@@ -79,7 +79,16 @@ export const SignUp = () => {
                         secondary_color: "#aba8a0",
                         text_color: "#3b3029"
                     },
-                    profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png"
+                    profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png",
+                    content : [],
+                    theme : {
+                        user_background: "#fbfcfd",
+                        user_background_size: "",
+                        user_background_color: "#fbfcfd",
+                        user_opacity : "1.0",
+                        user_background_attachment: "fixed",
+                    }
+                    
                 });
 
                 navigate("/" + user.email.substring(0, user.email.indexOf("@")));
@@ -139,7 +148,15 @@ export const SignUp = () => {
                             secondary_color: "#aba8a0",
                             text_color: "#3b3029"
                         },
-                        profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png"
+                        profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png",
+                        content : [],
+                        theme : {
+                            user_background: "#fbfcfd",
+                            user_background_size: "",
+                            user_background_color: "#fbfcfd",
+                            user_opacity : "1.0",
+                            user_background_attachment: "fixed",
+                        }
                     });
                     
                     navigate("/" + username);

@@ -21,20 +21,29 @@ import {useNavigate} from "react-router-dom";
 import {doc, getDoc} from "firebase/firestore";
 import {auth, db, googleProv} from "../firebase-config";
 
+
 export const Login = () => {
+  
     const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [remember, setRemember] = useState(false);
+
     const loginWithGoogle = async () => {
       try {
         const userCredential = await signInWithPopup(auth, googleProv);
+
+
         const usersRef = doc(db, "users", userCredential.user.uid);
         const snap = await getDoc(usersRef);
         navigate ("/" + snap.data().displayname);
+
       } catch (error) {
+
         console.error(error);
+        
       }
 
     };
@@ -43,8 +52,13 @@ export const Login = () => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
+            if (remember){
+              //add cookie set here
+              
+            }
             const usersRef = doc(db, "users", userCredential.user.uid);
             const snap = await getDoc(usersRef);
+
             navigate ("/" + snap.data().displayname);
 
         } catch (error) {
@@ -52,9 +66,12 @@ export const Login = () => {
         }
     }
 
-
+    const handleRemember = () => {
+      setRemember(!remember);
+    };
 
     return (
+      
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -115,8 +132,10 @@ export const Login = () => {
                 Sign In With Google
               </Button>
               <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
+                control={<Checkbox color="primary" />}
                 label="Remember me"
+                checked = {remember}
+                onChange = {handleRemember}
               />
               <Button
                 type="submit"
