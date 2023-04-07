@@ -8,6 +8,7 @@ import {Login} from "./components/pages/login";
 import {UserPage} from "./components/pages/userpage";
 import {NoPage} from "./components/pages/nopage";
 import {ForgotPassword} from "./components/pages/forgotpassword";
+import {ResendEmail} from './components/pages/resendemail';
 import {CookiesProvider} from "react-cookie";
 
 export const HyprCrd = () => {
@@ -20,6 +21,7 @@ export const HyprCrd = () => {
             <Route path = "/login" element = {<Login/>}/>
             <Route path = "/:id" element = {<UserPage/>}/>
             <Route path = "/forgotpassword" element = {<ForgotPassword/>}/>
+            <Route path = "/resendemail" element = {<ResendEmail/>}/>
             <Route path = "*" to = "/nopage" element = {<NoPage/>}/>
           </Routes>
         </BrowserRouter>
