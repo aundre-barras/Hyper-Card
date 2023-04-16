@@ -62,7 +62,6 @@ export const Tracks = (props) => {
       useEffect(() => {
         if (accessToken) {
           search();
-          console.log(tracks);
         }
       }, [accessToken]);
 
@@ -79,6 +78,8 @@ export const Tracks = (props) => {
                         track.album.images && track.album.images[0] ?
                         <img src={track.album.images[0].url} width="10%" alt={track.name} /> : null
                         }
+                        
+                        
                     </div>
                 )
             })

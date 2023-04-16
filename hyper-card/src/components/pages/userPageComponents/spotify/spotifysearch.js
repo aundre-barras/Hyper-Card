@@ -9,7 +9,10 @@ import { Container, Grid,TextField} from "@mui/material";
 import {Artists} from "./searches/artists";
 import { Albums } from "./searches/albums";
 import {Tracks} from "./searches/tracks";
-
+import { PodcastShows } from "./searches/podcastshows";
+import { Episodes } from "./searches/episodes";
+import { Audiobooks } from "./searches/audiobooks";
+import { Playlists } from "./searches/playlists";
 
 export const SpotifySearch = () => {
     const [searchFor, setSearchFor] = useState("artists");
@@ -22,6 +25,10 @@ export const SpotifySearch = () => {
             "artists": Artists,
             "albums" : Albums,
             "tracks":  Tracks,
+            "podcastshows" : PodcastShows,
+            "episodes" : Episodes,
+            "audiobooks": Audiobooks,
+            "playlists" : Playlists
         };
 
         const GetSearch = getSearchQueries[searchFor];

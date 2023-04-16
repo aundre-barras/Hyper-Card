@@ -2,9 +2,9 @@ import {useState, useEffect} from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
 import { Grid } from "@mui/material";
 
-export const Audiobooks = (props) => {
+export const PodcastShows = (props) => {
     const searchInput = props.to_search;
-    const [audiobooks, setAudiobooks] = useState([]);
+    const [podcastshows, setPodcastShows] = useState([]);
     const [accessToken, setAccessToken] = useState("");
 
     const search = async () => {
@@ -16,16 +16,15 @@ export const Audiobooks = (props) => {
                 Authorization: "Bearer " + accessToken,
             },
             };
-    
+
             await fetch(
-            "https://api.spotify.com/v1/search?q=" + searchInput + "&type=audiobook&limit=10",
+            "https://api.spotify.com/v1/search?q=" + searchInput + "&type=show&market=US&limit=10",
             searchParams
             )
             .then((response) => response.json())
             .then((data) => {
-                if (data.audiobooks && data.audiobooks.items){
-                  setAudiobooks(data.audiobooks.items);
-
+                if (data.shows && data.shows.items){
+                    setPodcastShows(data.shows.items);
                 }
 
             });
@@ -33,9 +32,9 @@ export const Audiobooks = (props) => {
         catch (error) {
             console.error(error);
         }
-      };
+        };
 
-      useEffect(() => {
+        useEffect(() => {
         // api access token
         try {
             var authParams = {
@@ -55,35 +54,38 @@ export const Audiobooks = (props) => {
                     setAccessToken(data.access_token);
                 });
         } 
-    
-          catch (error) {
+
+            catch (error) {
             console.error(error);
-          }
-      }, []);
+            }
+        }, []);
     
-      useEffect(() => {
+    useEffect(() => {
 
-        search();
-          
+    search();
+        
+    }, [accessToken]);
 
-      }, [accessToken]);
 
     return (
+
         <div>
-            {audiobooks.map((audiobook) => {
+            {podcastshows.map((podcastshow) => {
                 return (
-                    <div key={audiobook.id}>
+                    <div key = {podcastshow.id}>
                         <h2>
-                            {audiobook.name}
+                            {podcastshow.name}
                         </h2>
-                    {
-                    audiobook.images && audiobook.images[0] ?
-                    <img src={audiobook.images[0].url} width="10%" alt={audiobook.name} /> : null
-                    }
+                        {
+                            podcastshow.images && podcastshow.images[0] ? 
+                            <img src = {podcastshow.images[0].url} width = "10%" alt = {podcastshow.name}/> : null
+                        }
 
                     </div>
+
                 )
             })}
+
 
         </div>
     )

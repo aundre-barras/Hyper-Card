@@ -2,9 +2,9 @@ import {useState, useEffect} from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
 import { Grid } from "@mui/material";
 
-export const Audiobooks = (props) => {
+export const Playlists = (props) => {
     const searchInput = props.to_search;
-    const [audiobooks, setAudiobooks] = useState([]);
+    const [playlists, setPlaylists] = useState([]);
     const [accessToken, setAccessToken] = useState("");
 
     const search = async () => {
@@ -18,13 +18,13 @@ export const Audiobooks = (props) => {
             };
     
             await fetch(
-            "https://api.spotify.com/v1/search?q=" + searchInput + "&type=audiobook&limit=10",
+            "https://api.spotify.com/v1/search?q=" + searchInput + "&type=playlist&limit=10",
             searchParams
             )
             .then((response) => response.json())
             .then((data) => {
-                if (data.audiobooks && data.audiobooks.items){
-                  setAudiobooks(data.audiobooks.items);
+                if (data.playlists && data.playlists.items){
+                  setPlaylists(data.playlists.items);
 
                 }
 
@@ -70,15 +70,15 @@ export const Audiobooks = (props) => {
 
     return (
         <div>
-            {audiobooks.map((audiobook) => {
+            {playlists.map((playlist) => {
                 return (
-                    <div key={audiobook.id}>
+                    <div key={playlist.id}>
                         <h2>
-                            {audiobook.name}
+                            {playlist.name}
                         </h2>
                     {
-                    audiobook.images && audiobook.images[0] ?
-                    <img src={audiobook.images[0].url} width="10%" alt={audiobook.name} /> : null
+                    playlist.images && playlist.images[0] ?
+                    <img src={playlist.images[0].url} width="10%" alt={playlist.name} /> : null
                     }
 
                     </div>

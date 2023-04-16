@@ -23,8 +23,7 @@ export const Albums = (props) => {
             )
             .then((response) => response.json())
             .then((data) => {
-                if (data){
-                  console.log(data.albums.items);
+                if (data.albums && data.albums.items){
                   setAlbums(data.albums.items);
                 }
 
@@ -68,7 +67,6 @@ export const Albums = (props) => {
 
       }, [accessToken]);
 
-    console.log(albums);
     return (
 
         <div>
