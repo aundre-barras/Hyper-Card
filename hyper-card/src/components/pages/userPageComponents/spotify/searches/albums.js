@@ -23,8 +23,10 @@ export const Albums = (props) => {
             )
             .then((response) => response.json())
             .then((data) => {
-
-                  setAlbums(data);
+                if (data){
+                  console.log(data.albums.items);
+                  setAlbums(data.albums.items);
+                }
 
             });
         }
@@ -60,22 +62,30 @@ export const Albums = (props) => {
       }, []);
     
       useEffect(() => {
-        if (accessToken) {
-          search();
+
+        search();
           
-        }
+
       }, [accessToken]);
+
     console.log(albums);
     return (
 
         <div>
-            {/* {albums.map((album) => {
+            {albums.map((album) => {
                 return (
-                    <div>
-                        {album.name}
+                    <div key={album.id}>
+                        <h2>
+                            {album.name}
+                        </h2>
+                    {
+                    album.images && album.images[0] ?
+                    <img src={album.images[0].url} width="10%" alt={album.name} /> : null
+                    }
+                    <h4>{album.popularity}</h4>
                     </div>
                 )
-            })} */}
+            })}
 
         </div>
     )

@@ -8,6 +8,7 @@ import { Container, Grid,TextField} from "@mui/material";
 
 import {Artists} from "./searches/artists";
 import { Albums } from "./searches/albums";
+import {Tracks} from "./searches/tracks";
 
 
 export const SpotifySearch = () => {
@@ -20,17 +21,19 @@ export const SpotifySearch = () => {
 
             "artists": Artists,
             "albums" : Albums,
-            
+            "tracks":  Tracks,
         };
 
         const GetSearch = getSearchQueries[searchFor];
-
-        return (
-            <div>
-                <GetSearch to_search = {searchQuery}/>
-            </div>
-        
-        );
+        if (searchFor.length > 0){
+            return (
+                <div>
+                    <GetSearch to_search = {searchQuery}/>
+                </div>
+            
+            );
+        }
+        return;
     }
 
     useEffect(() => {
@@ -60,6 +63,10 @@ export const SpotifySearch = () => {
 
                             <Grid item cs = {2}>
                                 <FormControlLabel value="tracks" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Tracks" />
+                            </Grid>
+
+                            <Grid item cs = {2}>
+                                <FormControlLabel value="podcastshows" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Podcast and Shows" />
                             </Grid>
 
                             <Grid item cs = {2}>

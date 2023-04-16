@@ -13,8 +13,6 @@ export const UserTheme = (main_color, secondary_color, text_color, background_co
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            background: background_color,
-            backgroundColor: background_color,
             backgroundAttachment: "fixed"
           },
         }

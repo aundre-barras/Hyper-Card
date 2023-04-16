@@ -14,7 +14,7 @@ export const Artists = (props) => {
         headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + accessToken,
-        },
+        }
         };
 
         await fetch(
