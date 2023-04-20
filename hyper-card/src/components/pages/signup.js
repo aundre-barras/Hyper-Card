@@ -113,15 +113,22 @@ export const SignUp = () => {
     const isPasswordConfirmed= async () => { return password === confirmPassword}
 
     const correctBirthday = async () => {
-        const date = new Date();
-        date.setDate( date.getDate() - 6 );
-        const getBirthday = Timestamp.fromDate(new Date(birthday));
+        const thirteenYearsAgo = new Date();
+        console.log(Timestamp.fromDate(new Date(birthday)).seconds);
+        console.log(thirteenYearsAgo.setFullYear(thirteenYearsAgo.getFullYear() - 13));
+        if (Timestamp.fromDate(new Date(birthday)).seconds >= thirteenYearsAgo.setFullYear(thirteenYearsAgo.getFullYear() - 13)){
+            console.log("huh")
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     const signup = async () => {
 
         try {
-
+            if (! await correctBirthday()) {return window.alert("birthday to young :(");}
             if (! await isDisplayNameInUse()) { return window.alert("username is already in use."); }
 
             else if (! await isPasswordConfirmed()) { return window.alert("Please confirm password."); }
@@ -158,7 +165,7 @@ export const SignUp = () => {
                         }
                     });
                     
-                    navigate("/" + username);
+                    navigate("/u/" + username);
                 });
             }
 

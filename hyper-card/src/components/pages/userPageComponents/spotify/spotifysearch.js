@@ -21,7 +21,6 @@ export const SpotifySearch = () => {
     const SelectedSearch = () => {
         
         const getSearchQueries = {
-
             "artists": Artists,
             "albums" : Albums,
             "tracks":  Tracks,

@@ -12,14 +12,15 @@ import {ThemeProvider } from '@mui/material/styles';
 import logoCircle from '../media/logo-circle.png'
 import { Link } from 'react-router-dom';
 import {theme} from "./theme";
-import {React, useState} from "react";
+import {React, useEffect, useState} from "react";
 // 
 
 // backend integration imports
-import {signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
+import {signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import {doc, getDoc} from "firebase/firestore";
 import {auth, db, googleProv} from "../firebase-config";
+
 
 
 export const Login = () => {
@@ -28,17 +29,14 @@ export const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const [remember, setRemember] = useState(false);
+    const [isAuth, setIsAuth] = useState("");
 
     const loginWithGoogle = async () => {
       try {
         const userCredential = await signInWithPopup(auth, googleProv);
-
-
         const usersRef = doc(db, "users", userCredential.user.uid);
         const snap = await getDoc(usersRef);
-        navigate ("/" + snap.data().displayname);
+        navigate ("/u/" + snap.data().displayname);
 
       } catch (error) {
 
@@ -48,27 +46,48 @@ export const Login = () => {
 
     };
 
+
+    const alreadyLoggedIn = async () => {
+
+      try {
+
+        onAuthStateChanged(auth, (user) => {
+          if (user){
+            setIsAuth(user.uid);
+          }
+      
+        });
+        if (isAuth){
+          const usersRef = doc(db, "users", isAuth);
+          const snap = await getDoc(usersRef);
+          navigate ("/u/" + snap.data().displayname);
+        }
+
+
+      } catch (error) {
+        console.error(error);
+      }
+
+
+    }
+    useEffect(() => {
+      alreadyLoggedIn();
+    }, [isAuth])
+
     const login = async () => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-
-            if (remember){
-              //add cookie set here
-              
-            }
+            
             const usersRef = doc(db, "users", userCredential.user.uid);
             const snap = await getDoc(usersRef);
-
-            navigate ("/" + snap.data().displayname);
+          
+            navigate ("/u/" + snap.data().displayname);
 
         } catch (error) {
             console.error(error);
         }
     }
 
-    const handleRemember = () => {
-      setRemember(!remember);
-    };
 
     return (
       
@@ -131,12 +150,7 @@ export const Login = () => {
               >
                 Sign In With Google
               </Button>
-              <FormControlLabel
-                control={<Checkbox color="primary" />}
-                label="Remember me"
-                checked = {remember}
-                onChange = {handleRemember}
-              />
+
               <Button
                 type="submit"
                 fullWidth

@@ -27,6 +27,10 @@ import {db, storage} from "../firebase-config";
 
 import {UserTheme} from "./userPageComponents/usertheme";
 
+import { onAuthStateChanged } from 'firebase/auth';
+
+import { auth } from '../firebase-config';
+
 //
 
 const TopMenu = (props) => {
@@ -79,6 +83,8 @@ const TopMenu = (props) => {
 
 const ProfileArea = (props) => {
     const {userData} = props;
+    const {isAuth} = props;
+
     return (
         <div>
             {userData.map((user) => (
@@ -112,31 +118,43 @@ const ProfileArea = (props) => {
                        
                     </Typography>
                     </Box>
-                    <Box display="flex" justifyContent="center" alignItems="center" sx={{
-                        height: 200
-                    }}>
-                        <Typography align='center' variant='h2' sx={{
-                            fontStyle: 'bold',
-                            width: '60%',
-                            color: `${user.colors.text_color}`
+
+                    {
+                        isAuth &&
+                        
+                        <div>
+
+                        <Box display="flex" justifyContent="center" alignItems="center" sx={{
+                            height: 200
                         }}>
-                        it looks like your profile is empty :/
-                        </Typography>
-                    </Box>
-                    <Box display="flex" justifyContent="center" alignItems="center" sx={{
-                        height: 100
-                    }}>
-                        <Button variant="contained" sx={{
-                            backgroundColor: `${user.colors.button_color}`,
-                            borderRadius: 5,
-                            height: 40,
-                            width: 175,
-                            fontStyle: 'bold',
-                            color: `${user.colors.text_color}`
+                            <Typography align='center' variant='h2' sx={{
+                                fontStyle: 'bold',
+                                width: '60%',
+                                color: `${user.colors.text_color}`
+                            }}>
+                            it looks like your profile is empty :/
+                            </Typography>
+                        </Box>
+    
+                        <Box display="flex" justifyContent="center" alignItems="center" sx={{
+                            height: 100
                         }}>
-                        add some links
-                        </Button>
-                    </Box>
+                            <Button variant="contained" sx={{
+                                backgroundColor: `${user.colors.button_color}`,
+                                borderRadius: 5,
+                                height: 40,
+                                width: 175,
+                                fontStyle: 'bold',
+                                color: `${user.colors.text_color}`
+                            }}>
+                            add some links
+                            </Button>
+                        </Box>
+
+                        </div>
+
+                    }
+
                     </Stack>
                     </ThemeProvider>
             </div>
@@ -147,6 +165,8 @@ const ProfileArea = (props) => {
 
 export const UserPage = (props) => {
     const [isMenuOpen , setMenuOpen] = useState(false);
+    const [isAuth, setIsAuth] = useState(false);
+
     const navigate = useNavigate();
     const userContent = useParams();
 
@@ -180,13 +200,15 @@ export const UserPage = (props) => {
         try {
             // query name to determine if user exists and to pull data
             // takes snapshot of docs with dispaly name
+
             const userQuery = query(usersRef, where("displayname", "==", userContent.id));
             const userQuerySnapshot = await getDocs(userQuery);
+
 
             // if query snapshot is empty, then means user does not exist and will reroute to home page
 
             if (userQuerySnapshot.empty){
-                navigate("/");
+                navigate("/login");
                 setTimeout(window.alert("User does not exist!"), 1500);
                 return;
             }
@@ -197,6 +219,14 @@ export const UserPage = (props) => {
             const filteredData = userQuerySnapshot.docs.map((doc) => ({
                 ...doc.data(), id:doc.id
             }));
+
+
+            onAuthStateChanged(auth, (user) => {
+                if (user && filteredData[0].id == user.uid){
+                    setIsAuth(true);
+                }
+            });
+
             setUserData(filteredData);
 
         } catch (error) {
@@ -214,7 +244,7 @@ export const UserPage = (props) => {
         <Fragment>
             <TopMenu/>
             <ProfileArea
-               userData = {userData}/>
+               userData = {userData} isAuth = {isAuth}/>
         </Fragment>
     )
 }
