@@ -21,15 +21,17 @@ import { sendPasswordResetEmail, getAuth } from 'firebase/auth';
 
 
 export const ForgotPassword = () => {
+    const [isSent, setIsSent] = useState(false);
+
     const [email, setEmail] = useState("");
     const auth = getAuth();
 
     const sendEmail = async () => {
 
         try {
-            console.log(email);
+
             await sendPasswordResetEmail(auth, email);
-            window.alert("Please check your email and spam folder to follow the password reset process.");
+            setIsSent(true);
 
         } catch (error) {
 
@@ -67,15 +69,71 @@ export const ForgotPassword = () => {
                 a visual resume for creatives.
                 </text>
 
-                <Box
-                sx={{
-                marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                }}
-                > 
+                {isSent ? 
+                    <div>
+                    <Box
+                        sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        }}
+                    >
+                            <text style={{
+                                fontFamily: "Outfit",
+                                fontWeight: 600,
+                                fontSize: "20px",
+                                lineHeight: "25px",
+                                display: "flex",
+                                alignItems: "center",
+                                textAlign: "center",
+                                color: "#000000"
+                            }}>
+                                please check your email and spam folder 
+                                to follow the password reset process
+                            </text>
 
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 2, mb: 1 }}
+                                onClick = {sendEmail}
+                            >
+                                resend email
+                            </Button>
+
+                            <Link to="/login" style={{
+                                color:"rgba(0, 0, 0, 0.75)",
+                                fontFamily:"Open Sans",
+                                fontWeight:300,
+                                fontSize:"12px"
+                                }}>
+                                Sign in
+                            </Link>
+
+                            <Link to="/signup" style={{
+                                color:"rgba(0, 0, 0, 0.75)",
+                                fontFamily:"Open Sans",
+                                fontWeight:300,
+                                fontSize:"12px"
+                                }}>
+                                Don't have an account? Sign up.
+                            </Link>
+                    </Box>
+ 
+                    </div> : 
+                    
+                    <div>
+
+                    <Box
+                        sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        }}
+                    > 
                     <TextField
                         autoComplete="email"
                         name="email"
@@ -103,10 +161,25 @@ export const ForgotPassword = () => {
                             fontWeight:300,
                             fontSize:"12px"
                             }}>
-                            Don't have an account? Sign up
+                            Don't have an account? Sign up.
                         </Link>
 
-                </Box>
+
+                        <Link to="/login" style={{
+                                color:"rgba(0, 0, 0, 0.75)",
+                                fontFamily:"Open Sans",
+                                fontWeight:300,
+                                fontSize:"12px"
+                                }}>
+                                Remembered? Sign in.
+                        </Link>
+                    </Box>
+                    </div>
+                }
+
+
+
+
 
 
 
