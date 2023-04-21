@@ -13,7 +13,7 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import {theme} from "./theme";
 
 
-export const Landing = () => {
+export const Settings = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -29,6 +29,7 @@ export const Landing = () => {
             <Grid container spacing={2}>
                 <Grid item xs={12} align="right">
                 <MenuRoundedIcon
+                    // onClick={}
                     sx={{fontSize: "50px"}}
                     />
                 </Grid>
