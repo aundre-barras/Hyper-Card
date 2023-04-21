@@ -11,7 +11,6 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import ghost from '../media/ghost.png'
 import { Image } from 'mui-image'
 import {ThemeProvider } from '@mui/material/styles';
-
 import {React, Fragment, useState, useEffect} from "react";
 
 import {
@@ -31,10 +30,12 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 import { auth } from '../firebase-config';
 
+import GlobalStyles from '@mui/material/GlobalStyles';
 //
 
 const TopMenu = (props) => {
-    const {setSubMenu, } = props;
+    const {setSubMenu} = props;
+    
     return (
         <Grid container sx={{
             height: 100,
@@ -44,6 +45,7 @@ const TopMenu = (props) => {
                 <Box display="flex" justifyContent="flex-start" alignItems="flex-start" sx={{
                     height: '100%',
                 }}>
+                    
                     <Box sx={{
                         position: 'relative',
                         height: 75,
@@ -51,13 +53,10 @@ const TopMenu = (props) => {
                         left: 16,
                         top: 13
                     }}>
-                        <Avatar
-                            alt="HyperCard Logo"
-                            src={logo}
-                            sx={{ width: '100%', height: '100%' }}
-                        />
                     </Box>
+
                 </Box>
+
             </Grid>
             <Grid item xs={6}>
                 <Box display="flex" justifyContent="flex-end" alignItems="flex-start" sx={{
@@ -82,14 +81,45 @@ const TopMenu = (props) => {
 }
 
 const ProfileArea = (props) => {
+    
     const {userData} = props;
     const {isAuth} = props;
+    const hexToRGBA = (hex) => {
+        try {
+            var c;
+            if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+                c= hex.substring(1).split('');
+                if(c.length== 3){
+                    c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+                }
+                c= '0x'+c.join('');
+                console.log()
+                return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',.3)';
+            }
+            throw new Error('Bad Hex'); 
+        } catch (error) {
+            console.error(error);
+        }
 
+    }
     return (
         <div>
-            {userData.map((user) => (
+            {
+            
+            userData.map((user) => (
                 <div key = {user}>
-                    <ThemeProvider theme={UserTheme(user.colors.main_color, user.colors.secondary_color,user.colors.text_color, user.theme.user_background_color)}>
+                    <GlobalStyles
+                        styles={{
+                            body: { 
+                            backgroundColor: `${hexToRGBA(user.theme.background_color)}`,
+                            background: `${user.theme.background}`,
+                            backgroundPosition: `${user.theme.background_position}`,
+                            backgroundSize: `${user.theme.background_size}`,
+                            backgroundRepeat: `${user.theme.background_repeat}`,
+                            }
+                        }}
+                    />
+                    <ThemeProvider theme = {UserTheme}>
                     <Stack justifyContent={'center'}>
                     <Grid container justifyContent="center" alignItems="center" columns={1}>
                         <Grid item>
@@ -97,7 +127,7 @@ const ProfileArea = (props) => {
                                 height: 150,
                                 width: 150,
                                 borderRadius: '50%',
-                                backgroundColor: '#D8D8D8',
+                                backgroundColor: '#FFFFFF',
                             }}>
                                 <Box sx={{
                                     position: 'relative',
@@ -150,13 +180,22 @@ const ProfileArea = (props) => {
                             add some links
                             </Button>
                         </Box>
+                            <Box display="flex" justifyContent="center" alignItems="center">
+                                <Typography variant='h1' color="#5B7ABC" 
 
+                                style={{ textDecoration:"none"}}>
+                                <span style={{color:`${user.colors.text_color}`}}>hypr</span>
+                                <span style={{color:`${user.colors.secondary_color}`}}>crd</span>
+                            
+                                </Typography>
+                            </Box>
                         </div>
 
                     }
 
                     </Stack>
                     </ThemeProvider>
+
             </div>
             ))}
         </div>

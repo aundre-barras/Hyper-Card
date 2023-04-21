@@ -74,19 +74,19 @@ export const SignUp = () => {
                     displayname: user.email.substring(0, user.email.indexOf("@")),
                     description: "",
                     colors: {
-                        button_color: "#c9d3d8",
-                        main_color: "#c9d3d8",
-                        secondary_color: "#504537",
-                        text_color: "#2d5374"
+                        button_color: "#4c697d",
+                        main_color: "#eeeeee",
+                        secondary_color: "#96aebc",
+                        text_color: "#96aebc"
                     },
                     profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png",
                     content : [],
                     theme : {
-                        user_background: "#fbfcfd",
-                        user_background_size: "",
-                        user_background_color: "#fbfcfd",
-                        user_opacity : "1.0",
-                        user_background_attachment: "fixed",
+                        background_color: "#eeeeee",
+                        background: "",
+                        background_position: "",
+                        background_size: "",
+                        background_repeat: ""
                     }
                     
                 });
@@ -128,7 +128,7 @@ export const SignUp = () => {
     const signup = async () => {
 
         try {
-            if (! await correctBirthday()) {return window.alert("birthday to young :(");}
+            // if (! await correctBirthday()) {return window.alert("birthday to young :(");}
             if (! await isDisplayNameInUse()) { return window.alert("username is already in use."); }
 
             else if (! await isPasswordConfirmed()) { return window.alert("Please confirm password."); }
@@ -149,19 +149,19 @@ export const SignUp = () => {
                         displayname: username,
                         description: "",
                         colors: {
-                            button_color: "#c9d3d8",
-                            main_color: "#c9d3d8",
-                            secondary_color: "#504537",
-                            text_color: "#2d5374"
+                            button_color: "#4c697d",
+                            main_color: "#eeeeee",
+                            secondary_color: "#96aebc",
+                            text_color: "#eeeeee"
                         },
                         profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png",
                         content : [],
                         theme : {
-                            user_background: "#fbfcfd",
-                            user_background_size: "",
-                            user_background_color: "#fbfcfd",
-                            user_opacity : "1.0",
-                            user_background_attachment: "fixed",
+                            background_color: "#eeeeee",
+                            background: "",
+                            background_position: "",
+                            background_size: "",
+                            background_repeat: ""
                         }
                     });
                     

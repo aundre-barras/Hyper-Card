@@ -1,23 +1,7 @@
 import { createTheme} from '@mui/material/styles';
+import { GlobalStyles } from '@mui/material';
 
 export const UserTheme = (main_color, secondary_color, text_color, background_color) => createTheme({
-    palette: {
-        primary: {
-            main: main_color
-        },
-        secondary: {
-            main: secondary_color
-        }
-    },
-    components: {
-      MuiCssBaseline: {
-        styleOverrides: {
-          body: {
-            backgroundAttachment: "fixed"
-          },
-        }
-      }
-    },
     typography: {
       fontFamily: ["Outfit", "Open Sans", "Montserrat"].join(','),
       fontWeight:700,
