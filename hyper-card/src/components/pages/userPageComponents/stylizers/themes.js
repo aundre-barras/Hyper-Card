@@ -10,7 +10,7 @@ export const Themes = (background_color, secondary_color) => {
         },
         {
             "backgroundColor":`${background_color}`,
-            "background": `linear-gradient(167.95deg, ${background_color} 63.36%, #5C7BBD 100%)`,
+            "background": `linear-gradient(167.95deg, ${background_color} 63.36%, ${secondary_color} 100%)`,
             "backgroundPosition":"",
             "backgroundSize":"",
             "backgroundRepeat":"",

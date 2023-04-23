@@ -9,16 +9,6 @@ export const theme = createTheme({
             main: "#5B7ABC"
         }
     },
-    components: {
-      MuiCssBaseline: {
-        styleOverrides: {
-          body: {
-            background: "linear-gradient(167.95deg, #FFFFFF 63.36%, #5C7BBD 100%)",
-            backgroundAttachment: "fixed"
-          },
-        }
-      }
-    },
     typography: {
       fontFamily: ["Outfit", "Open Sans", "Montserrat"].join(','),
       fontWeight:700,

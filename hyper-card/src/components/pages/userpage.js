@@ -4,9 +4,13 @@ import {
     Box,
     Grid,
     Avatar,
-    Stack
+    Stack,
+    TextField,
+    IconButton
 } from '@mui/material';
-import logo from '../media/logo-circle.png';
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import Popover from '@mui/material/Popover';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import ghost from '../media/ghost.png'
 import { Image } from 'mui-image'
@@ -80,10 +84,136 @@ const TopMenu = (props) => {
     )
 }
 
+const AddContent = (props) => {
+    return (
+        <Grid container justifyContent="center" alignItems='center'>
+            <Grid item xs={12} sx={{
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <Typography align='center'>
+                    Link Type
+                </Typography>
+            </Grid>
+            <Grid item xs={4}>
+                <Box display='flex' justifyContent='center' 
+                sx={{
+                    border: 2,
+                    borderColor: 'black',
+                    width: '80%',
+                    marginLeft: 2
+                }}>
+                    add link
+                </Box>
+            </Grid>
+            <Grid item xs={4}>
+            <Box display='flex' justifyContent='center' 
+                sx={{
+                    border: 2,
+                    borderColor: 'black',
+                    width: '80%',
+                    marginLeft: 2
+                }}>
+                    Spotify
+                </Box>
+            </Grid>
+            <Grid item xs={4}>
+            <Box display='flex' justifyContent='center' 
+                sx={{
+                    border: 2,
+                    borderColor: 'black',
+                    width: '80%',
+                    marginLeft: 2
+                }}>
+                    SoundCloud
+                </Box>
+            </Grid>
+            <Grid item xs={12}>
+                <AddLink/>
+            </Grid>
+            <Grid item xs={12}>
+                <Box position={'absolute'} bottom={0}>
+                    <Button variant="contained" sx={{
+                                        borderRadius: 5,
+                                        height: 40,
+                                        width: 100,
+                                        fontStyle: 'bold',
+                                        marginLeft: 2,
+                                        marginBottom: 2
+                                    }}>
+                                    confirm
+                    </Button>
+                    <Button variant="contained" sx={{
+                                        borderRadius: 5,
+                                        height: 40,
+                                        width: 100,
+                                        fontStyle: 'bold',
+                                        marginLeft: 40,
+                                        marginBottom: 2
+                                    }}>
+                                    cancel
+                    </Button>
+                </Box>
+            </Grid>
+        </Grid>        
+    )
+}
+
+const AddLink = (props) => {
+
+    return ( 
+            <Grid container>
+                <Grid item xs={12} marginLeft={'10%'} marginTop={5}>
+                    <Typography variant='h4' marginLeft={4}>
+                        title
+                    </Typography>
+                    <Box display='flex' sx={{
+                            border: 2,
+                            borderRadius: '35px',
+                            marginRight: 10,
+                            width: '80%'
+                    }}>
+                            <TextField variant='standard' onChange={(event) => {console.log(event.target.value)}} InputProps={{ disableUnderline: true }} defaultValue={'enter title of url here'} sx = {{
+                                fontStyle: 'bold',
+                                color: `black`,
+                                width: '100%',
+                                marginLeft: 1
+                                }}>
+                                
+                            </TextField>
+                    </Box>   
+                </Grid>
+                <Grid item xs={12} marginLeft={'10%'}>
+                    <Typography variant='h4' marginLeft={4}>
+                        url
+                    </Typography>
+                    <Box display='flex' sx={{
+                            border: 2,
+                            borderRadius: '35px',
+                            marginRight: 10,
+                            width: '80%'
+                    }}>
+                            <TextField variant='standard' onChange={(event) => {console.log(event.target.value)}} InputProps={{ disableUnderline: true }} defaultValue={'://'} sx = {{
+                                fontStyle: 'bold',
+                                color: `black`,
+                                width: '100%',
+                                marginLeft: 1
+                                }}>
+                                
+                            </TextField>
+                    </Box>   
+                </Grid>
+                <Grid item>
+                    
+                </Grid>
+            </Grid>
+    )
+}
+
 const ProfileArea = (props) => {
     
-    const {userData} = props;
-    const {isAuth} = props;
+    const {userData, isAuth, isEdit, setIsEdit} = props;
+
     const hexToRGBA = (hex) => {
         try {
             var c;
@@ -104,6 +234,7 @@ const ProfileArea = (props) => {
     }
     return (
         <div>
+
             {
             
             userData.map((user) => (
@@ -111,11 +242,12 @@ const ProfileArea = (props) => {
                     <GlobalStyles
                         styles={{
                             body: { 
-                            backgroundColor: `${hexToRGBA(user.theme.background_color)}`,
-                            background: `${user.theme.background}`,
-                            backgroundPosition: `${user.theme.background_position}`,
-                            backgroundSize: `${user.theme.background_size}`,
-                            backgroundRepeat: `${user.theme.background_repeat}`,
+                                backgroundColor: `${hexToRGBA(user.theme.background_color)}`,
+                                background: `${user.theme.background}`,
+                                backgroundPosition: `${user.theme.background_position}`,
+                                backgroundSize: `${user.theme.background_size}`,
+                                backgroundRepeat: `${user.theme.background_repeat}`,
+                                backgroundAttatchment: "fixed"
                             }
                         }}
                     />
@@ -123,7 +255,9 @@ const ProfileArea = (props) => {
                     <Stack justifyContent={'center'}>
                     <Grid container justifyContent="center" alignItems="center" columns={1}>
                         <Grid item>
-                            <Box display="flex" justifyContent="center" alignItems="center" sx={{
+                        {
+                                !isEdit ?
+                                <Box display="flex" justifyContent="center" alignItems="center" sx={{
                                 height: 150,
                                 width: 150,
                                 borderRadius: '50%',
@@ -136,10 +270,44 @@ const ProfileArea = (props) => {
                                     <Image src={ghost}/>
                                 </Box>
                             </Box>
+                            :
+                            <Box display="flex" justifyContent="center" alignItems="center" sx={{
+                                height: 150,
+                                width: 150,
+                                borderRadius: '50%',
+                                backgroundColor: '#D8D8D8',
+                            }}>
+                                <Box sx={{
+                                    position: 'relative',
+                                    height: '70%',
+                                }}>
+                                    <Image src={ghost} sx={{
+                                        filter: 'blur(3.5px)'
+                                    }}/>
+                                    <Typography variant="caption" sx={{
+                                        position: "absolute",
+                                        color: 'white',
+                                        textalign: 'center',
+                                        position: 'absolute',
+                                        top: 0,
+                                        bottom: 0,
+                                        left: 0,
+                                        right: 0,
+                                        height: 'fit-content',
+                                        width: 90,
+                                        margin: 'auto',
+                                    }}>
+                                        Tap to change
+                                    </Typography>
+                                </Box>
+                            </Box>
+                            }
                         </Grid>
                     </Grid>
                     <Box display="flex" justifyContent="center">
-                    <Typography variant='h4' sx = {{
+                    {
+                            !isEdit ?
+                            <Typography variant='h4' sx = {{
                         fontStyle: 'bold',
                         color: `${user.colors.text_color}`
                         }}>
@@ -147,6 +315,34 @@ const ProfileArea = (props) => {
 
                        
                     </Typography>
+                    :
+                    <Box display="flex" justifyContent="center" sx={{
+                        position: "center",
+                        marginTop: 5
+                    }}>
+                        <Box display='flex' sx={{
+                            border: 2,
+                            borderRadius: '35px',
+                            marginRight: 10
+                        }}>
+                            <Typography variant='h6' sx={{marginLeft: 1}}>
+                                /
+                            </Typography>
+                            <TextField variant='standard' onChange={(event) => {console.log(event.target.value)}} InputProps={{ disableUnderline: true }} defaultValue={user.displayname} sx = {{
+                                fontStyle: 'bold',
+                                color: `black`,
+                                width: 200
+                                }}>
+                                
+                            </TextField>
+                        </Box>
+                        <Button variant="contained" sx={{
+
+                            }}>
+                                Update
+                        </Button>    
+                    </Box>
+                        }
                     </Box>
 
                     {
@@ -154,7 +350,9 @@ const ProfileArea = (props) => {
                         
                         <div>
 
-                        <Box display="flex" justifyContent="center" alignItems="center" sx={{
+                        {
+                            !isEdit?
+                            <Box display="flex" justifyContent="center" alignItems="center" sx={{
                             height: 200
                         }}>
                             <Typography align='center' variant='h2' sx={{
@@ -165,11 +363,82 @@ const ProfileArea = (props) => {
                             it looks like your profile is empty :/
                             </Typography>
                         </Box>
-    
+                        :
+                        <Box display='flex' sx={{
+                            justifyContent: 'center'}}>
+
+                        
+                            <Box display="flex" justifyContent="center" alignItems="center" sx={{
+                                height: 75,
+                                border: 2,
+                                borderRadius: '35px',
+                                marginTop: 5,
+                                width: 380
+                            }}>
+                                <TextField
+                                id="user-description"
+                                multiline
+                                size='small'
+                                variant='standard'
+                                InputProps={{ disableUnderline: true }}
+                                inputProps={{min: 0, style: { textAlign: 'center' }}}
+                                rows={2}
+                                defaultValue="Enter new Description here"
+                                sx={{
+                                    width: 370
+                                }}
+                            />
+                            </Box>
+                        </Box>
+                        }
+                        {
+                            isEdit &&                      
+                            <PopupState variant="popover" popupId="demo-popup-popover">
+                            {(popupState) => (
+                            <Box display='flex' justifyContent='center'>
+                            <Box sx={{
+                                justifyContent: 'center',
+                                height: 56,
+                                width: 56,
+                                borderRadius: '50%',
+                                backgroundColor: 'white',
+                                marginTop: 5
+                            }}>
+                                <IconButton {...bindTrigger(popupState)}>
+                                    <AddRoundedIcon sx={{
+                                        fontSize: 40
+                                    }}/>
+                                </IconButton>
+                            </Box>
+                            <Popover
+                                {...bindPopover(popupState)}
+                                anchorOrigin={{
+                                vertical: 'center',
+                                horizontal: 'center',
+                                }}
+                                transformOrigin={{
+                                vertical: 'center',
+                                horizontal: 'center',
+                                }}
+                            >
+                                <Box sx={{
+                                    height: '80vh',
+                                    width: '80vh'
+                                }}>
+                                    <AddContent/>
+                                </Box>
+                            </Popover>
+                            </Box>
+                        )}
+                        </PopupState>
+                        }
                         <Box display="flex" justifyContent="center" alignItems="center" sx={{
                             height: 100
                         }}>
-                            <Button variant="contained" sx={{
+                            { !isEdit ?
+                                <Button variant="contained" onClick={() => {
+                                setIsEdit(true);
+                            }} sx={{
                                 backgroundColor: `${user.colors.button_color}`,
                                 borderRadius: 5,
                                 height: 40,
@@ -177,22 +446,25 @@ const ProfileArea = (props) => {
                                 fontStyle: 'bold',
                                 color: `${user.colors.text_color}`
                             }}>
-                            add some links
+                            lets change that
                             </Button>
+                                :
+                            <Button variant="contained" onClick={() => {
+                                setIsEdit(false);
+                                }} sx={{
+                                backgroundColor: `${user.colors.button_color}`,
+                                borderRadius: 5,
+                                height: 40,
+                                width: 175,
+                                fontStyle: 'bold',
+                                color: `${user.colors.text_color}`
+                            }}>
+                            stop editing
+                            </Button>
+                            }
                         </Box>
-                            <Box display="flex" justifyContent="center" alignItems="center">
-                                <Typography variant='h1' color="#5B7ABC" 
-
-                                style={{ textDecoration:"none"}}>
-                                <span style={{color:`${user.colors.text_color}`}}>hypr</span>
-                                <span style={{color:`${user.colors.secondary_color}`}}>crd</span>
-                            
-                                </Typography>
-                            </Box>
                         </div>
-
                     }
-
                     </Stack>
                     </ThemeProvider>
 
@@ -205,6 +477,7 @@ const ProfileArea = (props) => {
 export const UserPage = (props) => {
     const [isMenuOpen , setMenuOpen] = useState(false);
     const [isAuth, setIsAuth] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
 
     const navigate = useNavigate();
     const userContent = useParams();
@@ -276,14 +549,13 @@ export const UserPage = (props) => {
 
     const setSubMenu = () => {
         setMenuOpen(!isMenuOpen);
-        console.log('here');
     }
 
     return(
         <Fragment>
             <TopMenu/>
             <ProfileArea
-               userData = {userData} isAuth = {isAuth}/>
+               userData = {userData} isAuth = {isAuth} isEdit={isEdit} setIsEdit={setIsEdit}/>
         </Fragment>
     )
 }
