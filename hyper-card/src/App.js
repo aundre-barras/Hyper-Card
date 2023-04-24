@@ -8,7 +8,9 @@ import {Login} from "./components/pages/login";
 import {UserPage} from "./components/pages/userpage";
 import {NoPage} from "./components/pages/nopage";
 import {ForgotPassword} from "./components/pages/forgotpassword";
-import { SpotifySearch } from './components/pages/userPageComponents/spotify/spotifysearch';
+// import { SpotifySearch } from './components/pages/userPageComponents/spotify/spotifysearch';
+// import { TwitchUserSearch } from './components/pages/userPageComponents/twitch/twitchusersearch';
+import { TwitterSearch } from './components/pages/userPageComponents/twitter/twittersearch';
 
 export const HyprCrd = () => {
   return (
@@ -19,9 +21,9 @@ export const HyprCrd = () => {
             <Route path = "/login" element = {<Login/>}/>
             <Route path = "/u/:id" element = {<UserPage/>}/>
             <Route path = "/forgotpassword" element = {<ForgotPassword/>}/>
-
-
-            <Route path = "/spotifytest" element = {<SpotifySearch/>}/>
+            {/* <Route path = "/twitchtest" element = {<TwitchUserSearch/>}/>
+            <Route path = "/spotifytest" element = {<SpotifySearch/>}/> */}
+            <Route path = "/twittertest" element = {<TwitterSearch/>}/>
             <Route path = "*" to = "/nopage" element = {<NoPage/>}/>
             
           </Routes>
