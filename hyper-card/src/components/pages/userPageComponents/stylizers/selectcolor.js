@@ -14,8 +14,8 @@ export const SelectColors = () => {
                             <Box item display="flex" justifyContent="center" alignItems="center" sx={{
                                 height: 200,
                                 width: 200,
-                                borderColor: "black",
-                                borderStyle: "solid",
+
+                                borderRadius: '50%',
                                 background:`linear-gradient( ${color.main_color} 20%, ${color.secondary_color} 0 40%, ${color.text_color} 0 60%, ${color.secondary_text_color} 0 80%, ${color.button_color} 0)`
                             }}>
 

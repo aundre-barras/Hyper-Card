@@ -10,8 +10,8 @@ import {NoPage} from "./components/pages/nopage";
 import {ForgotPassword} from "./components/pages/forgotpassword";
 // import { SpotifySearch } from './components/pages/userPageComponents/spotify/spotifysearch';
 // import { TwitchUserSearch } from './components/pages/userPageComponents/twitch/twitchusersearch';
-import { TwitterSearch } from './components/pages/userPageComponents/twitter/twittersearch';
-import {SelectColors} from './components/pages/userPageComponents/stylizers/selectcolor';
+// import { TwitterSearch } from './components/pages/userPageComponents/twitter/twittersearch';
+// import {SelectColors} from './components/pages/userPageComponents/stylizers/selectcolor';
 export const HyprCrd = () => {
   return (
         <BrowserRouter>
@@ -23,8 +23,8 @@ export const HyprCrd = () => {
             <Route path = "/forgotpassword" element = {<ForgotPassword/>}/>
             {/* <Route path = "/twitchtest" element = {<TwitchUserSearch/>}/>
             <Route path = "/spotifytest" element = {<SpotifySearch/>}/> */}
-            <Route path = "/colortest" element = {<SelectColors/>}/>
-            <Route path = "/twittertest" element = {<TwitterSearch/>}/>
+            {/* <Route path = "/colortest" element = {<SelectColors/>}/>
+            <Route path = "/twittertest" element = {<TwitterSearch/>}/> */}
             <Route path = "*" to = "/nopage" element = {<NoPage/>}/>
 
             
