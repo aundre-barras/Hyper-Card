@@ -71,18 +71,18 @@ export const Colors = () => {
             button_color:"#d3c3b6"
         },
         {
-            main_color:"##ECEBE9",
-            secondary_color:"##A0C8C3",
-            text_color:"##262225",
-            secondary_text_color:"##29354B",
-            button_color:"##4C8891"
+            main_color:"#ECEBE9",
+            secondary_color:"#A0C8C3",
+            text_color:"#262225",
+            secondary_text_color:"#29354B",
+            button_color:"#4C8891"
         },
         {
-            main_color:"##E1E1E1",
-            secondary_color:"##B8CABA",
-            text_color:"##97010E",
-            secondary_text_color:"##5A6B5D",
-            button_color:"##F34C3F"
+            main_color:"#E1E1E1",
+            secondary_color:"#B8CABA",
+            text_color:"#97010E",
+            secondary_text_color:"#5A6B5D",
+            button_color:"#F34C3F"
         },
         {
             main_color:"#eedede",
@@ -91,12 +91,12 @@ export const Colors = () => {
             secondary_text_color:"#112037",
             button_color:"#bbbbbb"
         },
-        {
-            main_color:"#",
-            secondary_color:"#",
-            text_color:"#",
-            secondary_text_color:"#",
-            button_color:"#"
-        },
+        // {
+        //     main_color:"#",
+        //     secondary_color:"#",
+        //     text_color:"#",
+        //     secondary_text_color:"#",
+        //     button_color:"#"
+        // },
     ]);
 };
