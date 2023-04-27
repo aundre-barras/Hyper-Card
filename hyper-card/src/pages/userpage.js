@@ -9,12 +9,12 @@ import {collection, getDocs, query, where} from "firebase/firestore";
 
 import {getDownloadURL, ref, listAll} from "firebase/storage";
 
-import {db, storage} from "../firebase-config";
+import {db, storage} from "./firebase-config";
 
 
 import { onAuthStateChanged } from 'firebase/auth';
 
-import { auth } from '../firebase-config';
+import { auth } from './firebase-config';
 //
 import {TopMenu} from './userPageComponents/mainUserComponents/topmenu';
 import { ProfileArea } from './userPageComponents/mainUserComponents/profilearea';

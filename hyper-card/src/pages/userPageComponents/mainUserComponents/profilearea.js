@@ -11,7 +11,7 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import Popover from '@mui/material/Popover';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import ghost from '../../../media/ghost.png';
+import ghost from '../../../components/media/ghost.png';
 import { Image } from 'mui-image'
 import {ThemeProvider } from '@mui/material/styles';
 import {UserTheme} from "../usertheme";
