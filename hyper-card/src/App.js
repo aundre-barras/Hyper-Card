@@ -27,7 +27,7 @@ export const HyprCrd = () => {
             <Route path = "/twittertest" element = {<TwitterSearch/>}/> */}
             <Route path = "*" to = "/nopage" element = {<NoPage/>}/>
 
-            
+
           </Routes>
         </BrowserRouter>
 
