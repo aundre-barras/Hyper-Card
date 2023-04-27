@@ -7,7 +7,6 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import {ThemeProvider } from '@mui/material/styles';
-import logoCircle from '../media/logo-circle.png'
 import { Link } from 'react-router-dom';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import {theme} from "./theme";

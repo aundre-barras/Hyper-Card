@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {ThemeProvider } from '@mui/material/styles';
-import logoCircle from '../media/logo-circle.png'
+import logoCircle from '../components/media/logo-circle.png'
 import { Link } from 'react-router-dom';
 import {theme} from "./theme";
 import {React, useEffect, useState} from "react";
@@ -19,7 +19,7 @@ import {React, useEffect, useState} from "react";
 import {signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import {doc, getDoc} from "firebase/firestore";
-import {auth, db, googleProv} from "../firebase-config";
+import {auth, db, googleProv} from "./firebase-config";
 
 
 

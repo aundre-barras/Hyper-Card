@@ -8,8 +8,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {ThemeProvider } from '@mui/material/styles';
-import logoCircle from '../media/logo-circle.png';
-import menu from '../media/menu.png';
+import logoCircle from '../components/media/logo-circle.png';
+import menu from '../components/media/menu.png';
 import { Link } from 'react-router-dom';
 import {theme} from "./theme";
 

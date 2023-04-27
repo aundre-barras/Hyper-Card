@@ -3,7 +3,7 @@ import {
     Button,
     Box
 } from '@mui/material';
-import ghost from '../../../media/ghost.png';
+import ghost from '../../../components/media/ghost.png';
 import { Image } from 'mui-image'
 
 export const EditProfileImage = () => {
