@@ -91,7 +91,7 @@ export const SignUp = () => {
                     
                 });
 
-                navigate("/" + user.email.substring(0, user.email.indexOf("@")));
+                navigate("/u/" + user.email.substring(0, user.email.indexOf("@")));
 
             });
         } catch (error) {
@@ -166,6 +166,7 @@ export const SignUp = () => {
                     });
                     
                     navigate("/u/" + username);
+                    return;
                 });
             }
 
