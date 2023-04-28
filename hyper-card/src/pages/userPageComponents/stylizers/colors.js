@@ -4,7 +4,7 @@ export const Colors = () => {
             main_color:"#eeeeee",
             secondary_color:"#c5ee7d",
             text_color:"#5c452d",
-            secondary_text_color:"8cb04e",
+            secondary_text_color:"#8cb04e",
             button_color:"#7a9244"
         },
         {
