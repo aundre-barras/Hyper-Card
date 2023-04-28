@@ -87,7 +87,8 @@ export const SignUp = () => {
                         background_position: "",
                         background_size: "",
                         background_repeat: ""
-                    }
+                    },
+                    theme_index: 0
                     
                 });
 
@@ -162,7 +163,8 @@ export const SignUp = () => {
                             background_position: "",
                             background_size: "",
                             background_repeat: ""
-                        }
+                        },
+                        theme_index: 0
                     });
                     
                     navigate("/u/" + username);

@@ -80,7 +80,10 @@ export const Episodes = (props) => {
                             episode.images && episode.images[0] ? 
                             <img src = {episode.images[0].url} width = "10%" alt = {episode.name}/> : null
                         }
-                        <h4>{episode.audio_preview_url}</h4>
+                        <audio controls>
+                            <source src={episode.audio_preview_url} type="audio/mp3"/>
+
+                        </audio>
 
                     </div>
 

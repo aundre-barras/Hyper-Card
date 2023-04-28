@@ -29,7 +29,6 @@ export const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isAuth, setIsAuth] = useState("");
 
     const loginWithGoogle = async () => {
       try {
@@ -46,33 +45,6 @@ export const Login = () => {
 
     };
 
-
-    const alreadyLoggedIn = async () => {
-
-      try {
-
-        onAuthStateChanged(auth, (user) => {
-          if (user){
-            setIsAuth(user.uid);
-          }
-      
-        });
-        if (isAuth){
-          const usersRef = doc(db, "users", isAuth);
-          const snap = await getDoc(usersRef);
-          navigate ("/u/" + snap.data().displayname);
-        }
-
-
-      } catch (error) {
-        console.error(error);
-      }
-
-
-    }
-    useEffect(() => {
-      alreadyLoggedIn();
-    }, [isAuth])
 
     const login = async () => {
         try {

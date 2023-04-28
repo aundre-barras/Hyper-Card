@@ -10,7 +10,6 @@ export const EditProfileImage = () => {
     // need props here to get current user image
 
     return (
-
         <Box display="flex" justifyContent="center" alignItems="center" sx={{
             height: 150,
             width: 150,

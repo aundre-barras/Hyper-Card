@@ -78,7 +78,11 @@ export const Tracks = (props) => {
                         track.album.images && track.album.images[0] ?
                         <img src={track.album.images[0].url} width="10%" alt={track.name} /> : null
                         }
-                        
+                        <h4></h4>
+                        <audio controls>
+                            <source src={track.preview_url} type="audio/mp3"/>
+
+                        </audio>
                         
                     </div>
                 )

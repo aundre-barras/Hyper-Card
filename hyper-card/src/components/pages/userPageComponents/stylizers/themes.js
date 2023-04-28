@@ -2,8 +2,8 @@ export const Themes = (background_color, secondary_color) => {
     return ([
         {
             "backgroundColor":`${background_color}`,
-            "background":"",
-            "backgroundPosition":"",
+            "background":`linear-gradient(167.95deg, ${background_color} 63.36%, ${background_color} 100%)`,
+            "backgroundPosition":"0",
             "backgroundSize":"",
             "backgroundRepeat":"",
 
@@ -11,7 +11,7 @@ export const Themes = (background_color, secondary_color) => {
         {
             "backgroundColor":`${background_color}`,
             "background": `linear-gradient(167.95deg, ${background_color} 63.36%, ${secondary_color} 100%)`,
-            "backgroundPosition":"",
+            "backgroundPosition":"0",
             "backgroundSize":"",
             "backgroundRepeat":"",
 
@@ -87,12 +87,5 @@ export const Themes = (background_color, secondary_color) => {
             "backgroundSize":"3em 3em",
             "backgroundRepeat":""
         },
-        {
-            "backgroundColor":`${background_color}`,
-            "background":`linear-gradient(45deg,${secondary_color} 20%, transparent 20%), linear-gradient(135deg, transparent 80%, ${secondary_color} 80%), radial-gradient(${secondary_color} 20% , transparent 21%)`,
-            "backgroundPosition":"",
-            "backgroundSize":"3em 3em",
-            "backgroundRepeat":""
-        }
     ]);
 };
