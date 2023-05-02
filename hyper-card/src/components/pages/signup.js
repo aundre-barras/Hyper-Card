@@ -39,6 +39,7 @@ import {
         signInWithPopup,
         sendEmailVerification
         } from 'firebase/auth';
+import { GlobalStyles } from '@mui/material';
 
 
 
@@ -178,6 +179,19 @@ export const SignUp = () => {
 
     return (
     <ThemeProvider theme={theme}>
+        <GlobalStyles
+          styles = {{
+            body: {
+              backgroundImage: "linear-gradient(to bottom right, #FFFFFF 63.36%, #5C7BBD)",
+              backgroundAttatchment: "relative",
+              overflow: "hidden",
+              width: "100%",
+              minHeight: "100vh"
+            }
+          }}
+        
+        
+        />
         <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

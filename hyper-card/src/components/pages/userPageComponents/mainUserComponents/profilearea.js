@@ -43,7 +43,10 @@ export const ProfileArea = (props) => {
                                 backgroundPosition: `${user.theme.backgroundPosition}`,
                                 backgroundSize: `${user.theme.backgroundSize}`,
                                 backgroundRepeat: `${user.theme.backgroundRepeat}`,
-                                backgroundAttatchment: "relative"
+                                backgroundAttatchment: "relative",
+                                overflow: "hidden",
+                                width: "100%",
+                                minHeight: "100vh"
                             }
                         }}
                     />
