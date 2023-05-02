@@ -19,26 +19,9 @@ import { Link } from 'react-router-dom';
 import { EditDescription } from './editdescription';
 import { ChangeTheme } from './changetheme';
 import { ChangeColor } from './changecolor';
-export const ProfileArea = (props) => {
+import { hexToRGBA } from '../stylizers/hexToRGBA';
 
-    const hexToRGBA = (hex) => {
-        try {
-            var c;
-            if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
-                c= hex.substring(1).split('');
-                if(c.length== 3){
-                    c= [c[0], c[0], c[1], c[1], c[2], c[2]];
-                }
-                c= '0x'+c.join('');
-                console.log()
-                return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',.1)';
-            }
-            throw new Error('Bad Hex'); 
-        } catch (error) {
-            console.error(error);
-        }
-    
-    }
+export const ProfileArea = (props) => {
 
     const {userData, isAuth, isEdit, setIsEdit} = props;
 
@@ -60,7 +43,7 @@ export const ProfileArea = (props) => {
                                 backgroundPosition: `${user.theme.backgroundPosition}`,
                                 backgroundSize: `${user.theme.backgroundSize}`,
                                 backgroundRepeat: `${user.theme.backgroundRepeat}`,
-                                backgroundAttatchment: "fixed"
+                                backgroundAttatchment: "relative"
                             }
                         }}
                     />
