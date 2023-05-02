@@ -6,11 +6,14 @@ import {
 
     IconButton
 } from '@mui/material';
+import spotify from '../../../media/spotify.png';
+import twitch from '../../../media/twitch.png';
+import shoutouts from '../../../media/shoutouts.png';
 import { AddLink } from './addlink';
+import { AddShoutOut } from './addshoutout';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import Popover from '@mui/material/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
-import spotify from '../../../media/spotify.png';
 
 export const AddContent = (props) => {
     return (
@@ -110,7 +113,7 @@ export const AddContent = (props) => {
                         alignItems:'center',
                         color:'#000000'
                     }}>
-                    twitch
+                    <img src={twitch} alt = "logo" style={{ width: "25px", height: "25px" }}/>
                 </Button>
                 </Grid>
 
@@ -122,16 +125,11 @@ export const AddContent = (props) => {
                         width:'80px',
                         height:'40px',
                         marginLeft: 2,
-                        fontSize:'16px',
-                        lineHeight:'15px',
                         borderRadius:'10px',
                         alignItems:'center',
-                        "fontFamily":'Outfit',
-                        "fontWeight":"600",
-                        textTransform:'none',
                         color:'#000000'
                     }}>
-                    shout outs
+                    <img src={shoutouts} alt = "logo" style={{ width: "25px", height: "25px" }}/>
                 </Button>
                 </Grid>
 
