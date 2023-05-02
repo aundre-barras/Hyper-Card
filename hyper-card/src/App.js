@@ -14,6 +14,7 @@ import {ForgotPassword} from "./components/pages/forgotpassword";
 // import {SelectColors} from './components/pages/userPageComponents/stylizers/selectcolor';
 export const HyprCrd = () => {
   return (
+     <div>
         <BrowserRouter>
           <Routes>
             <Route path = "/" element = {<Landing/>}/>
@@ -30,6 +31,7 @@ export const HyprCrd = () => {
 
           </Routes>
         </BrowserRouter>
+      </div>
 
   )
 }
