@@ -26,7 +26,9 @@ export const EditDescription = () => {
                     InputProps={{ disableUnderline: true }}
                     inputProps={{min: 0, style: { textAlign: 'center' }}}
                     rows={2}
-                    defaultValue="Enter new Description here"
+                    placeholder="Enter description..."
+                    // need to add default being pull from user database
+                    // defaultValue={}
                     sx={{
                         width: 370
                     }}

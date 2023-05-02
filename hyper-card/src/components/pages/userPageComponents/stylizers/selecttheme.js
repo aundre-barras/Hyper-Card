@@ -3,7 +3,7 @@ import {Grid, Box, IconButton} from '@mui/material'
 import { useEffect, useState } from 'react';
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from '../../firebase-config';
-
+import { hexToRGBA } from './hexToRGBA';
 export const SelectTheme = (props) => {
     const {main_color, secondary_color} = props;
     const themes = Themes(main_color, secondary_color);
