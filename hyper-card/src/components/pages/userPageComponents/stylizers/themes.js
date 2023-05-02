@@ -83,7 +83,7 @@ export const Themes = (background_color, secondary_color) => {
             "backgroundRepeat":""
         },
         {
-            "backgroundColor":"#e5e5f7",
+            "backgroundColor":`${background_color}`,
             "background":`radial-gradient(${secondary_color} 2px, ${hexToRGBA(background_color)} 2px)`,
             "backgroundPosition":"",
             "backgroundSize":"25px 25px",
