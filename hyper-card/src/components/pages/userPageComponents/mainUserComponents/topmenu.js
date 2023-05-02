@@ -37,7 +37,6 @@ export const TopMenu = (props) => {
                         position: 'relative',
                         height: 75,
                         width: 75,
-                        backgroundColor: 'white',
                         top: 13,
                         right: 16
                     }}>
