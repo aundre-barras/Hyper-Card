@@ -1,10 +1,10 @@
 export const Colors = () => {
     return ([
         {
-            main_color:"#c5ee7d",
-            secondary_color:"#7a9244",
+            main_color:"#eeeeee",
+            secondary_color:"#c5ee7d",
             text_color:"#5c452d",
-            secondary_text_color:"#e1dfb6",
+            secondary_text_color:"#8cb04e",
             button_color:"#7a9244"
         },
         {
@@ -15,11 +15,11 @@ export const Colors = () => {
             button_color:"#FCD8D4"
         },
         {
-            main_color:"#f4c430",
-            secondary_color:"#d73a24",
+            main_color:"#eeeeee",
+            secondary_color:"#aaaaaa",
             text_color:"#5e1418",
-            secondary_text_color:"#e8a017",
-            button_color:"#aaaaaa"
+            secondary_text_color:"#d73a24",
+            button_color:"#e8a017" 
         },
         {
             main_color:"#ffffff",
@@ -64,11 +64,11 @@ export const Colors = () => {
             button_color:"#888888"
         },
         {
-            main_color:"#9195ba",
+            main_color:"#d3c3b6",
             secondary_color:"#daa88f",
             text_color:"#4e4856",
             secondary_text_color:"#f2c37b",
-            button_color:"#d3c3b6"
+            button_color: "#9195ba"
         },
         {
             main_color:"#ECEBE9",
@@ -91,5 +91,12 @@ export const Colors = () => {
             secondary_text_color:"#112037",
             button_color:"#bbbbbb"
         },
+        // {
+        //     main_color:"#",
+        //     secondary_color:"#",
+        //     text_color:"#",
+        //     secondary_text_color:"#",
+        //     button_color:"#"
+        // },
     ]);
 };

@@ -87,7 +87,8 @@ export const Login = () => {
               fontFamily: "Montserrat",
               fontWeight: 400,
               fontSize: "16px",
-              color: "#1B1B1B"
+              color: "#1B1B1B",
+              height: '41px'
             }}>
               a visual resume for creatives.
             </text>

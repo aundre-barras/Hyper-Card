@@ -3,16 +3,16 @@ import {
     Button,
     Box,
     Grid,
+
     IconButton
 } from '@mui/material';
 import { AddLink } from './addlink';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import Popover from '@mui/material/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import spotify from '../../../media/spotify.png';
 
 export const AddContent = (props) => {
-
-
     return (
         <PopupState variant="popover" popupId="demo-popup-popover">
             {(popupState) => (
@@ -46,15 +46,16 @@ export const AddContent = (props) => {
                     }}
                 >
                 <Box sx={{
-                    height: '80vh',
-                    width: '80vh'
+                    height: '785px',
+                    width: '328px',
+                    borderRadius: '10px',
                 }}>
 
-                <Grid container justifyContent="center" alignItems='center'>
+                <Grid container direction='row' justifyContent="space-content" alignItems='center' xs={12}>
 
                 <Grid item xs={12} sx={{
-                    justifyContent: 'center',
-                    alignItems: 'center'
+                    // justifyContent: 'center',
+                    // alignItems: 'center'
                 }}>
                     <Typography align='center'>
                     Link Type
@@ -62,82 +63,78 @@ export const AddContent = (props) => {
                 </Grid>
 
                 <Grid item xs={4}>
-
                 <Box display='flex' justifyContent='center' 
                     sx={{
                     border: 2,
                     borderColor: 'black',
-                    width: '80%',
-                    marginLeft: 2
+                    width: '80px',
+                    height: '40px',
+                    marginLeft: 2,
+                    borderRadius: '10px',
+                    "fontFamily":"'Outfit'","fontStyle":"normal","fontWeight":"600","fontSize":"16px","lineHeight":"20px","display":"flex","alignItems":"center","textAlign":"center"
                 }}>
-
-                    add link
+                    ://
                 </Box>
-
                 </Grid>
 
                 <Grid item xs={4}>
-
                     <Box display='flex' justifyContent='center' 
                         sx={{
                         border: 2,
                         borderColor: 'black',
-                        width: '80%',
-                        marginLeft: 2
+                        width: '80px',
+                        height: '40px',
+                        marginLeft: 2,
+                        borderRadius: '10px',
+                        alignItems: 'center'
                     }}>
-
-                        Spotify
+                        <img src={spotify} alt = "logo" style={{ width: "25px", height: "25px" }}/>    
                     </Box>
-
                 </Grid>
 
                 <Grid item xs={4}>
-
                 <Box display='flex' justifyContent='center' 
                     sx={{
                     border: 2,
                     borderColor: 'black',
-                    width: '80%',
-                    marginLeft: 2
+                    width: '80px',
+                    height: '40px',
+                    marginLeft: 2,
+                    borderRadius: '10px',
+                    alignItems: 'center'
                 }}>
-
-                    SoundCloud
+                    twitch
                 </Box>
-
                 </Grid>
 
                 <Grid item xs={12}>
                     <AddLink/>
                 </Grid>
-
-                <Grid item xs={12}>
-                    <Box position={'absolute'} bottom={0}>
-                        <Button variant="contained" sx={{
+       
+                <Grid item xs={6} bottom={0} left={10} position={'absolute'}>
+                    <Button variant='contained' sx={{
                             borderRadius: 5,
                             height: 40,
                             width: 100,
                             fontStyle: 'bold',
-                            marginLeft: 2,
                             marginBottom: 2
                         }}>
-                            confirm
-                        </Button>
-
-                        <Button variant="contained" sx={{
+                        confirm
+                    </Button>
+                </Grid>
+                <Grid item xs={6} bottom={0} right={10} position={'absolute'}>
+                    <Button variant='contained' sx={{
                             borderRadius: 5,
                             height: 40,
                             width: 100,
                             fontStyle: 'bold',
-                            marginLeft: 40,
                             marginBottom: 2
                         }}>
-                            cancel
-                        </Button>
-                    </Box>
+                        cancel
+                    </Button>
                 </Grid>
 
-                </Grid>  
-
+                </Grid>         
 
                 </Box>
 
@@ -148,3 +145,4 @@ export const AddContent = (props) => {
         </PopupState>
     );
 }
+
