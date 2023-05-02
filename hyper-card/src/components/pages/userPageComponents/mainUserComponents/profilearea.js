@@ -4,24 +4,42 @@ import {
     Box,
     Grid,
     Stack,
-    TextField,
-    IconButton
 } from '@mui/material';
-import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
-import Popover from '@mui/material/Popover';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
+
 import GlobalStyles from '@mui/material/GlobalStyles';
-import ghost from '../../../components/media/ghost.png';
+import ghost from '../../../media/ghost.png';
 import { Image } from 'mui-image'
 import {ThemeProvider } from '@mui/material/styles';
 import {UserTheme} from "../usertheme";
 import { AddContent } from './addcontent';
-import { hexToRGBA } from './hextorgba';
+
 import {EditDisplayName} from './editdisplayname';
 import { EditProfileImage } from './editprofileimage';
-
+import { Link } from 'react-router-dom';
+import { EditDescription } from './editdescription';
+import { ChangeTheme } from './changetheme';
+import { ChangeColor } from './changecolor';
 export const ProfileArea = (props) => {
+
+    const hexToRGBA = (hex) => {
+        try {
+            var c;
+            if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+                c= hex.substring(1).split('');
+                if(c.length== 3){
+                    c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+                }
+                c= '0x'+c.join('');
+                console.log()
+                return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',.1)';
+            }
+            throw new Error('Bad Hex'); 
+        } catch (error) {
+            console.error(error);
+        }
     
+    }
+
     const {userData, isAuth, isEdit, setIsEdit} = props;
 
     const IsUserNameTaken = async () => {
@@ -37,11 +55,11 @@ export const ProfileArea = (props) => {
                     <GlobalStyles
                         styles={{
                             body: { 
-                                backgroundColor: `${hexToRGBA(user.theme.background_color)}`,
+                                backgroundColor: `${hexToRGBA(user.theme.backgroundColor)}`,
                                 background: `${user.theme.background}`,
-                                backgroundPosition: `${user.theme.background_position}`,
-                                backgroundSize: `${user.theme.background_size}`,
-                                backgroundRepeat: `${user.theme.background_repeat}`,
+                                backgroundPosition: `${user.theme.backgroundPosition}`,
+                                backgroundSize: `${user.theme.backgroundSize}`,
+                                backgroundRepeat: `${user.theme.backgroundRepeat}`,
                                 backgroundAttatchment: "fixed"
                             }
                         }}
@@ -72,7 +90,11 @@ export const ProfileArea = (props) => {
                                 <EditProfileImage/>
                             }
                         </Grid>
+
+                            
                     </Grid>
+
+
                     <Box display="flex" justifyContent="center">
                         {
                             !isEdit ?
@@ -112,30 +134,26 @@ export const ProfileArea = (props) => {
                                 justifyContent: 'center'}}>
 
                             
-                                <Box display="flex" justifyContent="center" alignItems="center" sx={{
-                                    height: 75,
-                                    border: 2,
-                                    borderRadius: '35px',
-                                    marginTop: 5,
-                                    width: 380
-                                }}>
-                                    <TextField
-                                        id="user-description"
-                                        multiline
-                                        size='small'
-                                        variant='standard'
-                                        InputProps={{ disableUnderline: true }}
-                                        inputProps={{min: 0, style: { textAlign: 'center' }}}
-                                        rows={2}
-                                        defaultValue="Enter new Description here"
-                                        sx={{
-                                            width: 370
-                                        }}
-                                    />
-                                    
-                                </Box>
+                                <EditDescription/>
                                 
                             </Box>
+                            }
+                            {isEdit && 
+                            
+                            <Grid container justifyContent="center" alignItems="center" columns={1} sx = {{padding: "5px", width: "100%"}}>
+                            <ChangeTheme 
+                                button_color = {user.colors.button_color} 
+                                secondary_text_color = {user.colors.secondary_text_color}
+                                main_color = {user.colors.main_color}
+                                secondary_color = {user.colors.secondary_color}
+                            />
+
+                            
+                            <ChangeColor
+                                button_color = {user.colors.button_color} 
+                                secondary_text_color = {user.colors.secondary_text_color}
+                            />
+                            </Grid>
                             }
                             {
                                 isEdit &&
@@ -149,18 +167,17 @@ export const ProfileArea = (props) => {
                             }}>
 
                                 { !isEdit ?
-                                    <Button variant="contained" onClick={() => {
-                                    setIsEdit(true);
-                                }} sx={{
+                                    <Button variant="contained" onClick={() => {setIsEdit(true);}} 
+                                    sx={{
                                     backgroundColor: `${user.colors.button_color}`,
                                     borderRadius: 5,
                                     height: 40,
                                     width: 175,
                                     fontStyle: 'bold',
-                                    color: `${user.colors.text_color}`
-                                }}>
-                                lets change that
-                                </Button>
+                                    color: `${user.colors.secondary_text_color}`
+                                    }}>
+                                    lets change that
+                                    </Button>
                                     :
                                 <Button variant="contained" onClick={() => {
                                     setIsEdit(false);
@@ -170,12 +187,25 @@ export const ProfileArea = (props) => {
                                     height: 40,
                                     width: 175,
                                     fontStyle: 'bold',
-                                    color: `${user.colors.text_color}`
+                                    color: `${user.colors.secondary_text_color}`
                                 }}>
                                 stop editing
                                 </Button>
+
                                 }
+
                             </Box>
+                            
+                            <Typography display="flex" justifyContent="center" alignItems="center" variant='h1' color={user.colors.secondary_text_color} 
+                            component={Link} to="/" 
+                            style={{ 
+                                textDecoration:"none",
+                                fontSize: "40px",
+
+                            }}>
+                            hypr
+                            <span style={{color:`${user.colors.text_color}`}}>crd</span>
+                            </Typography>
                         </div>
                     }
 

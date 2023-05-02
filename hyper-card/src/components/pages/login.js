@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {ThemeProvider } from '@mui/material/styles';
-import logoCircle from '../components/media/logo-circle.png'
+import logoCircle from '../media/logo-circle.png'
 import { Link } from 'react-router-dom';
 import {theme} from "./theme";
 import {React, useEffect, useState} from "react";
@@ -46,33 +46,6 @@ export const Login = () => {
 
     };
 
-
-    const alreadyLoggedIn = async () => {
-
-      try {
-
-        onAuthStateChanged(auth, (user) => {
-          if (user){
-            setIsAuth(user.uid);
-          }
-      
-        });
-        if (isAuth){
-          const usersRef = doc(db, "users", isAuth);
-          const snap = await getDoc(usersRef);
-          navigate ("/u/" + snap.data().displayname);
-        }
-
-
-      } catch (error) {
-        console.error(error);
-      }
-
-
-    }
-    useEffect(() => {
-      alreadyLoggedIn();
-    }, [isAuth])
 
     const login = async () => {
         try {

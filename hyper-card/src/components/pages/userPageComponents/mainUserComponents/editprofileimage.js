@@ -3,14 +3,13 @@ import {
     Button,
     Box
 } from '@mui/material';
-import ghost from '../../../components/media/ghost.png';
+import ghost from '../../../media/ghost.png';
 import { Image } from 'mui-image'
 
 export const EditProfileImage = () => {
     // need props here to get current user image
 
     return (
-
         <Box display="flex" justifyContent="center" alignItems="center" sx={{
             height: 150,
             width: 150,
