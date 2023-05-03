@@ -11,29 +11,36 @@ export const EditDisplayName = (props) => {
 
     return (
 
-        <Box display="flex" justifyContent="center" sx={{
-            position: "center",
-            marginTop: 5
+        <Box display="flex" justifyContent="center" alignItems= "center" sx={{
         }}>
 
-            <Box display='flex' sx={{
-                border: 2,
-                borderRadius: '35px',
-                marginRight: 10
-            }}>
-                <Typography variant='h6' sx={{marginLeft: 1}}>
-                    /
-                </Typography>
-                <TextField variant='standard' onChange={(event) => {console.log(event.target.value)}} InputProps={{ disableUnderline: true }} defaultValue={displayname} sx = {{
-                    fontStyle: 'bold',
-                    color: `black`,
-                    width: 200
-                }}>
+            <Box>
+                <TextField 
+                    size='small'
+                    variant='standard'
+                    margin="normal"
+                    fullWidth
+                    placeholder='/newdisplayname...'
+                    InputProps={{ disableUnderline: true }}
+                    inputProps={{
+                        style: {
+                            height: 40,
+                            border: 2,
+                            borderStyle: 'solid',
+                            borderColor: 'black',
+                            borderRadius: '15px',
+                            marginTop: 5,
+                            min: 0,
+                            marginRight: 20
+                         },
+                    }}>
                     
                 </TextField>
             </Box>
             <Button variant="contained" sx={{
-
+                width: "75px",
+                height: "50px",
+                borderRadius: '35px',
                 }}>
                     Update
             </Button>
