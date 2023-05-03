@@ -31,7 +31,9 @@ export const ProfileArea = (props) => {
     }
 
     return (
-        <div>
+        <div style={{
+
+        }}>
             {
             userData.map((user) => (
                 <div key = {user}>
@@ -44,7 +46,6 @@ export const ProfileArea = (props) => {
                                 backgroundSize: `${user.theme.backgroundSize}`,
                                 backgroundRepeat: `${user.theme.backgroundRepeat}`,
                                 backgroundAttatchment: "relative",
-                                overflow: "hidden",
                                 width: "100%",
                                 minHeight: "100vh"
                             }
@@ -148,8 +149,8 @@ export const ProfileArea = (props) => {
 
                             }
 
-                            <Box display="flex" justifyContent="center" alignItems="center" sx={{
-                                height: 100
+                            <Box display="flex" justifyContent="center"sx={{
+                                height: 400,
                             }}>
 
                                 { !isEdit ?
@@ -160,19 +161,21 @@ export const ProfileArea = (props) => {
                                     height: 40,
                                     width: 175,
                                     fontStyle: 'bold',
-                                    color: `${user.colors.secondary_text_color}`
+                                    color: `${user.colors.secondary_text_color}`,
                                     }}>
                                     lets change that
                                     </Button>
                                     :
                                 <Button variant="contained" onClick={() => {
                                     setIsEdit(false);
-                                    }} sx={{
+                                    }} 
+                                    sx={{
                                     backgroundColor: `${user.colors.button_color}`,
                                     borderRadius: 5,
                                     height: 40,
                                     width: 175,
                                     fontStyle: 'bold',
+                                    top: 40,
                                     color: `${user.colors.secondary_text_color}`
                                 }}>
                                 stop editing
