@@ -13,6 +13,7 @@ import {ThemeProvider } from '@mui/material/styles';
 import {UserTheme} from "../usertheme";
 import { AddContent } from './addcontent';
 
+import { useState, useEffect } from 'react';
 import {EditDisplayName} from './editdisplayname';
 import { EditProfileImage } from './editprofileimage';
 import { Link } from 'react-router-dom';
@@ -20,10 +21,12 @@ import { EditDescription } from './editdescription';
 import { ChangeTheme } from './changetheme';
 import { ChangeColor } from './changecolor';
 import { hexToRGBA } from '../stylizers/hexToRGBA';
+import { DisplayCard } from './displayCard';
 
 export const ProfileArea = (props) => {
 
     const {userData, isAuth, isEdit, setIsEdit} = props;
+    const [ userCards , setUserCards ] = useState([]);
 
     const IsUserNameTaken = async () => {
 
@@ -143,9 +146,15 @@ export const ProfileArea = (props) => {
                             </Grid>
                             }
                             {
+                                userCards.length > 0 &&
+                                <Box>
+                                    <DisplayCard userCards={userCards}/>
+                                </Box>
+                            }
+                            {
                                 isEdit &&
 
-                                    <AddContent/>
+                                    <AddContent userCards = {userCards} setUserCards = {setUserCards}/>
 
                             }
 

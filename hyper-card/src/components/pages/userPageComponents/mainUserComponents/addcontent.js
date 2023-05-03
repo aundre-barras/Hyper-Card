@@ -9,13 +9,45 @@ import {
 import spotify from '../../../media/spotify.png';
 import twitch from '../../../media/twitch.png';
 import shoutouts from '../../../media/shoutouts.png';
+
+import { SpotifySearch } from '../spotify/spotifysearch'
 import { AddLink } from './addlink';
+import { TwitchUserSearch } from '../twitch/twitchusersearch'
 import { AddShoutOut } from './addshoutout';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import Popover from '@mui/material/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import { useState , useEffect } from 'react';
 
 export const AddContent = (props) => {
+    const {setUserCards , userCards} = props;
+    const [addType, setAddType] = useState("link");
+
+
+    const SelectedCard = () => {
+
+        const getCardType = {
+            "link": AddLink,
+            "spotify" : SpotifySearch,
+            "twitch":  TwitchUserSearch,
+            "shoutout": AddShoutOut
+        };
+
+        const CardType = getCardType[addType];
+        if (addType.length > 0){
+            return (
+                <div>
+                    <CardType setUserCards={setUserCards} userCards={userCards}/>
+                </div>
+
+            );
+        }
+        return;
+    }
+
+    useEffect(() => {
+        SelectedCard();
+    } , [addType])
     return (
         <PopupState variant="popover" popupId="demo-popup-popover">
             {(popupState) => (
@@ -68,7 +100,9 @@ export const AddContent = (props) => {
                 </Grid>
 
                 <Grid item xs={4}>
-                <Button display='flex' justifyContent='center' 
+                <Button display='flex' justifyContent='center' onClick={() => {
+                    setAddType("link");
+                }}
                     sx={{
                         border: 2,
                         borderColor:'black',
@@ -86,7 +120,9 @@ export const AddContent = (props) => {
                 </Grid>
 
                 <Grid item xs={4}>
-                    <Button display='flex' justifyContent='center' 
+                    <Button display='flex' justifyContent='center' onClick={() => {
+                    setAddType("spotify");
+                }}
                         sx={{
                             border: 2,
                             borderColor:'black',
@@ -102,7 +138,9 @@ export const AddContent = (props) => {
                 </Grid>
 
                 <Grid item xs={4}>
-                <Button display='flex' justifyContent='center' 
+                <Button display='flex' justifyContent='center' onClick={() => {
+                    setAddType("twitch");
+                }}
                     sx={{
                         border: 2,
                         borderColor:'black',
@@ -118,7 +156,9 @@ export const AddContent = (props) => {
                 </Grid>
 
                 <Grid item xs={4}>
-                <Button display='flex' justifyContent='center' 
+                <Button display='flex' justifyContent='center' onClick={() => {
+                    setAddType("shoutout")
+                }}
                     sx={{
                         border: 2,
                         borderColor:'black',
@@ -134,38 +174,7 @@ export const AddContent = (props) => {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <AddLink/>
-                </Grid>
-       
-                <Grid item xs={6} bottom={0} left={'12px'} position={'absolute'}>
-                    <Button variant='contained' sx={{
-                            width:'100px',
-                            height:'44px',
-                            background:'#000000',
-                            border:'2px solid #000000',
-                            borderRadius:'35px',
-                            marginBottom: '16px',
-                            ":hover": {bgcolor: "#000000"}
-                        }} style={{
-                            fontFamily:'Outfit', fontWeight:'700'
-                        }}>
-                        confirm
-                    </Button>
-                </Grid>
-                <Grid item xs={6} bottom={0} right={'12px'} position={'absolute'}>
-                    <Button variant='contained' sx={{
-                            width:'100px',
-                            height:'44px',
-                            background:'#ffffff',
-                            border:'2px solid #000000',
-                            borderRadius:'35px',
-                            marginBottom: '16px',
-                            ":hover": {bgcolor: "#ffffff"}
-                        }} style={{
-                            color:'#000000', fontFamily:'Outfit', fontWeight:'700'
-                        }}>
-                        cancel
-                    </Button>
+                    <SelectedCard/>
                 </Grid>
 
                 </Grid>         
