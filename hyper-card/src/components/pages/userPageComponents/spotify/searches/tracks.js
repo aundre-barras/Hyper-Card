@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
-import { Grid } from "@mui/material";
+import { Box , Paper } from "@mui/material";
+import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons";
 
 export const Tracks = (props) => {
     const searchInput = props.to_search;
+    const { userCards , setUserCards } = props;
     const [tracks, setTracks] = useState([]);
     const [accessToken, setAccessToken] = useState("");
+    const [tempCard, setTempCard] = useState([]);
 
     const search = async () => {
         try {
@@ -67,10 +70,16 @@ export const Tracks = (props) => {
 
       return (
         <div>
-        {
-            tracks.map((track) => {
+            <Paper style={{maxHeight: 180, overflow: 'auto'}}>
+                {tracks.map((track) => {
                 return (
-                    <div key={track.id}>
+                    <div key={track.id} onClick={() => {
+                        setTempCard([{
+                            "type": "spotify",
+                            "spotify_type": "track",
+                            "trackId": track.id
+                          }])
+                    }}>
                         <h2>
                             {track.name}
                         </h2>
@@ -82,9 +91,23 @@ export const Tracks = (props) => {
                         
                     </div>
                 )
-            })
-        }
+            })}
+            </Paper>
+            <ConfirmCardButtons tempCard={tempCard} userCards={userCards} setUserCards={setUserCards}/>
+        
 
         </div>
       )
 }
+
+export const DisplayTrack = (props) => {
+    const { card } = props;
+  
+    return (
+      <Box display={"flex"} justifyContent={"center"}>
+        {
+          card["spotify_type"]
+        }
+      </Box>
+    )
+  }

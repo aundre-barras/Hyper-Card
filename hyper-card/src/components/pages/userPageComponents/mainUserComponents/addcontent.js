@@ -81,7 +81,7 @@ export const AddContent = (props) => {
                     }}
                 >
                 <Box sx={{
-                    height: '785px',
+                    height: '95vh',
                     width: '328px',
                     borderRadius: '10px',
                 }}>

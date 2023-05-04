@@ -1,11 +1,14 @@
 import {useState, useEffect} from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
-import { Grid } from "@mui/material";
+import { Grid , Box , Paper , Button } from "@mui/material";
+import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons";
 
 export const PodcastShows = (props) => {
     const searchInput = props.to_search;
+    const { userCards , setUserCards }= props;
     const [podcastshows, setPodcastShows] = useState([]);
     const [accessToken, setAccessToken] = useState("");
+    const [tempCard, setTempCard] = useState([]);
 
     const search = async () => {
         try {
@@ -70,9 +73,16 @@ export const PodcastShows = (props) => {
     return (
 
         <div>
-            {podcastshows.map((podcastshow) => {
+            <Paper style={{maxHeight: 180, overflow: 'auto'}}>
+                {podcastshows.map((podcastshow) => {
                 return (
-                    <div key = {podcastshow.id}>
+                    <div key = {podcastshow.id} onClick={() => {
+                        setTempCard([{
+                            "type": "spotify",
+                            "spotify_type": "podcast",
+                            "podcastId": podcastshow.id
+                          }])
+                    }}>
                         <h2>
                             {podcastshow.name}
                         </h2>
@@ -85,8 +95,20 @@ export const PodcastShows = (props) => {
 
                 )
             })}
-
-
+            </Paper>
+            <ConfirmCardButtons tempCard={tempCard} userCards={userCards} setUserCards={setUserCards}/>
         </div>
     )
 }
+
+export const DisplayPodcast = (props) => {
+    const { card } = props;
+  
+    return (
+      <Box display={"flex"} justifyContent={"center"}>
+        {
+          card["spotify_type"]
+        }
+      </Box>
+    )
+  }

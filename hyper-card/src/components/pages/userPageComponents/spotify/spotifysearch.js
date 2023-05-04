@@ -14,7 +14,8 @@ import { Episodes } from "./searches/episodes";
 import { Audiobooks } from "./searches/audiobooks";
 import { Playlists } from "./searches/playlists";
 
-export const SpotifySearch = () => {
+export const SpotifySearch = (props) => {
+    const { userCards , setUserCards } = props;
     const [searchFor, setSearchFor] = useState("artists");
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -34,7 +35,7 @@ export const SpotifySearch = () => {
         if (searchFor.length > 0){
             return (
                 <div>
-                    <GetSearch to_search = {searchQuery}/>
+                    <GetSearch to_search = {searchQuery} userCards = {userCards} setUserCards = {setUserCards}/>
                 </div>
             
             );
@@ -59,34 +60,30 @@ export const SpotifySearch = () => {
                         
                         <Grid container spacing={1} justifyContent = {"center"}>
 
-                            <Grid item cs = {2}>
+                            <Grid item cs = {2} xs={4}>
                                 <FormControlLabel value="artists" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Artists" />
                             </Grid>
 
-                            <Grid item cs = {2}>
+                            <Grid item cs = {2} xs={4}>
                                 <FormControlLabel value="albums" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Albums" />
                             </Grid>
 
-                            <Grid item cs = {2}>
+                            <Grid item cs = {2} xs={4}>
                                 <FormControlLabel value="tracks" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Tracks" />
                             </Grid>
 
-                            <Grid item cs = {2}>
+                            <Grid item cs = {2} xs={4}>
                                 <FormControlLabel value="podcastshows" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Podcast and Shows" />
                             </Grid>
 
-                            <Grid item cs = {2}>
-                                <FormControlLabel value="episodes" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Episodes" />
-                            </Grid>
-
-                            <Grid item cs = {2}>
+                            <Grid item cs = {2} xs={4}>
                                 <FormControlLabel value="audiobooks" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Audiobooks" />
                             </Grid>
 
-                            <Grid item cs = {2}>
+                            <Grid item cs = {2} xs={4}>
                                 <FormControlLabel value="playlists" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Playlists" />
                             </Grid>
-                            <Grid item cs = {2}>
+                            <Grid item cs = {2} xs={12}>
                             <TextField fullWidth label="Enter your text" variant="outlined" onChange={(e) =>setSearchQuery(e.target.value)}/>
                             </Grid>
                         </Grid>
