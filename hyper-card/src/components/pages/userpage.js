@@ -5,9 +5,8 @@ import {
     useNavigate
 } from "react-router-dom"
 
-import { collection, getDocs, query, where, onSnapshot } from "firebase/firestore";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 
-import {getDownloadURL, ref, listAll} from "firebase/storage";
 
 import {db, storage} from "./firebase-config";
 
@@ -32,12 +31,11 @@ export const UserPage = (props) => {
     // userProfilePhoto: used to store users profile image thats stored in firebase storage
 
     const [userData, setUserData] = useState([]);
-    const [userProfilePhoto, setUserProfilePhoto] = useState("");
 
     // References to collections of database and storage
 
     const usersRef = collection(db, "users");
-    const imagesListRef = ref(storage, "profile_images/");
+  
     
     // Calls this everytime an update is changed and on initial rendering 
     // (technically does it after the first render but this is intentional)
@@ -46,11 +44,6 @@ export const UserPage = (props) => {
         getUserData();
     }, []);
 
-    const getUserImage = async () => {
-        const storageRef = ref(storage, );
-        return;
-
-    }
     
     // Gets users data from Firestore (db) 
     const getUserData = async () => {
@@ -60,7 +53,6 @@ export const UserPage = (props) => {
           const unsubscribe = onSnapshot(userQuery, (snapshot) => {
             if (snapshot.empty) {
               navigate("/login");
-              setTimeout(window.alert("User does not exist!"), 1500);
               return;
             }
       
