@@ -35,20 +35,6 @@ export const Themes = (background_color, secondary_color) => {
         },
         {
             "backgroundColor":`${background_color}`,
-            "background":`repeating-linear-gradient( -45deg, ${hexToRGBA(secondary_color)}, ${hexToRGBA(secondary_color)} 6px, ${hexToRGBA(background_color)} 6px, ${hexToRGBA(background_color)} 30px )`,
-            "backgroundPosition":"",
-            "backgroundSize":"",
-            "backgroundRepeat":""
-        },
-        {
-            "backgroundColor":`${background_color}`,
-            "background":`linear-gradient(45deg, ${hexToRGBA(secondary_color)} 50%, ${hexToRGBA(background_color)} 50%)`,
-            "backgroundPosition":"",
-            "backgroundSize":"66px 66px",
-            "backgroundRepeat":""
-        },
-        {
-            "backgroundColor":`${background_color}`,
             "background":`linear-gradient(-45deg, ${hexToRGBA(background_color)}, ${hexToRGBA(background_color)} 50%, ${hexToRGBA(secondary_color)} 50%, ${hexToRGBA(secondary_color)})`,
             "backgroundPosition":"",
             "backgroundSize":"66px 66px",
@@ -59,13 +45,6 @@ export const Themes = (background_color, secondary_color) => {
             "background":`repeating-linear-gradient(45deg, ${hexToRGBA(secondary_color)} 25%, transparent 25%, transparent 75%, ${hexToRGBA(secondary_color)} 75%, ${hexToRGBA(secondary_color)}), repeating-linear-gradient(45deg, ${hexToRGBA(secondary_color)} 25%, ${hexToRGBA(background_color)} 25%, ${hexToRGBA(background_color)} 75%, ${hexToRGBA(secondary_color)} 75%, ${hexToRGBA(secondary_color)})`,
             "backgroundPosition":"0 0, 44px 44px",
             "backgroundSize":"88px 88px",
-            "backgroundRepeat":""
-        },
-        {   
-            "backgroundColor":`${background_color}`,
-            "background":`radial-gradient(circle at top left,transparent 25%,${hexToRGBA(secondary_color)} 25.5%, ${hexToRGBA(secondary_color)} 36%, transparent 37%, transparent 100%),radial-gradient(circle at bottom right,transparent 34%,${hexToRGBA(secondary_color)} 34.5%, ${hexToRGBA(secondary_color)} 45.5%, transparent 46%, transparent 100%)`,
-            "backgroundPosition":"",
-            "backgroundSize":"4em 4em",
             "backgroundRepeat":""
         },
         {
