@@ -10,7 +10,8 @@ import { useState } from 'react';
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { auth, db } from '../../firebase-config';
 
-export const EditDescription = () => {
+export const EditDescription = (props) => {
+    const {description} = props;
     const CHARACTER_LIMIT = 300;
     const [values, setValues] = useState({
       description: ""
@@ -47,6 +48,7 @@ export const EditDescription = () => {
                     size='small'
                     variant='standard'
                     margin="normal"
+                    defaultValue={description}
                     value={values.name}
                     helperText={`${values.description.length}/${CHARACTER_LIMIT}`}
                     onChange={handleChange("description")}

@@ -7,8 +7,6 @@ import {
 } from '@mui/material';
 
 import GlobalStyles from '@mui/material/GlobalStyles';
-import ghost from '../../../media/ghost.png';
-import { Image } from 'mui-image'
 import {ThemeProvider } from '@mui/material/styles';
 import {UserTheme} from "../usertheme";
 import { AddContent } from './addcontent';
@@ -23,7 +21,7 @@ import { ChangeColor } from './changecolor';
 import { hexToRGBA } from '../stylizers/hexToRGBA';
 import { DisplayCard } from './displayCard';
 
-import {storage, auth} from '../../firebase-config';
+import {storage} from '../../firebase-config';
 import {ref, getDownloadURL} from 'firebase/storage'
 
 export const ProfileArea = (props) => {
@@ -32,13 +30,6 @@ export const ProfileArea = (props) => {
     const [ userCards , setUserCards ] = useState([]);
     const [userImage, setUserImage] = useState("");
 
-
-    const checkSubComponentValue = (value) => {
-        if (value !== userData[0].profile_image) {
-          setUserImage(value);
-          getImage();
-        }
-      };
     const getImage = async () => {
         try {
           const url = await getDownloadURL(ref(storage, `profile_images/${userData[0].profile_image}`));
@@ -110,20 +101,29 @@ export const ProfileArea = (props) => {
                     </Grid>
 
 
-                    <Box display="flex" justifyContent="center">
+                    
                         {
                             !isEdit ?
+                            <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
                             <Typography variant='h4' sx = {{
                                     fontStyle: 'bold',
                                     color: `${user.colors.text_color}`
                                 }}>
                                 /{user.displayname}
                             </Typography>
+                            <Typography variant = 'h6' width="400px" height= '75px' textAlign="center" display="flex" justifyContent="center" alignItems="center" textOverflow="clip" sx={{
+                                textIndent: "10%",
+                                textOverflow: "inherit",
+                                color: `${user.colors.text_color}`
+                            }}>
+                                {user.description}
+                            </Typography>
+                            </Box>
 
                         :
                             <EditDisplayName displayname = {user.displayname}/>
                         }
-                    </Box>
+                    
 
                     {
                         isAuth &&
@@ -132,9 +132,12 @@ export const ProfileArea = (props) => {
 
                             {
                                 !isEdit?
+
+                                
                                 <Box display="flex" justifyContent="center" alignItems="center" sx={{
                                 height: 200
                             }}>
+
                                 <Typography align='center' variant='h2' sx={{
                                     fontStyle: 'bold',
                                     width: '60%',
@@ -150,7 +153,7 @@ export const ProfileArea = (props) => {
                                 justifyContent: 'center'}}>
 
                             
-                                <EditDescription/>
+                                <EditDescription description = {user.description}/>
                                 
                             </Box>
                             }
