@@ -16,7 +16,7 @@ export const AddShoutOut = (props) => {
             direction='row'
             justifyContent='center'
             alignItems='center'
-            xs={12} spacing={1}>
+            xs={12}>
         
             <Grid item xs={12} marginTop={5}>
                 <Typography align='center'>
