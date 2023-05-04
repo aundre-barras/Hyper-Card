@@ -5,14 +5,14 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { doc, updateDoc, getDoc } from "firebase/firestore";
+import { doc, updateDoc, getDocs, where, collection, query } from "firebase/firestore";
 import { auth, db } from '../../firebase-config';
 
 export const EditDisplayName = (props) => {
     const {displayname, button_color, secondary_text_color} = props;
     const navigate = useNavigate();
 
-    const MAX_LENGTH = 12;
+    const MAX_LENGTH = 20;
     const MIN_LENGTH = 6;
 
     const [invalid, isInvalid] = useState(false);
@@ -32,11 +32,21 @@ export const EditDisplayName = (props) => {
         return true;
     }
 
-    const changeDisplay = () => {
+    const isDisplayNameInUse = async () => {
+
+      const usersRef = collection(db, "users");
+      const userQuery = query(usersRef, where("displayname", "==", newdisplayname));
+          
+      const userQuerySnapshot = await getDocs(userQuery);
+      if (userQuerySnapshot.empty) return true;
+      return false;
+  }
+
+    const changeDisplay = async () => {
         return new Promise(async (resolve, reject) => {
           try {
             if (newdisplayname.length >= MIN_LENGTH && newdisplayname.length <= MAX_LENGTH) {
-              if (!isAlphaNumeric()) {
+              if (!isAlphaNumeric() || ! await isDisplayNameInUse()) {
                 isInvalid(true);
               } else {
                 auth.onAuthStateChanged(async function(user) {
