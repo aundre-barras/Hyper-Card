@@ -5,7 +5,7 @@ import {
     useNavigate
 } from "react-router-dom"
 
-import {collection, getDocs, query, where} from "firebase/firestore";
+import { collection, getDocs, query, where, onSnapshot } from "firebase/firestore";
 
 import {getDownloadURL, ref, listAll} from "firebase/storage";
 
@@ -54,44 +54,35 @@ export const UserPage = (props) => {
     
     // Gets users data from Firestore (db) 
     const getUserData = async () => {
-
         try {
-            // query name to determine if user exists and to pull data
-            // takes snapshot of docs with dispaly name
-
-            const userQuery = query(usersRef, where("displayname", "==", userContent.id));
-            const userQuerySnapshot = await getDocs(userQuery);
-
-
-            // if query snapshot is empty, then means user does not exist and will reroute to home page
-
-            if (userQuerySnapshot.empty){
-                navigate("/login");
-                setTimeout(window.alert("User does not exist!"), 1500);
-                return;
+          const userQuery = query(usersRef, where("displayname", "==", userContent.id));
+      
+          const unsubscribe = onSnapshot(userQuery, (snapshot) => {
+            if (snapshot.empty) {
+              navigate("/login");
+              setTimeout(window.alert("User does not exist!"), 1500);
+              return;
             }
-
-            // takes data from query snapshot and stores it in filteredData
-            // sets filteredData to setUserData
-
-            const filteredData = userQuerySnapshot.docs.map((doc) => ({
-                ...doc.data(), id:doc.id
+      
+            const filteredData = snapshot.docs.map((doc) => ({
+              ...doc.data(),
+              id: doc.id,
             }));
-
-
+      
             onAuthStateChanged(auth, (user) => {
-                if (user && filteredData[0].id == user.uid){
-                    setIsAuth(true);
-                }
+              if (user && filteredData[0].id === user.uid) {
+                setIsAuth(true);
+              }
             });
-
+      
             setUserData(filteredData);
-
+          });
+      
+          return unsubscribe; // optional, if you want to unsubscribe when component unmounts
         } catch (error) {
-
-            console.error(error);
+          console.error(error);
         }
-    };
+      };
 
     const setSubMenu = () => {
         setMenuOpen(!isMenuOpen);
