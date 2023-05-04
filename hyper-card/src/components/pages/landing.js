@@ -76,7 +76,9 @@ export const Landing = () => {
                       color:"#FFFFFF",
                       fontFamily:"Outfit",
                       fontWeight:600,
-                      fontSize:"24px"
+                      fontSize:"24px",
+                      borderRadius:'35px',
+                      textTransform:'lowercase'
                     }}>
                       Login
                   </Button>
@@ -86,13 +88,15 @@ export const Landing = () => {
                 }}>
                   <Button
                     fullWidth
-                    variant="contained"
+                    variant="outlined"
                     sx={{ mt: 3, mb: 2 }}
                     style={{
-                      color:"#FFFFFF",
+                      color:"#5B7ABC",
                       fontFamily:"Outfit",
                       fontWeight:600,
-                      fontSize:"24px"
+                      fontSize:"24px",
+                      borderRadius:'35px',
+                      textTransform:'lowercase'
                     }}>
                       Sign Up
                   </Button>
