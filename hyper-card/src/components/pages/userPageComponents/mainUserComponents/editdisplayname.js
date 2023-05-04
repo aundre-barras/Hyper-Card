@@ -20,11 +20,11 @@ export const EditDisplayName = (props) => {
                     variant='standard'
                     margin="normal"
                     fullWidth
-                    placeholder='/newdisplayname...'
+                    placeholder=' newdisplayname...'
                     InputProps={{ disableUnderline: true }}
                     inputProps={{
                         style: {
-                            height: 40,
+                            width: 280,
                             border: 2,
                             borderStyle: 'solid',
                             borderColor: 'black',

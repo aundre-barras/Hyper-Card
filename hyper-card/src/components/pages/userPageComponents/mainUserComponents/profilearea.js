@@ -23,15 +23,37 @@ import { ChangeColor } from './changecolor';
 import { hexToRGBA } from '../stylizers/hexToRGBA';
 import { DisplayCard } from './displayCard';
 
+import {storage, auth} from '../../firebase-config';
+import {ref, getDownloadURL} from 'firebase/storage'
+
 export const ProfileArea = (props) => {
 
     const {userData, isAuth, isEdit, setIsEdit} = props;
     const [ userCards , setUserCards ] = useState([]);
+    const [userImage, setUserImage] = useState("");
 
-    const IsUserNameTaken = async () => {
 
-        return true;
+    const checkSubComponentValue = (value) => {
+        if (value !== userData[0].profile_image) {
+          setUserImage(value);
+          getImage();
+        }
+      };
+    const getImage = async () => {
+        try {
+          const url = await getDownloadURL(ref(storage, `profile_images/${userData[0].profile_image}`));
+          setUserImage(url);
+        } catch (error) {
+          console.error(error);
+        }
     }
+
+    const updateUserImage = (value) => {
+        setUserImage(value);
+      };
+    useEffect(() => {
+        getImage();
+    }, [userData])
 
     return (
         <div style={{
@@ -49,7 +71,6 @@ export const ProfileArea = (props) => {
                                 backgroundSize: `${user.theme.backgroundSize}`,
                                 backgroundRepeat: `${user.theme.backgroundRepeat}`,
                                 backgroundAttatchment: "relative",
-                                width: "100%",
                                 minHeight: "100vh"
                             }
                         }}
@@ -61,23 +82,27 @@ export const ProfileArea = (props) => {
                         {
                                 !isEdit ?
 
-                                <Box display="flex" justifyContent="center" alignItems="center" sx={{
-                                    height: 150,
-                                    width: 150,
-                                    borderRadius: '50%',
-                                    backgroundColor: '#FFFFFF',
-                                }}>
-                                <Box sx={{
-                                    position: 'relative',
-                                    height: '70%',
-                                }}>
-                                    <Image src={ghost}/>
+                                <Box
+                                display="flex"
+                                justifyContent="center"
+                                alignItems="center"
+                                sx={{
+                                  height: 150,
+                                  width: 150,
+                                  borderRadius: '50%',
+                                  backgroundImage: `url(${userImage})`,
+                                  backgroundSize: 'cover',
+                                  backgroundPosition: 'center',
+                                  overflow: 'hidden',
+                                  border: 4,
+                                  borderColor: `${user.colors.text_color}`
+                                }}
+                                >
                                 </Box>
-                            </Box>
                             
                             :
 
-                                <EditProfileImage/>
+                            <EditProfileImage profileImage={userData[0].profile_image} textColor={user.colors.text_color} checkValue={updateUserImage} />
                             }
                         </Grid>
 
@@ -113,6 +138,7 @@ export const ProfileArea = (props) => {
                                 <Typography align='center' variant='h2' sx={{
                                     fontStyle: 'bold',
                                     width: '60%',
+                                    fontSize: "350%",
                                     color: `${user.colors.text_color}`
                                 }}>
                                 {/* // add if statement once when content is done */}

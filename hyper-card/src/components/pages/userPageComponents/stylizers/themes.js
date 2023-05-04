@@ -12,7 +12,7 @@ export const Themes = (background_color, secondary_color) => {
         },
         {
             "backgroundColor":`${background_color}`,
-            "background": `linear-gradient(167.95deg, ${hexToRGBA(background_color)} 63.36%, ${hexToRGBA(secondary_color)} 100%)`,
+            "background": `linear-gradient(${hexToRGBA(background_color)}, ${hexToRGBA(secondary_color)} 100%)`,
             "backgroundPosition":"0",
             "backgroundSize":"",
             "backgroundRepeat":"",
