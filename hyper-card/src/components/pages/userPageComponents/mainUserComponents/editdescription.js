@@ -11,7 +11,7 @@ import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { auth, db } from '../../firebase-config';
 
 export const EditDescription = (props) => {
-    const {description} = props;
+    const {description, button_color, secondary_text_color} = props;
     const CHARACTER_LIMIT = 300;
     const [values, setValues] = useState({
       description: ""
@@ -61,16 +61,15 @@ export const EditDescription = (props) => {
                             width: 280,
                             border: 2,
                             borderStyle: 'solid',
-                            borderColor: 'black',
+                            borderColor: `${secondary_text_color}`,
+                            backgroundColor: `${button_color}`,
                             borderRadius: '15px',
                             marginRight: 20,
                             marginTop: 5,
                             min: 0,
+                            color: `${secondary_text_color}`
                          },
                     }}
-                    // need to add default being pull from user database
-                    // defaultValue={}
-
                 />
                 </FormControl>
             </FormGroup>
@@ -81,6 +80,11 @@ export const EditDescription = (props) => {
                 width: "75px",
                 height: "50px",
                 borderRadius: '35px',
+                border: 2,
+                borderStyle: 'solid',
+                borderColor: `${secondary_text_color}`,
+                backgroundColor: `${button_color}`,
+                color: `${secondary_text_color}`
             }}>
                 Update
             </Button>

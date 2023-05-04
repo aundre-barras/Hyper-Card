@@ -9,7 +9,7 @@ import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { auth, db } from '../../firebase-config';
 
 export const EditDisplayName = (props) => {
-    const {displayname} = props;
+    const {displayname, button_color, secondary_text_color} = props;
     const navigate = useNavigate();
 
     const MAX_LENGTH = 12;
@@ -80,11 +80,13 @@ export const EditDisplayName = (props) => {
                             width: 280,
                             border: 2,
                             borderStyle: 'solid',
-                            borderColor: 'black',
+                            borderColor: `${secondary_text_color}`,
+                            backgroundColor: `${button_color}`,
                             borderRadius: '15px',
+                            marginRight: 20,
                             marginTop: 5,
                             min: 0,
-                            marginRight: 20
+                            color: `${secondary_text_color}`
                          },
                     }}>
                     
@@ -97,6 +99,11 @@ export const EditDisplayName = (props) => {
                 width: "75px",
                 height: "50px",
                 borderRadius: '35px',
+                border: 2,
+                borderStyle: 'solid',
+                borderColor: `${secondary_text_color}`,
+                backgroundColor: `${button_color}`,
+                color: `${secondary_text_color}`
                 }}>
                     Update
             </Button>

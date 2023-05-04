@@ -85,7 +85,7 @@ export const ProfileArea = (props) => {
                                   backgroundSize: 'cover',
                                   backgroundPosition: 'center',
                                   overflow: 'hidden',
-                                  border: 4,
+                                  border: 6,
                                   borderColor: `${user.colors.text_color}`
                                 }}
                                 >
@@ -121,7 +121,9 @@ export const ProfileArea = (props) => {
                             </Box>
 
                         :
-                            <EditDisplayName displayname = {user.displayname}/>
+                            <EditDisplayName 
+                            displayname = {user.displayname}                                 button_color = {user.colors.button_color}
+                            secondary_text_color = {user.colors.secondary_text_color}/>
                         }
                     
 
@@ -153,7 +155,11 @@ export const ProfileArea = (props) => {
                                 justifyContent: 'center'}}>
 
                             
-                                <EditDescription description = {user.description}/>
+                                <EditDescription 
+                                description = {user.description} 
+                                button_color = {user.colors.button_color}
+                                secondary_text_color = {user.colors.secondary_text_color}
+                                />
                                 
                             </Box>
                             }

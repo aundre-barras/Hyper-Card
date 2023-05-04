@@ -80,7 +80,7 @@ export const SignUp = () => {
                         secondary_color: "#96aebc",
                         text_color: "#96aebc"
                     },
-                    profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png",
+                    profile_image: "ghost_icon.png",
                     content : [],
                     theme : {
                         background_color: "#eeeeee",
@@ -155,7 +155,7 @@ export const SignUp = () => {
                             secondary_color: "#96aebc",
                             text_color: "#eeeeee"
                         },
-                        profile_image: "gs://hyper-card.appspot.com/profile_images/ghost_icon.png",
+                        profile_image: "ghost_icon.png",
                         content : [],
                         theme : {
                             background_color: "#eeeeee",
@@ -178,15 +178,18 @@ export const SignUp = () => {
     }
 
     return (
+    <div style={{
+        
+        
+    }}>
     <ThemeProvider theme={theme}>
         <GlobalStyles
           styles = {{
             body: {
               backgroundImage: "linear-gradient(to bottom right, #FFFFFF 63.36%, #5C7BBD)",
               backgroundAttatchment: "relative",
-              overflow: "hidden",
-              width: "100%",
-              minHeight: "100vh"
+              overflow: "scroll",
+              overflowX:"hidden"
             }
           }}
         
@@ -346,5 +349,6 @@ export const SignUp = () => {
 
         </Container>
     </ThemeProvider>
+    </div>
     );
 }

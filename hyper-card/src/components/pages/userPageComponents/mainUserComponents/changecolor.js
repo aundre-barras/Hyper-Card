@@ -1,13 +1,11 @@
 import {
     Button,
-    Box,
-    Stack
+    Box
 } from '@mui/material';
 
 import {SelectColors} from "../stylizers/selectcolor";
 import Popover from '@mui/material/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
-import {UserTheme} from "../../userPageComponents/usertheme";
 
 export const ChangeColor = (props) => {
     const {button_color, secondary_text_color} = props;

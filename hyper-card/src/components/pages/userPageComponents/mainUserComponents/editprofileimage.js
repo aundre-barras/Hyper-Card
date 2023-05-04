@@ -2,11 +2,8 @@ import {
     Typography,
     Button,
     Box,
-    IconButton,
     CircularProgress,
   } from '@mui/material';
-  import ghost from '../../../media/ghost.png';
-  import { Image } from 'mui-image'
   import { storage, auth, db } from '../../firebase-config';
   import {ref,getDownloadURL, uploadBytes} from 'firebase/storage'
   import { useEffect, useState } from 'react';
