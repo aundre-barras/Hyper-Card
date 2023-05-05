@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TextField } from "@mui/material";
+import { TextField, Grid, Typography } from "@mui/material";
 import live from "../../../media/live.png";
 
 export const TwitchUserSearch = () => {
@@ -55,19 +55,26 @@ export const TwitchUserSearch = () => {
 
     return (
         <div>
-        <TextField fullWidth label="Enter your text" variant="outlined" onChange={(e) =>setUserSearch(e.target.value)}/>
+            <Grid item xs={12} marginTop={2}>
+                <TextField fullWidth label="search" variant="outlined" onChange={(e) =>setUserSearch(e.target.value)}
+                    InputProps={{sx:{borderRadius:'35px'}}} size="small" />
+            </Grid>
         {
             userList.map((user) => {
                 return (
                     
-                    <div key = {user.id}> 
-                        <h2>
-                            {user.display_name}
-                        </h2>
-                        {user.is_live? <img src = {live} width = "5%"/>: null}
-                        <br/>
-                        <img src={user.thumbnail_url} width = "10%"/>
-
+                    <div key = {user.id}>
+                        <Grid container justifyContent={'center'} marginTop={2}>
+                            <Grid item xs={6}>
+                                <img src={user.thumbnail_url} width = "125px" height="125px"/>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'20px', textAlign:'center'}}>
+                                    {user.display_name}
+                                </Typography>
+                                {user.is_live? <img src = {live} width = "25%"/>: null}
+                            </Grid>
+                        </Grid>
 
                     </div>
                 );
