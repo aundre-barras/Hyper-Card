@@ -4,7 +4,9 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { Container, Grid,TextField} from "@mui/material";
+import { Button, Container, Grid,TextField} from "@mui/material";
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import ToggleButton from "@mui/material/ToggleButton";
 
 import {Artists} from "./searches/artists";
 import { Albums } from "./searches/albums";
@@ -50,49 +52,60 @@ export const SpotifySearch = (props) => {
     return (
             <div>
                 <Container component="main">
-
-                    <FormControl>
-                    <FormLabel id="spotify-multiple-choice-select-query"></FormLabel>
-                    <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="artists"
-                        name="radio-buttons-group">
-                        
-                        <Grid container spacing={1} justifyContent = {"center"}>
+                    <ToggleButtonGroup exclusive='true' type='radio'>
+                        <Grid container spacing={1} justifyContent = {"center"} marginTop={2}>
 
                             <Grid item cs = {2} xs={4}>
-                                <FormControlLabel value="artists" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Artists" />
+                                <ToggleButton value="artists" onClick={(e) => setSearchFor(e.target.value)}
+                                sx={{textTransform:'lowercase', font:'Outfit', fontSize:'16px', borderRadius:'10px', width:'80px', height:'40px'}}>
+                                    artists
+                                </ToggleButton>
                             </Grid>
 
                             <Grid item cs = {2} xs={4}>
-                                <FormControlLabel value="albums" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Albums" />
+                                <ToggleButton value="albums" onClick={(e) => setSearchFor(e.target.value)}
+                                sx={{textTransform:'lowercase', font:'Outfit', fontSize:'16px', borderRadius:'10px', width:'80px', height:'40px'}}>
+                                    albums
+                                </ToggleButton>
                             </Grid>
 
                             <Grid item cs = {2} xs={4}>
-                                <FormControlLabel value="tracks" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Tracks" />
+                                <ToggleButton value="tracks" onClick={(e) => setSearchFor(e.target.value)}
+                                sx={{textTransform:'lowercase', font:'Outfit', fontSize:'16px', borderRadius:'10px', width:'80px', height:'40px'}}>
+                                    tracks
+                                </ToggleButton>
                             </Grid>
 
                             <Grid item cs = {2} xs={4}>
-                                <FormControlLabel value="podcastshows" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Podcast and Shows" />
+                                <ToggleButton value="podcastshows" onClick={(e) => setSearchFor(e.target.value)}
+                                sx={{textTransform:'lowercase', font:'Outfit', fontSize:'16px', borderRadius:'10px', width:'80px', height:'40px'}}>
+                                    podcasts
+                                </ToggleButton>
                             </Grid>
 
                             <Grid item cs = {2} xs={4}>
-                                <FormControlLabel value="audiobooks" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Audiobooks" />
+                                <ToggleButton value="audiobooks" onClick={(e) => setSearchFor(e.target.value)}
+                                sx={{textTransform:'lowercase', font:'Outfit', fontSize:'16px', borderRadius:'10px', width:'80px', height:'40px'}}>
+                                    books
+                                </ToggleButton>
                             </Grid>
 
                             <Grid item cs = {2} xs={4}>
-                                <FormControlLabel value="playlists" control={<Radio />} onChange={(e) => setSearchFor(e.target.value)} label="Playlists" />
+                                <ToggleButton value="playlists" onClick={(e) => setSearchFor(e.target.value)}
+                                sx={{textTransform:'lowercase', font:'Outfit', fontSize:'16px', borderRadius:'10px', width:'80px', height:'40px'}}>
+                                playlists
+                            </ToggleButton>
                             </Grid>
-                            <Grid item cs = {2} xs={12}>
-                            <TextField fullWidth label="Enter your text" variant="outlined" onChange={(e) =>setSearchQuery(e.target.value)}/>
+
+                            <Grid item cs = {2} xs={12} marginTop={1} marginBottom={2}>
+                            <TextField fullWidth label="search" variant="outlined" onChange={(e) =>setSearchQuery(e.target.value)}
+                                InputProps={{sx:{borderRadius:'35px'}}} size="small" />
                             </Grid>
+
                         </Grid>
-                    </RadioGroup>
-                    </FormControl>
-                    <SelectedSearch/>
-                </Container>
-                
-                
-            </div>
+                    </ToggleButtonGroup>
+                <SelectedSearch/>
+            </Container>
+        </div>
       );
 }

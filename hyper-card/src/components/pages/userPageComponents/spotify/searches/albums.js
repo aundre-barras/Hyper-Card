@@ -73,7 +73,7 @@ export const Albums = (props) => {
     return (
 
         <div>
-            <Paper style={{maxHeight: 180, overflow: 'auto'}}>
+            <Paper style={{maxHeight: 180, overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
                 {albums.map((album) => {
                 return (
                     <div key={album.id} onClick={() => {

@@ -73,7 +73,7 @@ export const Playlists = (props) => {
 
     return (
         <div>
-            <Paper style={{ maxHeight: 180, overflow: 'auto' }}>
+            <Paper style={{ maxHeight: 180, overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
                 {playlists.map((playlist) => {
                     return (
                         <div key={playlist.id} onClick={() => {

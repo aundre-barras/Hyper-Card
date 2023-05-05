@@ -70,7 +70,7 @@ export const Tracks = (props) => {
 
       return (
         <div>
-            <Paper style={{maxHeight: 180, overflow: 'auto'}}>
+            <Paper style={{maxHeight: 180, overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
                 {tracks.map((track) => {
                 return (
                     <div key={track.id} onClick={() => {
