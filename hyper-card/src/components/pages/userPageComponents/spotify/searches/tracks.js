@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
-import { Box , Paper } from "@mui/material";
+import { Box , Paper, Grid, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons";
 
 export const Tracks = (props) => {
@@ -70,7 +70,7 @@ export const Tracks = (props) => {
 
       return (
         <div>
-            <Paper style={{maxHeight: 180, overflow: 'auto'}}>
+            <Paper style={{maxHeight:'285px', overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
                 {tracks.map((track) => {
                 return (
                     <div key={track.id} onClick={() => {
@@ -80,15 +80,20 @@ export const Tracks = (props) => {
                             "trackId": track.id
                           }])
                     }}>
-                        <h2>
-                            {track.name}
-                        </h2>
-                        {
-                        track.album.images && track.album.images[0] ?
-                        <img src={track.album.images[0].url} width="10%" alt={track.name} /> : null
-                        }
-                        
-                        
+                        <Grid container>
+                            <Grid item xs={6}>
+                                {
+                                track.album.images && track.album.images[0] ?
+                                <img src={track.album.images[0].url} width="125px" height='125px' alt={track.name} /> : null
+                                }
+                            </Grid>
+
+                            <Grid item xs={6}>
+                                <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
+                                    {track.name}
+                                </Typography>
+                            </Grid>
+                        </Grid>
                     </div>
                 )
             })}
