@@ -88,7 +88,8 @@ export const SignUp = () => {
                         background_position: "",
                         background_size: "",
                         background_repeat: ""
-                    }
+                    },
+                    shoutouts: []
                     
                 });
 
@@ -163,7 +164,8 @@ export const SignUp = () => {
                             background_position: "",
                             background_size: "",
                             background_repeat: ""
-                        }
+                        },
+                        shoutouts: []
                     });
                     
                     navigate("/u/" + username);

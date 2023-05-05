@@ -20,71 +20,58 @@ import { ProfileArea } from './userPageComponents/mainUserComponents/profilearea
 
 
 export const UserPage = (props) => {
-    const [isMenuOpen , setMenuOpen] = useState(false);
-    const [isAuth, setIsAuth] = useState(false);
-    const [isEdit, setIsEdit] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [userData, setUserData] = useState([]);
 
-    const navigate = useNavigate();
-    const userContent = useParams();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-    // userData: State to hold data of user
-    // userProfilePhoto: used to store users profile image thats stored in firebase storage
-
-    const [userData, setUserData] = useState([]);
-
-    // References to collections of database and storage
-
-    const usersRef = collection(db, "users");
-  
-    
-    // Calls this everytime an update is changed and on initial rendering 
-    // (technically does it after the first render but this is intentional)
-
-    useEffect(() => {
-        getUserData();
-    }, []);
-
-    
-    // Gets users data from Firestore (db) 
+  useEffect(() => {
     const getUserData = async () => {
-        try {
-          const userQuery = query(usersRef, where("displayname", "==", userContent.id));
-      
-          const unsubscribe = onSnapshot(userQuery, (snapshot) => {
-            if (snapshot.empty) {
-              navigate("/login");
-              return;
+      try {
+        const userQuery = query(collection(db, "users"), where("displayname", "==", id));
+
+        const unsubscribe = onSnapshot(userQuery, (snapshot) => {
+          if (snapshot.empty) {
+            navigate("/login");
+            window.location.reload();
+            return;
+          }
+
+          const filteredData = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+
+          onAuthStateChanged(auth, (user) => {
+            if (user && filteredData[0].id === user.uid) {
+              setIsAuth(true);
             }
-      
-            const filteredData = snapshot.docs.map((doc) => ({
-              ...doc.data(),
-              id: doc.id,
-            }));
-      
-            onAuthStateChanged(auth, (user) => {
-              if (user && filteredData[0].id === user.uid) {
-                setIsAuth(true);
-              }
-            });
-      
-            setUserData(filteredData);
           });
-      
-          return unsubscribe; // optional, if you want to unsubscribe when component unmounts
-        } catch (error) {
-          console.error(error);
-        }
-      };
 
-    const setSubMenu = () => {
-        setMenuOpen(!isMenuOpen);
-    }
+          setUserData(filteredData);
+          
+        });
 
-    return(
-        <Fragment>
-            <TopMenu/>
-            <ProfileArea
-               userData = {userData} isAuth = {isAuth} isEdit={isEdit} setIsEdit={setIsEdit}/>
-        </Fragment>
-    )
-}
+        return unsubscribe;
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getUserData();
+  }, [id]); // add id as a dependency
+
+  const setSubMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <Fragment>
+      <TopMenu />
+      <ProfileArea userData={userData} isAuth={isAuth} isEdit={isEdit} setIsEdit={setIsEdit} />
+    </Fragment>
+  );
+};

@@ -23,6 +23,7 @@ import { DisplayCard } from './displayCard';
 
 import {storage} from '../../firebase-config';
 import {ref, getDownloadURL} from 'firebase/storage'
+import { GetShoutOut } from './getshoutout';
 
 export const ProfileArea = (props) => {
 
@@ -43,6 +44,7 @@ export const ProfileArea = (props) => {
         setUserImage(value);
       };
     useEffect(() => {
+        
         getImage();
     }, [userData])
 
@@ -122,8 +124,10 @@ export const ProfileArea = (props) => {
 
                         :
                             <EditDisplayName 
-                            displayname = {user.displayname}                                 button_color = {user.colors.button_color}
-                            secondary_text_color = {user.colors.secondary_text_color}/>
+                            displayname = {user.displayname}
+                            button_color = {user.colors.button_color}
+                            secondary_text_color = {user.colors.secondary_text_color}
+                            />
                         }
                     
 
@@ -228,19 +232,48 @@ export const ProfileArea = (props) => {
                                 }
 
                             </Box>
-                            
-                            <Typography display="flex" justifyContent="center" alignItems="center" variant='h1' color={user.colors.secondary_text_color} 
-                            component={Link} to="/" 
-                            style={{ 
-                                textDecoration:"none",
-                                fontSize: "40px",
 
-                            }}>
-                            hypr
-                            <span style={{color:`${user.colors.text_color}`}}>crd</span>
-                            </Typography>
                         </div>
                     }
+                    <Box sx = {{
+                    position: 'relative',
+                    top: "-200px",
+                    }}>
+                    <Box display="flex" justifyContent="center" alignItems="center">
+                        <Typography 
+                        variant='h4' 
+                        sx = {{
+                            fontStyle: 'bold',
+                            color: `${user.colors.text_color}`
+                        }}
+                        >
+                            Shout outs
+                        </Typography>
+                    </Box>
+                    <Box display="flex" justifyContent="center" alignItems="center" flexDirection="row">
+                        {user.shoutouts.map((shoutout, i) => {
+                            return(
+                            <div key = {shoutout}>
+                            <Box >
+                                <GetShoutOut shout_out_uid = {shoutout} text_color = {user.colors.text_color}/>
+                            </Box>
+                            </div>
+                            )
+
+                        })}
+                    </Box>
+                    </Box>
+                    
+                    <Typography display="flex" justifyContent="center" alignItems="center" variant='h1' color={user.colors.secondary_text_color} 
+                    component={Link} to="/" 
+                    style={{ 
+                        textDecoration:"none",
+                        fontSize: "40px",
+
+                    }}>
+                    hypr
+                    <span style={{color:`${user.colors.text_color}`}}>crd</span>
+                    </Typography>
 
                     </Stack>
                     </ThemeProvider>

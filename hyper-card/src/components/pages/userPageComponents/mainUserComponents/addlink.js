@@ -24,7 +24,7 @@ export const AddLink = (props) => {
                             marginRight: 10,
                             width: '80%'
                     }}>
-                            <TextField variant='standard' onChange={(event) => {title = event.target.value}} InputProps={{ disableUnderline: true }} defaultValue={'enter title of url here'} sx = {{
+                            <TextField variant='standard' onChange={(event) => {title = event.target.value}} InputProps={{ disableUnderline: true }} placeholder={'enter title of url here'} sx = {{
                                 fontStyle: 'bold',
                                 color: `black`,
                                 width: '100%',
@@ -44,7 +44,7 @@ export const AddLink = (props) => {
                             marginRight: 10,
                             width: '80%'
                     }}>
-                            <TextField variant='standard' onChange={(event) => {url = event.target.value}} InputProps={{ disableUnderline: true }} defaultValue={'://'} sx = {{
+                            <TextField variant='standard' onChange={(event) => {url = event.target.value}} InputProps={{ disableUnderline: true }} placeholder={'://'} sx = {{
                                 fontStyle: 'bold',
                                 color: `black`,
                                 width: '100%',
