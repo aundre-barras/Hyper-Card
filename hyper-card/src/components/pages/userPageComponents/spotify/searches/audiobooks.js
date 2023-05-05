@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
-import { Grid, Box, Paper, Button } from "@mui/material";
+import { Grid, Box, Paper, Button, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons"
 
 export const Audiobooks = (props) => {
@@ -73,7 +73,7 @@ export const Audiobooks = (props) => {
 
     return (
         <div>
-            <Paper style={{ maxHeight: 180, overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
+            <Paper style={{ maxHeight:'285px', overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
                 {audiobooks.map((audiobook) => {
                     return (
                         <div key={audiobook.id} onClick={() => {
@@ -83,14 +83,19 @@ export const Audiobooks = (props) => {
                                 "audioBookId": audiobook.id
                             }])
                         }}>
-                            <h2>
-                                {audiobook.name}
-                            </h2>
-                            {
-                                audiobook.images && audiobook.images[0] ?
-                                    <img src={audiobook.images[0].url} width="10%" alt={audiobook.name} /> : null
-                            }
-
+                            <Grid container>
+                                <Grid item xs={6}>
+                                    {
+                                        audiobook.images && audiobook.images[0] ?
+                                            <img src={audiobook.images[0].url} width="125px" height='125px' alt={audiobook.name} /> : null
+                                    }
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'14px', textAlign:'center'}}>
+                                        {audiobook.name}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
                         </div>
                     )
                 })}

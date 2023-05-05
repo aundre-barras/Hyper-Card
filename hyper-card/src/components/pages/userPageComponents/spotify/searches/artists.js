@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
-import { Grid , Box , Paper , Button } from "@mui/material";
+import { Grid , Box , Paper , Button, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons"
 
 export const Artists = (props) => {
@@ -69,7 +69,7 @@ export const Artists = (props) => {
 
   return (
     <div>
-      <Paper style={{maxHeight: 180, overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
+      <Paper style={{maxHeight:'285px', overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
       {
         artists.map((artist) => {
           return (
@@ -80,18 +80,25 @@ export const Artists = (props) => {
                 "artistId": artist.id
               }])
             }}>
-              <h2>
-                {artist.name}
-              </h2>
-
-              {
-                artist.images && artist.images[0] ?
-                  <img src={artist.images[0].url} width="10%" alt={artist.name} /> : null
-              }
-
-              <h3>Followers: {artist.followers.total}</h3>
-              <a href = {artist.external_urls.spotify}>Spotify</a>
-
+              <Grid container>
+                <Grid item xs={6}>
+                  {
+                    artist.images && artist.images[0] ?
+                      <img src={artist.images[0].url} width="125px" height='125px' alt={artist.name} /> : null
+                  }
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'20px', textAlign:'center'}}>
+                    {artist.name}
+                  </Typography>
+                  <Typography marginTop={1} sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
+                    Followers: {artist.followers.total}
+                  </Typography>
+                  <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
+                  <a href = {artist.external_urls.spotify} target="_blank" rel="noreferrer" style={{textDecoration:'none'}}>spotify</a>
+                  </Typography>
+                </Grid>
+              </Grid>
             </div> 
           );
         })

@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
-import { Grid , Box , Paper , Button } from "@mui/material";
+import { Grid , Box , Paper , Button, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons";
 
 export const Albums = (props) => {
@@ -73,25 +73,32 @@ export const Albums = (props) => {
     return (
 
         <div>
-            <Paper style={{maxHeight: 180, overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
+            <Paper style={{maxHeight:'285px', overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
                 {albums.map((album) => {
                 return (
-                    <div key={album.id} onClick={() => {
+                  <div key={album.id} onClick={() => {
                         setTempCard([{
                             "type": "spotify",
                             "spotify_type": "album",
                             "albumId": album.id
                           }])
                     }}>
-                        <h2>
+                      <Grid container>
+                        <Grid item xs={6}>
+                          {
+                          album.images && album.images[0] ?
+                          <img src={album.images[0].url} width="125px" height='125px' alt={album.name} /> : null
+                          }
+                          <h4>{album.popularity}</h4>
+                      </Grid>
+
+                      <Grid item xs={6}>
+                        <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'20px', textAlign:'center'}}>
                             {album.name}
-                        </h2>
-                    {
-                    album.images && album.images[0] ?
-                    <img src={album.images[0].url} width="10%" alt={album.name} /> : null
-                    }
-                    <h4>{album.popularity}</h4>
-                    </div>
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </div>
                 )
             })}
             </Paper>

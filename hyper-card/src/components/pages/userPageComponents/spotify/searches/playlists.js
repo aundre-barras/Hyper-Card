@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
-import { Grid, Box, Paper, Button } from "@mui/material";
+import { Grid, Box, Paper, Button, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons"
 
 export const Playlists = (props) => {
@@ -83,14 +83,19 @@ export const Playlists = (props) => {
                                 "playlistId": playlist.id
                             }])
                         }}>
-                            <h2>
-                                {playlist.name}
-                            </h2>
-                            {
-                                playlist.images && playlist.images[0] ?
-                                    <img src={playlist.images[0].url} width="10%" alt={playlist.name} /> : null
-                            }
-
+                            <Grid container>
+                                <Grid item xs={6}>
+                                    {
+                                        playlist.images && playlist.images[0] ?
+                                            <img src={playlist.images[0].url} width="125px" height='125px' alt={playlist.name} /> : null
+                                    }
+                            </Grid>
+                            <Grid item xs={6}>
+                                    <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'20px', textAlign:'center'}}>
+                                        {playlist.name}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
                         </div>
                     )
                 })}
