@@ -49,9 +49,7 @@ export const ProfileArea = (props) => {
     }, [userData])
 
     return (
-        <div style={{
-
-        }}>
+        <div>
             {
             userData.map((user) => (
                 <div key = {user}>
@@ -235,34 +233,36 @@ export const ProfileArea = (props) => {
 
                         </div>
                     }
-                    <Box sx = {{
-                    position: 'relative',
-                    top: "-200px",
-                    }}>
-                    <Box display="flex" justifyContent="center" alignItems="center">
-                        <Typography 
-                        variant='h4' 
-                        sx = {{
-                            fontStyle: 'bold',
-                            color: `${user.colors.text_color}`
-                        }}
-                        >
-                            Shout outs
-                        </Typography>
-                    </Box>
-                    <Box display="flex" justifyContent="center" alignItems="center" flexDirection="row">
-                        {user.shoutouts.map((shoutout, i) => {
-                            return(
-                            <div key = {shoutout}>
-                            <Box >
-                                <GetShoutOut shout_out_uid = {shoutout} text_color = {user.colors.text_color}/>
-                            </Box>
-                            </div>
-                            )
+                    { user.shoutouts.length > 0 &&
+                        <Box sx = {{
+                        position: 'relative',
+                        top: "-200px",
+                        }}>
+                        <Box display="flex" justifyContent="center" alignItems="center">
+                            <Typography 
+                            variant='h4' 
+                            sx = {{
+                                fontStyle: 'bold',
+                                color: `${user.colors.text_color}`
+                            }}
+                            >
+                                shout outs
+                            </Typography>
+                        </Box>
+                        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="row">
+                            {user.shoutouts.map((shoutout, i) => {
+                                return(
+                                <div key = {shoutout}>
+                                <Box >
+                                    <GetShoutOut shout_out_uid = {shoutout} text_color = {user.colors.text_color}/>
+                                </Box>
+                                </div>
+                                )
 
-                        })}
-                    </Box>
-                    </Box>
+                            })}
+                        </Box>
+                        </Box>
+                    }
                     
                     <Typography display="flex" justifyContent="center" alignItems="center" variant='h1' color={user.colors.secondary_text_color} 
                     component={Link} to="/" 

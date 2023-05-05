@@ -15,6 +15,7 @@ export const GetShoutOut = (props) => {
     const [userImage, setUserImage] = useState("");
     const navigate = useNavigate();
     const [userURL, setUserURL] = useState("");
+
     const getImage = async () => {
         try {
           const docRef = doc(db, "users", shout_out_uid);
@@ -34,6 +35,7 @@ export const GetShoutOut = (props) => {
           console.error(error);
         }
     }
+    
     const handleButtonClick = () => {
         // Use the navigate function to go to the desired page
         navigate(`/u/${userURL}`);

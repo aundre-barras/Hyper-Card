@@ -1,48 +1,74 @@
 import {
     Typography,
     Button,
-    Box,
     Grid,
     TextField,
 } from '@mui/material';
 import {React, useEffect, useState} from 'react';
-import { query, where, orderBy, limit, getDocs, collection } from "firebase/firestore";
-import { db } from '../../firebase-config';
-
+import { query, where, limit, getDocs, collection, doc, updateDoc, getDoc} from "firebase/firestore";
+import { db, storage, auth} from '../../firebase-config';
+import {ref, getDownloadURL} from 'firebase/storage'
 
 
 export const AddShoutOut = () => {
 
     const [username, setUserName] = useState("");
-    console.log("here");
-    const searchUsers = async () => {
-        
+    const [listOfUsers, setListOfUsers] = useState([]);
+    const [listOfImages, setListOfImages]=  useState([]);
+
+    const getImage = async (profile_image) => {
         try {
-          const usersRef = collection(db, "users");
-      
-          // Construct a Firestore query that matches documents where displayName is similar to the search query
-          const q = query(
-            usersRef,
-            where("displayName", ">=", username),
-            where("displayName", "<=", username + "\uf8ff"), // \uf8ff is a high Unicode code point used as the last character in a range to match all strings that start with the query string
-            orderBy("displayName"),
-            limit(10)
-          );
-      
-          // Execute the query and retrieve the results
-          const querySnapshot = await getDocs(q);
-          const results = querySnapshot.docs.map((doc) => doc.data());
-      
-          console.log("Search results:", results);
-          // Do something with the results here
+            const url = await getDownloadURL(ref(storage, `profile_images/${profile_image}`));
+            return url;
         } catch (error) {
-          console.error("Error searching for users:", error);
+          console.error(error);
         }
     }
-    const handleUserNameChange = (event) => {
-        setUserName(event.target.value);
-        searchUsers(); // Call the searchUsers function when the username value changes
-    };
+
+    const addShoutOutOnUserName = async (username) => {
+        const userRef = collection(db, "users");
+        const userQuery = query(userRef, where("displayname", "==", username));
+        const querySnapshot = await getDocs(userQuery);
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+          const ref = doc(db, "users", currentUser.uid);
+          const userDoc = await getDoc(ref);
+          const existingShoutouts = userDoc.data().shoutouts || []; // Default to empty array if shoutouts is not yet set
+          const newShoutouts = querySnapshot.docs.map((doc) => doc.id);
+          const updatedShoutouts = [...existingShoutouts, ...newShoutouts];
+          await updateDoc(ref, { shoutouts: updatedShoutouts });
+        } else {
+          throw new Error("User is not authenticated");
+        }
+      }
+
+    const searchUsers = async () => {
+        if(username){
+            try {
+            const usersRef = collection(db, "users");
+            // Construct a Firestore query that matches documents where displayName is similar to the search query
+            const q = query(
+                usersRef,
+                where("displayname", ">=", username),
+                where("displayname", "<=", username + "\uf8ff"),
+                limit(10)
+            );
+        
+            // Execute the query and retrieve the results
+            const querySnapshot = await getDocs(q);
+            const results = querySnapshot.docs.map((doc) => doc.data());
+            setListOfUsers(results);
+
+            const images = await Promise.all(results.map(async (item) => await getImage(item.profile_image)));
+
+            setListOfImages(images);
+            // Do something with the results here
+            } catch (error) {
+                console.error("Error searching for users:", error);
+            }
+        }
+
+    }
 
     useEffect(() => {
         searchUsers();
@@ -68,15 +94,44 @@ export const AddShoutOut = () => {
                         height:'40px',
                         borderRadius:'35px'
                     }}} 
-                    id="username"
-                    label="Username"
-                    name="username"
+                    id="display name"
+                    label="display name"
+                    name="display name"
                     size='small'
-                    onChange={handleUserNameChange}
+                    onChange={(e) => {setUserName(e.target.value)}}
                     >
 
                 </TextField>
             </Grid>
+
+            {
+                listOfUsers.map((user, i) => {
+                    return (
+                        <div key={user.displayname}>
+                            <h6 style={{ width: "170px", height: "20px", textAlign: "center" }}>
+                                {user.displayname}
+                            </h6>
+                            {/* {console.log(`url(${imageUrl})`)} */}
+                            <Button
+                                onClick={() => {addShoutOutOnUserName(user.displayname)}}
+                                sx={{
+                                    height: 150,
+                                    width: 150,
+                                    borderRadius: '50%',
+                                    backgroundImage: `url(${listOfImages[i]})`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                    overflow: 'hidden',
+                                    border: 3,
+                                    borderColor: 'black'
+                                }}
+                            >
+                            </Button>
+                        </div>
+                    );
+                })
+            }
+
             
             <Grid item xs={6} bottom={0} left={'12px'} position={'absolute'}>
                     <Button variant='contained' sx={{
