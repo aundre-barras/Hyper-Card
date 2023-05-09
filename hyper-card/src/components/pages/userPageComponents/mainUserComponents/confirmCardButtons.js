@@ -8,7 +8,6 @@ export const ConfirmCardButtons = (props) => {
             <Grid item xs={6} bottom={0} left={'12px'} position={'absolute'} >
                 <Button variant='contained' onClick={() => {
                 newUserCards = [...tempCard, ...userCards];
-                console.log(tempCard);
                 setUserCards(newUserCards);
                 }}
                     sx={{

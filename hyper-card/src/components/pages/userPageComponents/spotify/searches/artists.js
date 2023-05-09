@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
 import { Grid , Box , Paper , Button, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons"
+import { SearchArtistId } from "../spotifysearchbyId";
 
 export const Artists = (props) => {
   const searchInput = props.to_search;
@@ -9,6 +10,7 @@ export const Artists = (props) => {
   const [artists, setArtists] = useState([]);
   const [accessToken, setAccessToken] = useState("");
   const [tempCard, setTempCard] = useState([]);
+  let temp = [];
 
   const search = async () => {
     try {
@@ -78,7 +80,7 @@ export const Artists = (props) => {
                 "type": "spotify",
                 "spotify_type": "artist",
                 "artistId": artist.id
-              }])
+              }]);              
             }}>
               <Grid container>
                 <Grid item xs={6}>
@@ -112,13 +114,32 @@ export const Artists = (props) => {
 };
 
 export const DisplayArtist = (props) => {
+  const [artistsToDisplay, setArtistsToDisplay] = useState([]);
   const { card } = props;
+  SearchArtistId(card["artistId"] , setArtistsToDisplay);
 
   return (
-    <Box display={"flex"} justifyContent={"center"}>
-      {
-        card["spotify_type"]
-      }
-    </Box>
+    artistsToDisplay["name"] &&
+    <Grid item key={artistsToDisplay.id} width={"50vw"} align={"center"} xs={12}>
+      <Grid container>
+        <Grid item xs={6}>
+          {
+            artistsToDisplay.images && artistsToDisplay.images[0] ?
+              <img src={artistsToDisplay.images[0].url} width="125px" height='125px' alt={artistsToDisplay.name} /> : null
+          }
+        </Grid>
+        <Grid item xs={6}>
+          <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'20px', textAlign:'center'}}>
+            {artistsToDisplay.name}
+          </Typography>
+          <Typography marginTop={1} sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
+            Followers: {artistsToDisplay.followers.total}
+          </Typography>
+          <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
+          <a href = {artistsToDisplay.external_urls.spotify} target="_blank" rel="noreferrer" style={{textDecoration:'none'}}>spotify</a>
+          </Typography>
+        </Grid>
+      </Grid>
+    </Grid> 
   )
 }

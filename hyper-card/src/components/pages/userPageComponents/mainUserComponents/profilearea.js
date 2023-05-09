@@ -184,9 +184,7 @@ export const ProfileArea = (props) => {
                             }
                             {
                                 userCards.length > 0 &&
-                                <Box>
                                     <DisplayCard userCards={userCards}/>
-                                </Box>
                             }
                             {
                                 isEdit &&

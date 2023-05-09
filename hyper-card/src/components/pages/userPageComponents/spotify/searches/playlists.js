@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
 import { Grid, Box, Paper, Button, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons"
+import { SearchPlaylistId } from "../spotifysearchbyId";
 
 export const Playlists = (props) => {
     const searchInput = props.to_search;
@@ -106,13 +107,28 @@ export const Playlists = (props) => {
 }
 
 export const DisplayPlaylist = (props) => {
+    const [playlistToDisplay, setPlaylistToDisplay] = useState([]);
     const { card } = props;
-
+    SearchPlaylistId(card["playlistId"], setPlaylistToDisplay);
+    
     return (
-        <Box display={"flex"} justifyContent={"center"}>
+        playlistToDisplay["name"] &&
+      <Grid item key={playlistToDisplay.id} width={"50vw"} align={"center"} xs={12}>
+        <Grid container>
+          <Grid item xs={6}>
             {
-                card["spotify_type"]
+              playlistToDisplay.images && playlistToDisplay.images[0] ?
+                <img src={playlistToDisplay.images[0].url} width="125px" height='125px' alt={playlistToDisplay.name} /> : null
             }
-        </Box>
+            <h4>{playlistToDisplay.popularity}</h4>
+          </Grid>
+  
+          <Grid item xs={6}>
+            <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
+              {playlistToDisplay.name}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Grid>
     )
-}
+  }

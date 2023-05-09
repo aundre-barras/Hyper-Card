@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
 import { Grid, Box, Paper, Button, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons"
+import { SearchAudioBookId } from "../spotifysearchbyId";
 
 export const Audiobooks = (props) => {
     const searchInput = props.to_search;
@@ -106,13 +107,28 @@ export const Audiobooks = (props) => {
 }
 
 export const DisplayAudioBook = (props) => {
+    const [audioBookToDisplay, setAudioBookToDisplay] = useState([]);
     const { card } = props;
-
+    SearchAudioBookId(card["audioBookId"], setAudioBookToDisplay);
+    
     return (
-        <Box display={"flex"} justifyContent={"center"}>
+        audioBookToDisplay["name"] &&
+      <Grid item key={audioBookToDisplay.id} width={"50vw"} align={"center"} xs={12}>
+        <Grid container>
+          <Grid item xs={6}>
             {
-                card["spotify_type"]
+              audioBookToDisplay.images && audioBookToDisplay.images[0] ?
+                <img src={audioBookToDisplay.images[0].url} width="125px" height='125px' alt={audioBookToDisplay.name} /> : null
             }
-        </Box>
+            <h4>{audioBookToDisplay.popularity}</h4>
+          </Grid>
+  
+          <Grid item xs={6}>
+            <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
+              {audioBookToDisplay.name}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Grid>
     )
-}
+  }
