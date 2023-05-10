@@ -42,7 +42,7 @@ export const ChangeColor = (props) => {
             }}
             >
             <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                <SelectColors />
+                <SelectColors/>
             </Box>
             <Box sx={{ textAlign: 'center' }}>
                 <Button

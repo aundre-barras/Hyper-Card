@@ -101,7 +101,6 @@ import {
               variant="caption"
               sx={{
                 position: 'absolute',
-                top: 170,
                 margin: 'auto',
                 textAlign: 'center',
                 color: `${textColor}`,

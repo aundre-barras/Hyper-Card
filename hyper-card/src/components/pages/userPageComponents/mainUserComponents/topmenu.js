@@ -26,8 +26,8 @@ export const TopMenu = (props) => {
     if (isAuth) {
         const profile = "/u/" + userData[0].displayname
         return (
-            <div>
-                <div style={{ float: 'right'}}>
+            <>
+                <div style={{ right: "0", position: "absolute"}}>
                     <IconButton onClick={toggleDrawer}>
                         {!drawerOpen ? <ReorderIcon sx={{ fontSize: "64px" }}style={{ color: 'black' }} /> : null}
                     </IconButton>
@@ -38,6 +38,7 @@ export const TopMenu = (props) => {
                     open={drawerOpen}
                     onClose={switchDrawer}
                     anchor='right'
+                    sx={{position: "fixed"}}
                 >
                     <div style={{ 'fontSize': 24, 'display': 'flex', 'flexDirection': 'column', 'padding': 24 }}>
                         <Link to={profile} style={{ 'textDecoration': 'none', 'color': 'black', 'fontFamily': 'Outfit', 'marginBottom': 16 }}>profile</Link>
@@ -46,12 +47,12 @@ export const TopMenu = (props) => {
                         <Link to="/logout" style={{ 'textDecoration': 'none', 'color': 'black', 'fontFamily': 'Outfit', 'marginBottom': 16  }}>log out</Link>
                     </div>
                 </Drawer>
-            </div>
+            </>
         );
     } else {
         return (
             <div>
-                <div style={{ float: 'right' }}>
+                <div>
                     <IconButton onClick={toggleDrawer}>
                         {!drawerOpen ? <ReorderIcon sx={{ fontSize: "64px" }}style={{ color: 'black' }}/> : null}
                     </IconButton>
