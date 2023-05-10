@@ -18,7 +18,6 @@ import { Link, useLocation} from 'react-router-dom';
 import { EditDescription } from './editdescription';
 import { ChangeTheme } from './changetheme';
 import { ChangeColor } from './changecolor';
-import { hexToRGBA } from '../stylizers/hexToRGBA';
 import { DisplayCard } from './displayCard';
 
 import {storage} from '../../firebase-config';
@@ -61,9 +60,9 @@ export const ProfileArea = (props) => {
                 <div key = {user}>
                     <GlobalStyles
                         styles={{
-                            body: { 
-                                backgroundColor: `${hexToRGBA(user.theme.backgroundColor)}`,
-                                background: `${user.theme.background}`,
+                            body: {
+                                backgroundColor: `${user.theme.backgroundColor}`,
+                                backgroundImage: `${user.theme.backgroundImage}`,
                                 backgroundPosition: `${user.theme.backgroundPosition}`,
                                 backgroundSize: `${user.theme.backgroundSize}`,
                                 backgroundRepeat: `${user.theme.backgroundRepeat}`,

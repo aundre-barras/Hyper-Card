@@ -1,11 +1,11 @@
 export const Colors = () => {
     return ([
         {
-            main_color:"#eeeeee",
-            secondary_color:"#c5ee7d",
-            text_color:"#5c452d",
-            secondary_text_color:"#8cb04e",
-            button_color:"#7a9244"
+            main_color:"#e8eae8",
+            secondary_color:"#646e73",
+            text_color:"#2a312f",
+            secondary_text_color:"#434b4e",
+            button_color:"#c6cdcd"
         },
         {
             main_color:"#eee0d3",
@@ -15,53 +15,55 @@ export const Colors = () => {
             button_color:"#e7d5bb"
         },
         {
+            main_color:"#405692",
+            secondary_color:"#4863ad",
+            text_color:"#d9b4d7",
+            secondary_text_color:"#ffffff",
+            button_color:"#9192cd"
+        },
+        {
             main_color:"#eeeeee",
-            secondary_color:"#aaaaaa",
-            text_color:"#5e1418",
-            secondary_text_color:"#d73a24",
-            button_color:"#e8a017" 
+            secondary_color:"#65662f",
+            text_color:"#28241b",
+            secondary_text_color:"#d5d8d6",
+            button_color:"#5c665f"
         },
         {
-            main_color:"#ffffff",
-            secondary_color:"#f890e7",
-            text_color:"#000000",
-            secondary_text_color:"#0bd3d3",
-            button_color:"#d0d0d0"
+            main_color:"#d1dbed",
+            secondary_color:"#ffffff",
+            text_color:"#28241b",
+            secondary_text_color:"#828c82",
+            button_color:"#b1cdbf"
         },
         {
-            main_color:"#f2e6d7",
-            secondary_color:"#ebd5bb",
-            text_color:"#98acba",
-            secondary_text_color:"#978864",
-            button_color:"#cbc6bf"
+            main_color:"#d6dfeb",
+            secondary_color:"#639ccc",
+            text_color:"#194594",
+            secondary_text_color:"#eeeeee",
+            button_color:"#99bed9"
         },
         {
-            main_color:"#f3f3f3",
-            secondary_color:"#e5e5e5",
-            text_color:"#181818",
-            secondary_text_color:"#333333",
+            main_color:"#fbf9f6",
+            secondary_color:"#77644b",
+            text_color:"#3d3925",
+            secondary_text_color:"#e5cbc5",
+            button_color:"#b58c85"
+        },
+        {
+            main_color:"#333333",
+            secondary_color:"#181818",
+            text_color:"#f3f3f3",
+            secondary_text_color:"#e5e5e5",
             button_color:"#888888"
         },
         {
-            main_color:"#ECEBE9",
-            secondary_color:"#A0C8C3",
-            text_color:"#262225",
-            secondary_text_color:"#29354B",
-            button_color:"#4C8891"
+            main_color:"#f3e0e7",
+            secondary_color:"#e5c2ca",
+            text_color:"#542b29",
+            secondary_text_color:"#eeeeee",
+            button_color:"#c78d96"
         },
-        {
-            main_color:"#eedede",
-            secondary_color:"#d9aa67",
-            text_color:"#24578b",
-            secondary_text_color:"#112037",
-            button_color:"#bbbbbb"
-        },
-        // {
-        //     main_color:"#",
-        //     secondary_color:"#",
-        //     text_color:"#",
-        //     secondary_text_color:"#",
-        //     button_color:"#"
-        // },
+
+
     ]);
 };

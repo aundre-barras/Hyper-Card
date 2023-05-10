@@ -1,6 +1,5 @@
-import { Button, Popover, Box } from '@mui/material';
+import { Button, Popover, Box} from '@mui/material';
 import PopupState, { bindPopover, bindTrigger } from 'material-ui-popup-state';
-import { useState } from 'react';
 import { SelectTheme } from '../stylizers/selecttheme';
 
 export const ChangeTheme = (props) => {
@@ -24,37 +23,41 @@ export const ChangeTheme = (props) => {
               color: `${secondary_text_color}`,
             }}
           >
-            Edit Style
+            edit style
           </Button>
           <Popover
             {...bindPopover(popupState)}
             anchorReference="none"
-            style={{
+            sx={{
               display: 'flex',
-              justifyContent: 'center',
+              flexDirection: 'column',
               alignItems: 'center',
-            }}
+              justifyContent: 'center',
+          }}
           >
-            
-            <Box>
-                <Button
-                variant="contained"
-                onClick={() => {
-                    popupState.close();
-                }}
-                sx={{
-                    backgroundColor: "black",
-                    borderRadius: 5,
-                    height: 30,
-                    width: 160,
-                    margin: '15px',
-                    fontStyle: 'bold',
-                    color: "white",
-                }}
-                >
-                close
-                </Button>
+            <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+            <SelectTheme main_color = {main_color} secondary_color = {secondary_color}/>
             </Box>
+            <Box sx={{ textAlign: 'center' }}>
+            <Button
+            variant="contained"
+            onClick={() => {
+                popupState.close();
+            }}
+            sx={{
+                backgroundColor: "black",
+                borderRadius: 5,
+                height: 30,
+                width: 160,
+                margin: '15px',
+                fontStyle: 'bold',
+                color: "white",
+            }}
+            >
+            close
+            </Button>
+            </Box>
+
           </Popover>
           
         </div>

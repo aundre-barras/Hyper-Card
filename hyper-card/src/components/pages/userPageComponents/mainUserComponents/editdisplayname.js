@@ -70,7 +70,6 @@ export const EditDisplayName = (props) => {
           }
         });
       };
-    console.log(newdisplayname);
     return (
 
         <Box display="flex" justifyContent="center" alignItems= "center" sx={{

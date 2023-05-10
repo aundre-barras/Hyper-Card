@@ -1,5 +1,5 @@
-export const hexToRGBA = (hex) => {
-    const opacity = 0.08
+export const hexToRGBA = (hex , opacity) => {
+
     try {
         var c;
         if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){

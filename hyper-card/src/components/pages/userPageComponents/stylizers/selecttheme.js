@@ -13,7 +13,6 @@ export const SelectTheme = (props) => {
     const ChangeTheme = async () => {
 
         if (theme){
-
             try {
 
                 auth.onAuthStateChanged(async function(user) {
@@ -40,7 +39,7 @@ export const SelectTheme = (props) => {
             <div>
             <Grid item sx={{ fontStyle: "bold", textAlign: "center", margin: "15px", fontFamily: "Outfit",
               fontWeight: 400,}}>
-                <h2>select a background style</h2>
+                <h2>select a background style.</h2>
             </Grid>
 
             <Grid container item columns={2} spacing={2} direction="row" justifyContent="center" alignItems="center" overflow={"auto"} height={"auto"} width = {"400px"}>
@@ -52,13 +51,14 @@ export const SelectTheme = (props) => {
                         setIndex(i);
                     }}
                     sx={{
-                        height: "150px",
-                        width: "150px",
-                        background: `${theme.background}`,
+                        height: "100px",
+                        width: "100px",
                         backgroundColor: `${theme.backgroundColor}`,
+                        backgroundImage: `${theme.backgroundImage}`,
                         backgroundPosition: `${theme.backgroundPosition}`,
-                        backgroundSize: `${theme.backgroundSize}`,
+                        backgroundSize: `${theme.backgroundSize !== '' ? '1em 1em' : ''}`,
                         backgroundRepeat: `${theme.backgroundRepeat}`,
+                        opacity: 5,
                         borderRadius: "50%",
                         marginTop: "10px",
                         marginBottom: "10px",

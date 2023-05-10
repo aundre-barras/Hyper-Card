@@ -41,18 +41,13 @@ export const SelectColors = () => {
         ChangeColor();
     }, [color])
     return (
-
         <div>
-            
-            <Grid container item xs={6} spacing={2} columns = {2} direction="column" justifyContent="center" alignItems="center" overflow={"auto"}>
-                <Grid item sx = {{
-                    fontStyle: 'bold',
-                }}>
-                    <h2>
-                        select a color palatte
-                    </h2>
+            <Grid item sx={{ fontStyle: "bold", textAlign: "center", margin: "15px", fontFamily: "Outfit",
+            fontWeight: 400,}}>
+                <h2>select a color palette.</h2>
+            </Grid>
                     
-                </Grid>
+            <Grid container item columns={2} spacing={2} direction="row" justifyContent="center" alignItems="center" overflow={"auto"} height={"auto"} width = {"400px"}>
             {
                         colors_list.map((color) => (
                         <div key={color.secondary_color}>
@@ -60,12 +55,17 @@ export const SelectColors = () => {
                             <Grid item >
                             <Box item xs={6} spacing = {2}
                             sx={{
-                                height: "200px",
-                                width: "200px",
+                                height: "100px",
+                                width: "100px",
                                 borderRadius: '50%',
                                 marginTop: 1,
                                 marginBottom: 1,
-                                background:`linear-gradient( ${color.main_color} 20%, ${color.secondary_color} 0 40%, ${color.text_color} 0 60%, ${color.secondary_text_color} 0 80%, ${color.button_color} 0)`
+                                background:`linear-gradient( ${color.main_color} 20%, ${color.secondary_color} 0 40%, ${color.text_color} 0 60%, ${color.secondary_text_color} 0 80%, ${color.button_color} 0)`,
+                                marginTop: "10px",
+                                marginBottom: "10px",
+                                border: "solid",
+                                borderWidth: "4px",
+                                borderColor: "black",
                             }}>
                             </Box>
                             </Grid>
@@ -73,8 +73,6 @@ export const SelectColors = () => {
                         </div>
                         ))
                     }
-
-
             </Grid>
         </div>
     );
