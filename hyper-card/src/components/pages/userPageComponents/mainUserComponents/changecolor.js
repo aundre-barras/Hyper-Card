@@ -12,7 +12,7 @@ export const ChangeColor = (props) => {
 
 
     return (
-    <Box m={2} pt={2}>
+
     <PopupState variant="popover" popupId="demo-popup-popover">
         {(popupState) => (
             <div>
@@ -22,6 +22,7 @@ export const ChangeColor = (props) => {
                 borderRadius: 5,
                 height: 30,
                 width: 160,
+                margin: "15px",
                 fontStyle: 'bold',
                 fontSize: "15px",
                 color: `${secondary_text_color}`
@@ -40,12 +41,6 @@ export const ChangeColor = (props) => {
               }}
       
                 >
-                <Box xs={6} sx={{
-                    height: '35vh',
-                    width: '45vh'
-                }}>
-
-                </Box>
             <SelectColors/>
 
             </Popover>
@@ -54,6 +49,6 @@ export const ChangeColor = (props) => {
         )}
 
     </PopupState>
-    </Box>
+
     );
 }

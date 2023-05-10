@@ -1,4 +1,5 @@
 export const hexToRGBA = (hex) => {
+    const opacity = 0.08
     try {
         var c;
         if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
@@ -7,7 +8,7 @@ export const hexToRGBA = (hex) => {
                 c= [c[0], c[0], c[1], c[1], c[2], c[2]];
             }
             c= '0x'+c.join('');
-            return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',0.3)';
+            return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',' + opacity + ')';
         }
         throw new Error('Bad Hex'); 
     } catch (error) {

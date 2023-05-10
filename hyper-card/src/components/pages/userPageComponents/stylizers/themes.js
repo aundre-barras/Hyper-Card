@@ -1,33 +1,34 @@
 import { hexToRGBA } from "./hexToRGBA";
 
 export const Themes = (background_color, secondary_color) => {
+
     return ([
         {
-            "backgroundColor":`${background_color}`,
-            "background":`linear-gradient(167.95deg, ${hexToRGBA(background_color)} 63.36%, ${hexToRGBA(background_color)} 100%)`,
+            "backgroundColor":`${hexToRGBA(background_color, .8)}`,
+            "background":`linear-gradient(167.95deg, ${hexToRGBA(background_color, .8)} 63.36%, ${hexToRGBA(background_color, .08)} 100%)`,
             "backgroundPosition":"0",
             "backgroundSize":"",
             "backgroundRepeat":"",
 
         },
         {
-            "backgroundColor":`${background_color}`,
-            "background": `linear-gradient(${hexToRGBA(background_color)}, ${hexToRGBA(secondary_color)} 100%)`,
+            "backgroundColor":`${hexToRGBA(background_color, 1)}`,
+            "background": `linear-gradient(${hexToRGBA(background_color, 1)}, ${hexToRGBA(secondary_color, 1)} 100%)`,
             "backgroundPosition":"0",
             "backgroundSize":"",
             "backgroundRepeat":"",
 
         },
         {
-            "backgroundColor":`${background_color}`,
-            "background":`linear-gradient(135deg, ${hexToRGBA(secondary_color)} 25%, transparent 25%), linear-gradient(225deg, ${hexToRGBA(secondary_color)} 25%, transparent 25%), linear-gradient(45deg, ${hexToRGBA(secondary_color)} 25%, transparent 25%), linear-gradient(315deg, ${hexToRGBA(secondary_color)} 25%, ${hexToRGBA(background_color)} 25%)`,
+            "backgroundColor":`${hexToRGBA(background_color, .08)}`,
+            "background":`linear-gradient(135deg, ${hexToRGBA(secondary_color)} 25%, transparent 25%), linear-gradient(225deg, ${hexToRGBA(secondary_color)} 25%, transparent 25%), linear-gradient(45deg, ${hexToRGBA(secondary_color)} 25%, transparent 25%), linear-gradient(315deg, ${hexToRGBA(secondary_color, .08)} 25%, ${hexToRGBA(background_color, .08)} 25%)`,
             "backgroundPosition":"36px 0, 36px 0, 0 0, 0 0",
             "backgroundSize":"72px 72px",
             "backgroundRepeat":"repeat",
         },
         {
             "backgroundColor":`${background_color}`,
-            "background":`repeating-linear-gradient( 45deg, ${hexToRGBA(secondary_color)}, ${hexToRGBA(secondary_color)} 6px, ${hexToRGBA(background_color)} 6px, ${hexToRGBA(background_color)} 30px )`,
+            "background":`repeating-linear-gradient( 45deg, ${hexToRGBA(secondary_color)}, ${hexToRGBA(secondary_color)} 6px, ${hexToRGBA(background_color, .08)} 6px, ${hexToRGBA(background_color, .08)} 30px )`,
             "backgroundPosition":"",
             "backgroundSize":"",
             "backgroundRepeat":""
@@ -35,14 +36,14 @@ export const Themes = (background_color, secondary_color) => {
         },
         {
             "backgroundColor":`${background_color}`,
-            "background":`linear-gradient(-45deg, ${hexToRGBA(background_color)}, ${hexToRGBA(background_color)} 50%, ${hexToRGBA(secondary_color)} 50%, ${hexToRGBA(secondary_color)})`,
+            "background":`linear-gradient(-45deg, ${hexToRGBA(background_color, .08)}, ${hexToRGBA(background_color, .08)} 50%, ${hexToRGBA(secondary_color)} 50%, ${hexToRGBA(secondary_color)})`,
             "backgroundPosition":"",
             "backgroundSize":"66px 66px",
             "backgroundRepeat":""
         },
         {
             "backgroundColor":`${background_color}`,
-            "background":`repeating-linear-gradient(45deg, ${hexToRGBA(secondary_color)} 25%, transparent 25%, transparent 75%, ${hexToRGBA(secondary_color)} 75%, ${hexToRGBA(secondary_color)}), repeating-linear-gradient(45deg, ${hexToRGBA(secondary_color)} 25%, ${hexToRGBA(background_color)} 25%, ${hexToRGBA(background_color)} 75%, ${hexToRGBA(secondary_color)} 75%, ${hexToRGBA(secondary_color)})`,
+            "background":`repeating-linear-gradient(45deg, ${hexToRGBA(secondary_color)} 25%, transparent 25%, transparent 75%, ${hexToRGBA(secondary_color)} 75%, ${hexToRGBA(secondary_color)}), repeating-linear-gradient(45deg, ${hexToRGBA(secondary_color)} 25%, ${hexToRGBA(background_color, .08)} 25%, ${hexToRGBA(background_color, .08)} 75%, ${hexToRGBA(secondary_color)} 75%, ${hexToRGBA(secondary_color)})`,
             "backgroundPosition":"0 0, 44px 44px",
             "backgroundSize":"88px 88px",
             "backgroundRepeat":""
@@ -63,7 +64,7 @@ export const Themes = (background_color, secondary_color) => {
         },
         {
             "backgroundColor":`${background_color}`,
-            "background":`radial-gradient(${secondary_color} 2px, ${hexToRGBA(background_color)} 2px)`,
+            "background":`radial-gradient(${hexToRGBA(secondary_color)} 2px, ${hexToRGBA(background_color, .08)} 2px)`,
             "backgroundPosition":"",
             "backgroundSize":"25px 25px",
             "backgroundRepeat":""

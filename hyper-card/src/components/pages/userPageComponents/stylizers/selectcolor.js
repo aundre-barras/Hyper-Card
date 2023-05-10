@@ -43,7 +43,8 @@ export const SelectColors = () => {
     return (
 
         <div>
-            <Grid container spacing={2} direction="column" justifyContent="center" alignItems="center" >
+            
+            <Grid container item xs={6} spacing={2} columns = {2} direction="column" justifyContent="center" alignItems="center" overflow={"auto"}>
                 <Grid item sx = {{
                     fontStyle: 'bold',
                 }}>
@@ -51,7 +52,7 @@ export const SelectColors = () => {
                         select a color palatte
                     </h2>
                     
-            </Grid>
+                </Grid>
             {
                         colors_list.map((color) => (
                         <div key={color.secondary_color}>

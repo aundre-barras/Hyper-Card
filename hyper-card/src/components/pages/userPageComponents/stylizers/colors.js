@@ -8,11 +8,11 @@ export const Colors = () => {
             button_color:"#7a9244"
         },
         {
-            main_color:"#FDF6F0",
-            secondary_color:"#F8E2CF",
-            text_color:"#F5C6AA",
-            secondary_text_color:"#eeeeee",
-            button_color:"#FCD8D4"
+            main_color:"#eee0d3",
+            secondary_color:"#9a6e51",
+            text_color:"#461f11",
+            secondary_text_color:"#6f9ab4",
+            button_color:"#e7d5bb"
         },
         {
             main_color:"#eeeeee",
