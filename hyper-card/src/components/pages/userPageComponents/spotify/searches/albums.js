@@ -90,7 +90,6 @@ export const Albums = (props) => {
                     album.images && album.images[0] ?
                       <img src={album.images[0].url} width="125px" height='125px' alt={album.name} /> : null
                   }
-                  <h4>{album.popularity}</h4>
                 </Grid>
 
                 <Grid item xs={6}>
@@ -116,18 +115,20 @@ export const DisplayAlbum = (props) => {
   return (
     albumToDisplay["name"] &&
     <Grid item key={albumToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-      <Grid container>
+      <Grid container width='300px'>
         <Grid item xs={6}>
           {
             albumToDisplay.images && albumToDisplay.images[0] ?
               <img src={albumToDisplay.images[0].url} width="125px" height='125px' alt={albumToDisplay.name} /> : null
           }
-          <h4>{albumToDisplay.popularity}</h4>
         </Grid>
 
         <Grid item xs={6}>
           <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
-            {albumToDisplay.name}
+            {albumToDisplay.name} <br/>
+            <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '16px', textAlign: 'center' }}>
+              ranking: {albumToDisplay.popularity}
+            </Typography>
           </Typography>
         </Grid>
       </Grid>

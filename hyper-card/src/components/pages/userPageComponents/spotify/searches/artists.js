@@ -121,7 +121,7 @@ export const DisplayArtist = (props) => {
   return (
     artistsToDisplay["name"] &&
     <Grid item key={artistsToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-      <Grid container>
+      <Grid container width='300px'>
         <Grid item xs={6}>
           {
             artistsToDisplay.images && artistsToDisplay.images[0] ?

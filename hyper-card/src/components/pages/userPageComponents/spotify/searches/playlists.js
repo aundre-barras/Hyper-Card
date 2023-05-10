@@ -114,7 +114,7 @@ export const DisplayPlaylist = (props) => {
     return (
         playlistToDisplay["name"] &&
       <Grid item key={playlistToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-        <Grid container>
+        <Grid container width='300px'>
           <Grid item xs={6}>
             {
               playlistToDisplay.images && playlistToDisplay.images[0] ?

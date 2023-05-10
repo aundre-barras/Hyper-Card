@@ -114,18 +114,18 @@ export const DisplayAudioBook = (props) => {
     return (
         audioBookToDisplay["name"] &&
       <Grid item key={audioBookToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-        <Grid container>
+        <Grid container width='300px'>
           <Grid item xs={6}>
             {
               audioBookToDisplay.images && audioBookToDisplay.images[0] ?
                 <img src={audioBookToDisplay.images[0].url} width="125px" height='125px' alt={audioBookToDisplay.name} /> : null
             }
-            <h4>{audioBookToDisplay.popularity}</h4>
           </Grid>
   
           <Grid item xs={6}>
             <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
-              {audioBookToDisplay.name}
+              {audioBookToDisplay.name} <br/>
+              {audioBookToDisplay.popularity}
             </Typography>
           </Grid>
         </Grid>
