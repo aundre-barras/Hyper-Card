@@ -62,7 +62,7 @@ export const AddContent = (props) => {
                 }}>
                     <IconButton {...bindTrigger(popupState)}>
                         <AddRoundedIcon sx={{
-                            fontSize: 40
+                            fontSize: 40,
                         }}/>
 
                     </IconButton>

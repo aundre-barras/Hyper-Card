@@ -20,7 +20,7 @@ export const HyprCrd = () => {
             <Route path = "/login" element = {<Login/>}/>
             <Route path = "/u/:id" element = {<UserPage/>}/>
             <Route path = "/forgotpassword" element = {<ForgotPassword/>}/>
-            <Route path = "/settings" element = {<Settings/>}/>
+            <Route path = "u/:id/settings" element = {<Settings/>}/>
             <Route path = "*" to = "/nopage" element = {<NoPage/>}/>
 
 

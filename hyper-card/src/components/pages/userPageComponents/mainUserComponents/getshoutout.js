@@ -51,8 +51,8 @@ export const GetShoutOut = (props) => {
             // Attach the handleButtonClick function to the onClick prop
             onClick={handleButtonClick}
             sx={{
-              height: 150,
-              width: 150,
+              height: "20vh",
+              width: "20vh",
               borderRadius: '50%',
               backgroundImage: `url(${userImage})`,
               backgroundSize: 'cover',

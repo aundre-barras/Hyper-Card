@@ -68,11 +68,12 @@ export const Login = () => {
         <GlobalStyles
           styles = {{
             body: {
-              backgroundImage: "linear-gradient(to bottom right, #FFFFFF 63.36%, #5C7BBD)",
+              backgroundImage: "linear-gradient(to bottom right, #FFFFFF 63.36%, #5C7BBD) !important",
               backgroundAttatchment: "relative",
-              overflow: "hidden",
+              overflow: "scroll",
               width: "100%",
-              minHeight: "100vh"
+              minHeight: "100vh",
+              overflowX: "hidden",
             }
           }}
         

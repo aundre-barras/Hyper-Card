@@ -21,6 +21,13 @@ export const ChangeTheme = (props) => {
               fontStyle: 'bold',
               fontSize: '15px',
               color: `${secondary_text_color}`,
+              fontFamily: "Outfit",
+              fontSize: "18px",
+              lineHeight: "25px",
+              display: "flex",
+              alignItems: "center",
+              textAlign: "center",
+              textTransform:'lowercase'
             }}
           >
             edit style

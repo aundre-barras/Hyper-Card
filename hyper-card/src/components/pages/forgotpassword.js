@@ -79,7 +79,7 @@ export const ForgotPassword = () => {
                         alignItems: 'center',
                         }}
                     >
-                            <text style={{
+                            <Typography style={{
                                 fontFamily: "Outfit",
                                 fontWeight: 600,
                                 fontSize: "20px",
@@ -91,7 +91,7 @@ export const ForgotPassword = () => {
                             }}>
                                 please check your email and spam folder 
                                 to follow the password reset process
-                            </text>
+                            </Typography>
 
                             <Button
                                 type="submit"

@@ -117,7 +117,14 @@ export const EditDisplayName = (props) => {
                 borderStyle: 'solid',
                 borderColor: `${secondary_text_color}`,
                 backgroundColor: `${button_color}`,
-                color: `${secondary_text_color}`
+                color: `${secondary_text_color}`,
+                fontFamily: "Outfit",
+                fontSize: "15px",
+                lineHeight: "25px",
+                display: "flex",
+                alignItems: "center",
+                textAlign: "center",
+                textTransform:'lowercase'
                 }}>
                     Update
             </Button>

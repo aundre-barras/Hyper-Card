@@ -62,12 +62,11 @@ export const ProfileArea = (props) => {
                         styles={{
                             body: {
                                 backgroundColor: `${user.theme.backgroundColor}`,
-                                backgroundImage: `${user.theme.backgroundImage}`,
+                                backgroundImage: `${user.theme.backgroundImage} !important`,
                                 backgroundPosition: `${user.theme.backgroundPosition}`,
                                 backgroundSize: `${user.theme.backgroundSize}`,
                                 backgroundRepeat: `${user.theme.backgroundRepeat}`,
                                 backgroundAttatchment: "relative",
-                                minHeight: "100vh",
                                 overflow: "scroll",
                                 scrollbarWidth: "none",
                                 overflowX: "hidden",
@@ -86,8 +85,8 @@ export const ProfileArea = (props) => {
                                 justifyContent="center"
                                 alignItems="center"
                                 sx={{
-                                  height: 150,
-                                  width: 150,
+                                  height: "20vh",
+                                  width: "20vh",
                                   borderRadius: '50%',
                                   backgroundImage: `url(${userImage})`,
                                   backgroundSize: 'cover',
@@ -119,12 +118,23 @@ export const ProfileArea = (props) => {
                                 }}>
                                 /{user.displayname}
                             </Typography>
-                            <Typography variant = 'h6' width="400px" height= '75px' textAlign="center" display="flex" justifyContent="center" alignItems="center" textOverflow="clip" sx={{
-                                textIndent: "10%",
-                                textOverflow: "inherit",
-                                color: `${user.colors.text_color}`
-                            }}>
-                                {user.description}
+                            <Typography
+                            variant="h6"
+                            width="400px"
+                            height="auto"
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            textOverflow="clip"
+                            sx={{
+                                margin: '30px',
+                                color: `${user.colors.text_color}`,
+                                overflowWrap: "break-word",
+                                wordWrap: "break-word",
+                                wordBreak: "break-word",
+                            }}
+                            >
+                            {user.description}
                             </Typography>
                             </Box>
 
@@ -153,16 +163,14 @@ export const ProfileArea = (props) => {
                                 <Typography align='center' variant='h2' sx={{
                                     fontStyle: 'bold',
                                     width: '60%',
-                                    fontSize: "350%",
+                                    height: 'auto',
+                                    fontSize: "5vh",
                                     color: `${user.colors.text_color}`
                                 }}>
 
 
                                 {/* // add if statement once when content is done */}
                                 it looks like your profile is empty :/
-
-
-
                                 </Typography>
                             </Box>
                             :
@@ -211,7 +219,10 @@ export const ProfileArea = (props) => {
                             }}>
 
                                 { !isEdit ?
-                                    <Button variant="contained" onClick={() => {setIsEdit(true);}} 
+                                    <Button 
+                                    
+                                    variant="contained" 
+                                    onClick={() => {setIsEdit(true);}} 
                                     sx={{
                                     backgroundColor: `${user.colors.button_color}`,
                                     borderRadius: 5,
@@ -219,8 +230,17 @@ export const ProfileArea = (props) => {
                                     width: 175,
                                     fontStyle: 'bold',
                                     color: `${user.colors.secondary_text_color}`,
+                                    fontFamily: "Outfit",
+                                    fontSize: "18px",
+                                    lineHeight: "25px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    textAlign: "center",
+                                    textTransform:'lowercase'
                                     }}>
+
                                     lets change that
+                                    
                                     </Button>
                                     :
                                 <Button variant="contained" onClick={() => {
@@ -233,7 +253,14 @@ export const ProfileArea = (props) => {
                                     width: 175,
                                     fontStyle: 'bold',
                                     top: 40,
-                                    color: `${user.colors.secondary_text_color}`
+                                    color: `${user.colors.secondary_text_color}`,
+                                    fontFamily: "Outfit",
+                                    fontSize: "18px",
+                                    lineHeight: "25px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    textAlign: "center",
+                                    textTransform:'lowercase'
                                 }}>
                                 stop editing
                                 </Button>
@@ -248,7 +275,7 @@ export const ProfileArea = (props) => {
                     { user.shoutouts.length > 0 &&
                         <Box sx = {{
                         position: 'relative',
-                        marginBottom: "30px"
+                        marginBottom: "130px"
                         }}>
                         <Box display="flex" justifyContent="center" alignItems="center">
                             <Typography 

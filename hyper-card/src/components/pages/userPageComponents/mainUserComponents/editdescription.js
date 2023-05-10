@@ -12,7 +12,7 @@ import { auth, db } from '../../firebase-config';
 
 export const EditDescription = (props) => {
     const {description, button_color, secondary_text_color} = props;
-    const CHARACTER_LIMIT = 300;
+    const CHARACTER_LIMIT = 200;
     const [values, setValues] = useState({
       description: ""
     });
@@ -42,34 +42,35 @@ export const EditDescription = (props) => {
             <Box>
             <FormGroup>
             <FormControl>
-                <TextField
-                    multiline
-                    placeholder='enter description...'
-                    size='small'
-                    variant='standard'
-                    margin="normal"
-                    defaultValue={description}
-                    value={values.name}
-                    helperText={`${values.description.length}/${CHARACTER_LIMIT}`}
-                    onChange={handleChange("description")}
-                    InputProps={{ disableUnderline: true }}
-                    inputProps={{
-                        maxlength: CHARACTER_LIMIT,
-                        style: {
-                            textAlign: 'center',
-                            height: 150,
-                            width: 280,
-                            border: 2,
-                            borderStyle: 'solid',
-                            borderColor: `${secondary_text_color}`,
-                            backgroundColor: `${button_color}`,
-                            borderRadius: '15px',
-                            marginRight: 20,
-                            marginTop: 5,
-                            min: 0,
-                            color: `${secondary_text_color}`
-                         },
-                    }}
+            <TextField
+                multiline
+                placeholder='enter description...'
+                size='small'
+                variant='standard'
+                margin="normal"
+                defaultValue={description}
+                value={values.name}
+                helperText={`${values.description.length}/${CHARACTER_LIMIT}`}
+                onChange={handleChange("description")}
+                InputProps={{ disableUnderline: true }}
+                inputProps={{
+                    maxlength: CHARACTER_LIMIT,
+                    style: {
+                    textAlign: 'center',
+                    minHeight: 80,
+                    maxHeight: 200,
+                    width: 280,
+                    border: 2,
+                    borderStyle: 'solid',
+                    borderColor: `${secondary_text_color}`,
+                    backgroundColor: `${button_color}`,
+                    borderRadius: '15px',
+                    marginRight: 20,
+                    marginTop: 5,
+                    min: 0,
+                    color: `${secondary_text_color}`
+                    },
+                }}
                 />
                 </FormControl>
             </FormGroup>
@@ -84,7 +85,14 @@ export const EditDescription = (props) => {
                 borderStyle: 'solid',
                 borderColor: `${secondary_text_color}`,
                 backgroundColor: `${button_color}`,
-                color: `${secondary_text_color}`
+                color: `${secondary_text_color}`,
+                fontFamily: "Outfit",
+                fontSize: "15px",
+                lineHeight: "25px",
+                display: "flex",
+                alignItems: "center",
+                textAlign: "center",
+                textTransform:'lowercase'
             }}>
                 Update
             </Button>
