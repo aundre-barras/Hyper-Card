@@ -5,7 +5,6 @@ import {getDownloadURL, ref} from 'firebase/storage'
 import { doc, getDoc } from "firebase/firestore";
 import {db} from '../../firebase-config';
 import {
-    Box,
     Button
 } from '@mui/material';
 

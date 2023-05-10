@@ -3,7 +3,7 @@ import {
     Box,
     TextField,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { doc, updateDoc, getDocs, where, collection, query } from "firebase/firestore";
 import { auth, db } from '../../firebase-config';
@@ -70,6 +70,9 @@ export const EditDisplayName = (props) => {
           }
         });
       };
+    useEffect(() => {
+      
+    }, [])
     return (
 
         <Box display="flex" justifyContent="center" alignItems= "center" sx={{

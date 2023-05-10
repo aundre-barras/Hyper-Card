@@ -50,10 +50,9 @@ export const SelectColors = () => {
             <Grid container item columns={2} spacing={2} direction="row" justifyContent="center" alignItems="center" overflow={"auto"} height={"auto"} width = {"400px"}>
             {
                         colors_list.map((color) => (
-                        <div key={color.secondary_color}>
-                            <IconButton onClick={() => { setColor(color); }} >
-                            <Grid item >
-                            <Box item xs={6} spacing = {2}
+
+                        <Grid item key={color.secondary_color}>
+                            <IconButton onClick={() => { setColor(color); }}
                             sx={{
                                 height: "100px",
                                 width: "100px",
@@ -67,10 +66,9 @@ export const SelectColors = () => {
                                 borderWidth: "4px",
                                 borderColor: "black",
                             }}>
-                            </Box>
-                            </Grid>
                             </IconButton>
-                        </div>
+                        </Grid>
+
                         ))
                     }
             </Grid>

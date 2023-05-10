@@ -26,52 +26,72 @@ export const AddShoutOut = () => {
     }
 
     const addShoutOutOnUserName = async (username) => {
+
         const userRef = collection(db, "users");
         const userQuery = query(userRef, where("displayname", "==", username));
         const querySnapshot = await getDocs(userQuery);
         const currentUser = auth.currentUser;
+
         if (currentUser) {
           const ref = doc(db, "users", currentUser.uid);
           const userDoc = await getDoc(ref);
-          const existingShoutouts = userDoc.data().shoutouts || []; // Default to empty array if shoutouts is not yet set
-          const newShoutouts = querySnapshot.docs.map((doc) => doc.id);
-          const updatedShoutouts = [...existingShoutouts, ...newShoutouts];
-          await updateDoc(ref, { shoutouts: updatedShoutouts });
+          const existingShoutouts = userDoc.data().shoutouts || [];
+          if (existingShoutouts.length < 6){
+            const newShoutouts = querySnapshot.docs.map((doc) => doc.id);
+            const updatedShoutouts = [...existingShoutouts, ...newShoutouts];
+            await updateDoc(ref, { shoutouts: updatedShoutouts });
+          }
         } else {
           throw new Error("User is not authenticated");
         }
       }
 
-    const searchUsers = async () => {
-        if(username){
-            try {
-            const usersRef = collection(db, "users");
-            // Construct a Firestore query that matches documents where displayName is similar to the search query
-            const q = query(
-                usersRef,
-                where("displayname", ">=", username),
-                where("displayname", "<=", username + "\uf8ff"),
-                limit(10)
-            );
-        
-            // Execute the query and retrieve the results
-            const querySnapshot = await getDocs(q);
-            const results = querySnapshot.docs.map((doc) => doc.data());
-            setListOfUsers(results);
-
-            const images = await Promise.all(results.map(async (item) => await getImage(item.profile_image)));
-
-            setListOfImages(images);
+      const searchUsers = async () => {
+        if (username) {
+          try {
+            auth.onAuthStateChanged(async function (user) {
+              if (user) {
+                const ref = doc(db, "users", user.uid);
+      
+                const usersRef = collection(db, "users");
+                // Construct a Firestore query that matches documents where displayName is similar to the search query
+                const q = query(
+                  usersRef,
+                  where("displayname", ">=", username),
+                  where("displayname", "<=", username + "\uf8ff"),
+                );
+      
+                // Get the shoutouts array of the current user
+                const userDoc = await getDoc(ref);
+                const shoutouts = userDoc.data().shoutouts || [];
+      
+                // Filter out the usernames that are present in the shoutouts array
+                const filteredResults = [];
+                const querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                  if (!shoutouts.includes(doc.id)) {
+                    filteredResults.push(doc.data());
+                  }
+                });
+                setListOfUsers(filteredResults);
+      
+                const images = await Promise.all(
+                  filteredResults.map(async (item) => await getImage(item.profile_image))
+                );
+                setListOfImages(images);
+              }
+            });
+      
             // Do something with the results here
-            } catch (error) {
-                console.error("Error searching for users:", error);
-            }
+          } catch (error) {
+            console.error("Error searching for users:", error);
+          }
         }
-
-    }
+      };
 
     useEffect(() => {
         searchUsers();
+        
     }, [username])
 
     return (

@@ -1,5 +1,3 @@
-import { React, Fragment, useState, useEffect } from "react";
-
 import {
     useParams,
     useNavigate,
@@ -18,28 +16,19 @@ import { auth } from './firebase-config';
 //
 import { TopMenu } from './userPageComponents/mainUserComponents/topmenu';
 import { ProfileArea } from './userPageComponents/mainUserComponents/profilearea';
+import { Fragment, useEffect, useState } from "react";
 
 
-export const UserPage = (props) => {
+export const UserPage = () => {
 
-  const [isMenuOpen, setMenuOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [userData, setUserData] = useState([]);
-  const navigate = useNavigate();
   const { id } = useParams();
-  
-  const getAuth = async (filteredData) => {
-
-    onAuthStateChanged(auth, (user) => {
-      if (user && filteredData[0].id === user.uid) {
-        setIsAuth(true);
-      }
-    });
-  }
 
   const getUserData = async () => {
     try {
+      
       const userQuery = query(collection(db, "users"), where("displayname", "==", id));
 
       const unsubscribe = onSnapshot(userQuery, (snapshot) => {
@@ -49,9 +38,20 @@ export const UserPage = (props) => {
           ...doc.data(),
           id: doc.id,
         }));
-
-        getAuth(filteredData);
-        setUserData(filteredData);
+        
+        if (filteredData.length === 0) {
+          setIsAuth(false);
+          setUserData([]);
+        } else {
+          onAuthStateChanged(auth, (user) => {
+            if (user && filteredData[0].id === user.uid) {
+              setIsAuth(true);
+            } else {
+              setIsAuth(false);
+            }
+          });
+          setUserData(filteredData);
+        }
         
       });
       return unsubscribe;
@@ -61,19 +61,14 @@ export const UserPage = (props) => {
   };
 
   useEffect(() => {
-    getAuth(userData);
     getUserData();
-  }, [id, isAuth]);
+  }, [id]);
 
   useEffect(() => {
     window.addEventListener('popstate', () => {
       window.location.reload();
     });
   }, []);
-  
-  const setSubMenu = () => {
-    setMenuOpen(!isMenuOpen);
-  };
 
   return (
     <Fragment>

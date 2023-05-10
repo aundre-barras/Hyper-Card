@@ -25,13 +25,13 @@ import {ref, getDownloadURL} from 'firebase/storage'
 import { GetShoutOut } from './getshoutout';
 import { auth } from '../../firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
+import { EditShoutOuts } from './editshoutouts';
 
 
 export const ProfileArea = (props) => {
     const {userData, isAuth, isEdit, setIsEdit} = props;
     const [ userCards , setUserCards ] = useState([]);
     const [userImage, setUserImage] = useState("");
-    const location = useLocation();
 
     const getImage = async () => {
         try {
@@ -50,7 +50,7 @@ export const ProfileArea = (props) => {
         
         getImage();
 
-    }, [userData, isAuth])
+    }, [userData])
 
 
     return (
@@ -156,8 +156,13 @@ export const ProfileArea = (props) => {
                                     fontSize: "350%",
                                     color: `${user.colors.text_color}`
                                 }}>
+
+
                                 {/* // add if statement once when content is done */}
                                 it looks like your profile is empty :/
+
+
+
                                 </Typography>
                             </Box>
                             :
@@ -254,9 +259,12 @@ export const ProfileArea = (props) => {
                                 margin: "15px"
                             }}
                             >
-                                shout outs
+                                shout outs: {isEdit && <>{user.shoutouts.length} / 6</>}
                             </Typography>
                         </Box>
+
+                        {!isEdit ? 
+                        
                         <Box display="flex" justifyContent="center" alignItems="center" flexDirection="row">
                             {user.shoutouts.map((shoutout, i) => {
                                 return(
@@ -271,6 +279,12 @@ export const ProfileArea = (props) => {
 
                             })}
                         </Box>
+                        
+                        :
+
+                        <EditShoutOuts shoutouts = {user.shoutouts} text_color = {user.colors.text_color}/>
+                        }
+
                         </Box>
                     }
                     

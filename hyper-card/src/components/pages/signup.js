@@ -180,23 +180,26 @@ export const SignUp = () => {
     }
 
     return (
-    <div style={{
-        
-        
-    }}>
-    <ThemeProvider theme={theme}>
+    <div>
+    
         <GlobalStyles
           styles = {{
             body: {
+              backgroundColor: "white",
               backgroundImage: "linear-gradient(to bottom right, #FFFFFF 63.36%, #5C7BBD)",
-              backgroundAttatchment: "relative",
+              backgroundPosition: "0",
+              backgroundSize: "",
+              backgroundRepeat: "none",
               overflow: "scroll",
-              overflowX:"hidden"
+              overflowX:"hidden",
+              position: "relative",
+              minHeight: "100vh",
             }
           }}
         
         
         />
+        <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
