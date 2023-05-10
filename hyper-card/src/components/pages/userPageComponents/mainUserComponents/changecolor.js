@@ -12,16 +12,17 @@ export const ChangeColor = (props) => {
 
 
     return (
-    <Box m={2} pt={2}>
+
     <PopupState variant="popover" popupId="demo-popup-popover">
         {(popupState) => (
-            <div>
+            <div >
             <Button variant="contained" {...bindTrigger(popupState)}
                 sx={{
                 backgroundColor: `${button_color}`,
                 borderRadius: 5,
                 height: 30,
                 width: 160,
+                margin: "15px",
                 fontStyle: 'bold',
                 fontSize: "15px",
                 color: `${secondary_text_color}`
@@ -32,28 +33,43 @@ export const ChangeColor = (props) => {
             
             <Popover
             {...bindPopover(popupState)}
-              anchorReference="none"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-      
+            anchorReference="none"
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
+            >
+            <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                <SelectColors />
+            </Box>
+            <Box sx={{ textAlign: 'center' }}>
+                <Button
+                variant="contained"
+                onClick={() => {
+                    popupState.close();
+                }}
+                sx={{
+                    backgroundColor: 'black',
+                    borderRadius: 5,
+                    height: 30,
+                    width: 160,
+                    margin: '15px',
+                    fontStyle: 'bold',
+                    color: 'white',
+                }}
                 >
-                <Box xs={6} sx={{
-                    height: '35vh',
-                    width: '45vh'
-                }}>
-
-                </Box>
-            <SelectColors/>
-
+                close
+                </Button>
+            </Box>
             </Popover>
+
             </div>
 
         )}
 
     </PopupState>
-    </Box>
+
     );
 }

@@ -48,7 +48,6 @@ import {
       
         try {
           const hold_temp = imageUpload.name + v4();
-          console.log(hold_temp);
       
           auth.onAuthStateChanged(async function (user) {
             if (user) {

@@ -49,15 +49,17 @@ export const EditDisplayName = (props) => {
               if (!isAlphaNumeric() || ! await isDisplayNameInUse()) {
                 isInvalid(true);
               } else {
+                navigate ("/u/" + newdisplayname);
                 auth.onAuthStateChanged(async function(user) {
                   if (user){
                     const ref = doc(db, "users", user.uid);
                     await updateDoc(ref, {
                       displayname: newdisplayname
                     });
+                    
                   };
-                  navigate ("/u/" + newdisplayname);
-                  resolve(); // resolve the promise when everything is done
+                  
+                  resolve();
                 })
               }
             } else {
@@ -68,7 +70,6 @@ export const EditDisplayName = (props) => {
           }
         });
       };
-    
     return (
 
         <Box display="flex" justifyContent="center" alignItems= "center" sx={{

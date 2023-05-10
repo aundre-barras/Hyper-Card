@@ -14,27 +14,30 @@ import { AddContent } from './addcontent';
 import { useState, useEffect } from 'react';
 import {EditDisplayName} from './editdisplayname';
 import { EditProfileImage } from './editprofileimage';
-import { Link } from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import { EditDescription } from './editdescription';
 import { ChangeTheme } from './changetheme';
 import { ChangeColor } from './changecolor';
-import { hexToRGBA } from '../stylizers/hexToRGBA';
 import { DisplayCard } from './displayCard';
 
 import {storage} from '../../firebase-config';
 import {ref, getDownloadURL} from 'firebase/storage'
 import { GetShoutOut } from './getshoutout';
+import { auth } from '../../firebase-config';
+import { onAuthStateChanged } from 'firebase/auth';
+
 
 export const ProfileArea = (props) => {
-
     const {userData, isAuth, isEdit, setIsEdit} = props;
     const [ userCards , setUserCards ] = useState([]);
     const [userImage, setUserImage] = useState("");
+    const location = useLocation();
 
     const getImage = async () => {
         try {
           const url = await getDownloadURL(ref(storage, `profile_images/${userData[0].profile_image}`));
           setUserImage(url);
+          
         } catch (error) {
           console.error(error);
         }
@@ -46,7 +49,9 @@ export const ProfileArea = (props) => {
     useEffect(() => {
         
         getImage();
-    }, [userData])
+
+    }, [userData, isAuth])
+
 
     return (
         <div>
@@ -55,9 +60,9 @@ export const ProfileArea = (props) => {
                 <div key = {user}>
                     <GlobalStyles
                         styles={{
-                            body: { 
-                                backgroundColor: `${hexToRGBA(user.theme.backgroundColor)}`,
-                                background: `${user.theme.background}`,
+                            body: {
+                                backgroundColor: `${user.theme.backgroundColor}`,
+                                backgroundImage: `${user.theme.backgroundImage}`,
                                 backgroundPosition: `${user.theme.backgroundPosition}`,
                                 backgroundSize: `${user.theme.backgroundSize}`,
                                 backgroundRepeat: `${user.theme.backgroundRepeat}`,
@@ -130,7 +135,7 @@ export const ProfileArea = (props) => {
                     
 
                     {
-                        isAuth &&
+                        isAuth ? (
                         
                         <div>
 
@@ -167,7 +172,7 @@ export const ProfileArea = (props) => {
                             }
                             {isEdit && 
                             
-                            <Grid container justifyContent="center" alignItems="center" columns={1} sx = {{padding: "5px", width: "100%"}}>
+                            <Grid container justifyContent="center" alignItems="center" columns={1} sx = {{padding: "5px"}}>
                             <ChangeTheme 
                                 button_color = {user.colors.button_color} 
                                 secondary_text_color = {user.colors.secondary_text_color}
@@ -230,18 +235,20 @@ export const ProfileArea = (props) => {
                             </Box>
 
                         </div>
+                        ) : null
                     }
                     { user.shoutouts.length > 0 &&
                         <Box sx = {{
                         position: 'relative',
-                        top: "-200px",
+                        marginBottom: "30px"
                         }}>
                         <Box display="flex" justifyContent="center" alignItems="center">
                             <Typography 
                             variant='h4' 
                             sx = {{
                                 fontStyle: 'bold',
-                                color: `${user.colors.text_color}`
+                                color: `${user.colors.text_color}`,
+                                margin: "15px"
                             }}
                             >
                                 shout outs
@@ -251,7 +258,9 @@ export const ProfileArea = (props) => {
                             {user.shoutouts.map((shoutout, i) => {
                                 return(
                                 <div key = {shoutout}>
-                                <Box >
+                                <Box sx = {{
+                                    marginRight: "10px"
+                                }}>
                                     <GetShoutOut shout_out_uid = {shoutout} text_color = {user.colors.text_color}/>
                                 </Box>
                                 </div>
