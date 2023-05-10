@@ -19,6 +19,7 @@ import { auth } from './firebase-config';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { TopMenu } from './userPageComponents/mainUserComponents/topmenu';
 import {theme} from "./theme";
+import { GlobalStyles } from "@mui/material";
 
 
 export const Settings = (props) => {
@@ -70,7 +71,27 @@ export const Settings = (props) => {
     setMenuOpen(!isMenuOpen);
   };
   return (
+    <div>
+      <GlobalStyles
+      styles = {{
+        body: {
+          background: "white",
+          backgroundAttachment: "fixed",
+        }
+      }}
+    />
     <ThemeProvider theme={theme}>
+    <GlobalStyles
+            styles = {{
+              body: {
+                backgroundImage: "white",
+                backgroundAttatchment: "relative",
+                overflow: "hidden",
+                width: "100%",
+                minHeight: "100vh"
+              }
+            }}
+          />
       <TopMenu userData={userData} isAuth={isAuth}/>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -186,5 +207,6 @@ export const Settings = (props) => {
         </Box>
       </Container>
     </ThemeProvider>
+    </div>
   );
 }
