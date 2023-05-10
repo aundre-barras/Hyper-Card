@@ -8,6 +8,7 @@ import {Login} from "./components/pages/login";
 import {UserPage} from "./components/pages/userpage";
 import {NoPage} from "./components/pages/nopage";
 import {ForgotPassword} from "./components/pages/forgotpassword";
+import { Settings } from "./components/pages/settings";
 
 export const HyprCrd = () => {
   return (
@@ -19,6 +20,7 @@ export const HyprCrd = () => {
             <Route path = "/login" element = {<Login/>}/>
             <Route path = "/u/:id" element = {<UserPage/>}/>
             <Route path = "/forgotpassword" element = {<ForgotPassword/>}/>
+            <Route path = "/settings" element = {<Settings/>}/>
             <Route path = "*" to = "/nopage" element = {<NoPage/>}/>
 
 

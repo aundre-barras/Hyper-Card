@@ -1,4 +1,4 @@
-import {React, Fragment, useState, useEffect} from "react";
+import { React, Fragment, useState, useEffect } from "react";
 
 import {
     useParams,
@@ -16,7 +16,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 import { auth } from './firebase-config';
 //
-import {TopMenu} from './userPageComponents/mainUserComponents/topmenu';
+import { TopMenu } from './userPageComponents/mainUserComponents/topmenu';
 import { ProfileArea } from './userPageComponents/mainUserComponents/profilearea';
 
 
@@ -77,7 +77,7 @@ export const UserPage = (props) => {
 
   return (
     <Fragment>
-      <TopMenu />
+      <TopMenu userData={userData} isAuth={isAuth}/>
       <ProfileArea userData={userData} isAuth={isAuth} isEdit={isEdit} setIsEdit={setIsEdit} />
     </Fragment>
   );

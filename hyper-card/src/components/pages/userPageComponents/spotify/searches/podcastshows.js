@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
 import { Grid , Box , Paper , Button, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons";
+import { SearchPodcastId } from "../spotifysearchbyId";
 
 export const PodcastShows = (props) => {
     const searchInput = props.to_search;
@@ -107,13 +108,28 @@ export const PodcastShows = (props) => {
 }
 
 export const DisplayPodcast = (props) => {
+    const [podcastshowToDisplay, setPodcastshowToDisplay] = useState([]);
     const { card } = props;
-  
+    SearchPodcastId(card["podcastId"], setPodcastshowToDisplay);
+    
     return (
-      <Box display={"flex"} justifyContent={"center"}>
-        {
-          card["spotify_type"]
-        }
-      </Box>
+        podcastshowToDisplay["name"] &&
+      <Grid item key={podcastshowToDisplay.id} width={"50vw"} align={"center"} xs={12}>
+        <Grid container>
+          <Grid item xs={6}>
+            {
+              podcastshowToDisplay.images && podcastshowToDisplay.images[0] ?
+                <img src={podcastshowToDisplay.images[0].url} width="125px" height='125px' alt={podcastshowToDisplay.name} /> : null
+            }
+            <h4>{podcastshowToDisplay.popularity}</h4>
+          </Grid>
+  
+          <Grid item xs={6}>
+            <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
+              {podcastshowToDisplay.name}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Grid>
     )
   }

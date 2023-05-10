@@ -1,4 +1,4 @@
-import {React} from "react";
+import { React, Fragment, useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -8,13 +8,91 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import {ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import {
+  useParams,
+  useNavigate
+} from "react-router-dom"
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import {db, storage} from "./firebase-config";
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase-config';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import { TopMenu } from './userPageComponents/mainUserComponents/topmenu';
 import {theme} from "./theme";
+import { GlobalStyles } from "@mui/material";
 
 
-export const Settings = () => {
+export const Settings = (props) => {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [userData, setUserData] = useState([]);
+
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userQuery = query(collection(db, "users"), where("displayname", "==", id));
+
+        const unsubscribe = onSnapshot(userQuery, (snapshot) => {
+          if (snapshot.empty) {
+            navigate("/login");
+            window.location.reload();
+            return;
+          }
+
+          const filteredData = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+
+          onAuthStateChanged(auth, (user) => {
+            if (user && filteredData[0].id === user.uid) {
+              setIsAuth(true);
+            }
+          });
+
+          setUserData(filteredData);
+          
+        });
+
+        return unsubscribe;
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getUserData();
+  }, [id]); // add id as a dependency
+
+  const setSubMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
   return (
+    <div>
+      <GlobalStyles
+      styles = {{
+        body: {
+          background: "white",
+          backgroundAttachment: "fixed",
+        }
+      }}
+    />
     <ThemeProvider theme={theme}>
+    <GlobalStyles
+            styles = {{
+              body: {
+                backgroundImage: "white",
+                backgroundAttatchment: "relative",
+                overflow: "hidden",
+                width: "100%",
+                minHeight: "100vh"
+              }
+            }}
+          />
+      <TopMenu userData={userData} isAuth={isAuth}/>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -26,12 +104,6 @@ export const Settings = () => {
           }}
           >
             <Grid container spacing={2}>
-                <Grid item xs={12} align="right">
-                <MenuRoundedIcon
-                    // onClick={}
-                    sx={{fontSize: "50px"}}
-                    />
-                </Grid>
                 <Grid item xs={12} align="center">
                 <text style={{
                     "fontFamily":"'Outfit'",
@@ -135,5 +207,6 @@ export const Settings = () => {
         </Box>
       </Container>
     </ThemeProvider>
+    </div>
   );
 }

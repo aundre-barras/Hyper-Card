@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
 import { Box , Paper, Grid, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons";
+import { SearchTrackId } from "../spotifysearchbyId";
 
 export const Tracks = (props) => {
     const searchInput = props.to_search;
@@ -106,13 +107,28 @@ export const Tracks = (props) => {
 }
 
 export const DisplayTrack = (props) => {
+    const [trackToDisplay, setTrackToDisplay] = useState([]);
     const { card } = props;
-  
+    SearchTrackId(card["trackId"], setTrackToDisplay);
+    
     return (
-      <Box display={"flex"} justifyContent={"center"}>
-        {
-          card["spotify_type"]
-        }
-      </Box>
+        trackToDisplay["name"] &&
+      <Grid item key={trackToDisplay.id} width={"50vw"} align={"center"} xs={12}>
+        <Grid container>
+          <Grid item xs={6}>
+            {
+              trackToDisplay.album.images && trackToDisplay.album.images[0] ?
+                <img src={trackToDisplay.album.images[0].url} width="125px" height='125px' alt={trackToDisplay.name} /> : null
+            }
+            <h4>{trackToDisplay.popularity}</h4>
+          </Grid>
+  
+          <Grid item xs={6}>
+            <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
+              {trackToDisplay.name}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Grid>
     )
   }
