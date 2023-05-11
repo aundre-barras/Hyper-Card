@@ -3,6 +3,7 @@ import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
 import { Grid , Box , Paper , Button, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons";
 import { SearchPodcastId } from "../spotifysearchbyId";
+import spotify from '../../../../media/spotify.png';
 
 export const PodcastShows = (props) => {
     const searchInput = props.to_search;
@@ -118,15 +119,15 @@ export const DisplayPodcast = (props) => {
     return (
         podcastshowToDisplay["name"] &&
       <Grid item key={podcastshowToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-        <Grid container width='350px' justifyContent='center' alignItems='center'>
-          <Grid item xs={6}>
+        <Grid container width='400px' justifyContent='center'>
+          <Grid item xs={5}>
             {
               podcastshowToDisplay.images && podcastshowToDisplay.images[0] ?
                 <img src={podcastshowToDisplay.images[0].url} width="125px" height='125px' alt={podcastshowToDisplay.name} /> : null
             }
           </Grid>
   
-          <Grid item xs={6}>
+          <Grid item xs={5} justifyContent='center' alignItems='center' display='flex'>
             <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
               {podcastshowToDisplay.name}
               <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '16px', textAlign: 'center' }}>
@@ -134,6 +135,12 @@ export const DisplayPodcast = (props) => {
               </Typography>
             </Typography>
           </Grid>
+
+          <Grid item xs={2} justifyContent='flex-end' alignItems='flex-start' display='flex'>
+          <a href = {podcastshowToDisplay.external_urls.spotify} target="_blank" rel="noreferrer">
+            <img src={spotify} alt="logo" style={{ width: "25px", height: "25px" }}/>
+          </a>
+        </Grid>
         </Grid>
       </Grid>
     )
