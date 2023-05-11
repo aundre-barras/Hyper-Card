@@ -10,7 +10,6 @@ import { db, auth} from '../../firebase-config';
 
 
 
-
 export const AddLink = (props) => {
     const { userCards , setUserCards } = props;
     let title = "";
@@ -124,14 +123,24 @@ export const DisplayLink = (props) => {
     const {card} = props;
 
     return(
-        <Box display={"flex"} justifyContent={"center"}>
-            <Box justifyContent={"center"} sx={{
-                borderColor: "black",
-                border: 2
-            }}>
-                {card["title"]}
-            </Box>
-        </Box>
+        <Grid item width={"25vw"} align={"center"} xs={12}>
+            <Grid container width='400px' height='75px' 
+                justifyContent='center' alignItems='center'
+                style={{ borderRadius:'10px', background:'rgba(255, 255, 255, 0.8)'}}>
+                <Grid item xs={12}>
+                    <a href = {card["url"]} target="_blank" rel="noreferrer" 
+                        style={{
+                            fontFamily:'Outfit',
+                            fontWeight:400,
+                            fontSize:'24px',
+                            textDecoration:'none',
+                            color:'#000000'
+                            }}>
+                        {card["title"]}
+                    </a>
+                </Grid>
+            </Grid>
+        </Grid>
     )
 
 }
