@@ -3,6 +3,7 @@ import { CLIENT_ID, CLIENT_SECRET_ID } from "../spotify-config";
 import { Box , Paper, Grid, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons";
 import { SearchTrackId } from "../spotifysearchbyId";
+import spotify from '../../../../media/spotify.png';
 
 export const Tracks = (props) => {
     const searchInput = props.to_search;
@@ -81,7 +82,7 @@ export const Tracks = (props) => {
                             "trackId": track.id
                           }])
                     }}>
-                        <Grid container>
+                        <Grid container justifyContent='center' alignItems='center'>
                             <Grid item xs={6}>
                                 {
                                 track.album.images && track.album.images[0] ?
@@ -91,7 +92,10 @@ export const Tracks = (props) => {
 
                             <Grid item xs={6}>
                                 <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
-                                    {track.name}
+                                    {track.name} <br/>
+                                    <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '12px', textAlign: 'center' }}>
+                                      {track.artists[0].name}
+                                    </Typography>
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -114,20 +118,28 @@ export const DisplayTrack = (props) => {
     return (
         trackToDisplay["name"] &&
       <Grid item key={trackToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-        <Grid container>
-          <Grid item xs={6}>
+        <Grid container width='400px' justifyContent='center'>
+          <Grid item xs={5}>
             {
               trackToDisplay.album.images && trackToDisplay.album.images[0] ?
                 <img src={trackToDisplay.album.images[0].url} width="125px" height='125px' alt={trackToDisplay.name} /> : null
             }
-            <h4>{trackToDisplay.popularity}</h4>
           </Grid>
   
-          <Grid item xs={6}>
+          <Grid item xs={5} justifyContent='center' alignItems='center' display='flex'>
             <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
-              {trackToDisplay.name}
+              {trackToDisplay.name} <br/>
+              <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '16px', textAlign: 'center' }}>
+                {trackToDisplay.artists[0].name}
+              </Typography>
             </Typography>
           </Grid>
+          
+          <Grid item xs={2} justifyContent='flex-end' alignItems='flex-start' display='flex'>
+            <a href = {trackToDisplay.external_urls.spotify} target="_blank" rel="noreferrer">
+              <img src={spotify} alt="logo" style={{ width: "25px", height: "25px" }}/>
+            </a>
+        </Grid>
         </Grid>
       </Grid>
     )
