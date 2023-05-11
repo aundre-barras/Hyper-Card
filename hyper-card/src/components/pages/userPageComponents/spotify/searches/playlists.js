@@ -84,7 +84,7 @@ export const Playlists = (props) => {
                                 "playlistId": playlist.id
                             }])
                         }}>
-                            <Grid container>
+                            <Grid container justifyContent='center' alignItems='center'>
                                 <Grid item xs={6}>
                                     {
                                         playlist.images && playlist.images[0] ?
@@ -92,8 +92,11 @@ export const Playlists = (props) => {
                                     }
                             </Grid>
                             <Grid item xs={6}>
-                                    <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'20px', textAlign:'center'}}>
+                                    <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
                                         {playlist.name}
+                                    </Typography>
+                                    <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'12px', textAlign:'center'}}>
+                                        {playlist.owner.display_name}
                                     </Typography>
                                 </Grid>
                             </Grid>
@@ -114,18 +117,20 @@ export const DisplayPlaylist = (props) => {
     return (
         playlistToDisplay["name"] &&
       <Grid item key={playlistToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-        <Grid container width='300px'>
+        <Grid container width='350px' justifyContent='center' alignItems='center'>
           <Grid item xs={6}>
             {
               playlistToDisplay.images && playlistToDisplay.images[0] ?
                 <img src={playlistToDisplay.images[0].url} width="125px" height='125px' alt={playlistToDisplay.name} /> : null
             }
-            <h4>{playlistToDisplay.popularity}</h4>
           </Grid>
   
           <Grid item xs={6}>
             <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
               {playlistToDisplay.name}
+              <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
+                {playlistToDisplay.owner.display_name}
+            </Typography>
             </Typography>
           </Grid>
         </Grid>

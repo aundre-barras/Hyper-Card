@@ -81,7 +81,7 @@ export const Tracks = (props) => {
                             "trackId": track.id
                           }])
                     }}>
-                        <Grid container>
+                        <Grid container justifyContent='center' alignItems='center'>
                             <Grid item xs={6}>
                                 {
                                 track.album.images && track.album.images[0] ?
@@ -91,7 +91,10 @@ export const Tracks = (props) => {
 
                             <Grid item xs={6}>
                                 <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
-                                    {track.name}
+                                    {track.name} <br/>
+                                    <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '12px', textAlign: 'center' }}>
+                                      {track.artists[0].name}
+                                    </Typography>
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -114,7 +117,7 @@ export const DisplayTrack = (props) => {
     return (
         trackToDisplay["name"] &&
       <Grid item key={trackToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-        <Grid container width='300px'>
+        <Grid container width='350px' justifyContent='center' alignItems='center'>
           <Grid item xs={6}>
             {
               trackToDisplay.album.images && trackToDisplay.album.images[0] ?
@@ -125,7 +128,9 @@ export const DisplayTrack = (props) => {
           <Grid item xs={6}>
             <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
               {trackToDisplay.name} <br/>
-              {trackToDisplay.artists.name}
+              <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '16px', textAlign: 'center' }}>
+                {trackToDisplay.artists[0].name}
+              </Typography>
             </Typography>
           </Grid>
         </Grid>

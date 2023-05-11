@@ -84,7 +84,7 @@ export const Albums = (props) => {
                 "albumId": album.id
               }]);
             }}>
-              <Grid container>
+              <Grid container justifyContent='center' alignItems='center'>
                 <Grid item xs={6}>
                   {
                     album.images && album.images[0] ?
@@ -93,8 +93,11 @@ export const Albums = (props) => {
                 </Grid>
 
                 <Grid item xs={6}>
-                  <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
+                  <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '16px', textAlign: 'center' }}>
                     {album.name}
+                    <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '12px', textAlign: 'center' }}>
+                      {album.artists[0].name}
+                    </Typography>
                   </Typography>
                 </Grid>
               </Grid>
@@ -115,7 +118,7 @@ export const DisplayAlbum = (props) => {
   return (
     albumToDisplay["name"] &&
     <Grid item key={albumToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-      <Grid container width='300px'>
+      <Grid container width='350px' justifyContent='center' alignItems='center'>
         <Grid item xs={6}>
           {
             albumToDisplay.images && albumToDisplay.images[0] ?
@@ -127,7 +130,7 @@ export const DisplayAlbum = (props) => {
           <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
             {albumToDisplay.name} <br/>
             <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '16px', textAlign: 'center' }}>
-              ranking: {albumToDisplay.popularity}
+              {albumToDisplay.artists[0].name}
             </Typography>
           </Typography>
         </Grid>

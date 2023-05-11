@@ -84,7 +84,7 @@ export const Audiobooks = (props) => {
                                 "audioBookId": audiobook.id
                             }])
                         }}>
-                            <Grid container>
+                            <Grid container justifyContent='center' alignItems='center'>
                                 <Grid item xs={6}>
                                     {
                                         audiobook.images && audiobook.images[0] ?
@@ -92,8 +92,11 @@ export const Audiobooks = (props) => {
                                     }
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'14px', textAlign:'center'}}>
+                                    <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
                                         {audiobook.name}
+                                    </Typography>
+                                    <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'12px', textAlign:'center'}}>
+                                        {audiobook.authors[0].name}
                                     </Typography>
                                 </Grid>
                             </Grid>
@@ -114,7 +117,7 @@ export const DisplayAudioBook = (props) => {
     return (
         audioBookToDisplay["name"] &&
       <Grid item key={audioBookToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-        <Grid container width='300px'>
+        <Grid container width='350px' justifyContent='center' alignItems='center'>
           <Grid item xs={6}>
             {
               audioBookToDisplay.images && audioBookToDisplay.images[0] ?
@@ -125,7 +128,9 @@ export const DisplayAudioBook = (props) => {
           <Grid item xs={6}>
             <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
               {audioBookToDisplay.name} <br/>
-              {audioBookToDisplay.popularity}
+              <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
+                {audioBookToDisplay.authors[0].name}
+            </Typography>
             </Typography>
           </Grid>
         </Grid>

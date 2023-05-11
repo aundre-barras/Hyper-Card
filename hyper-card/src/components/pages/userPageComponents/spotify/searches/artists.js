@@ -82,7 +82,7 @@ export const Artists = (props) => {
                 "artistId": artist.id
               }]);              
             }}>
-              <Grid container>
+              <Grid container justifyContent='center' alignItems='center'>
                 <Grid item xs={6}>
                   {
                     artist.images && artist.images[0] ?
@@ -90,14 +90,14 @@ export const Artists = (props) => {
                   }
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'20px', textAlign:'center'}}>
+                  <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
                     {artist.name}
                   </Typography>
-                  <Typography marginTop={1} sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
+                  <Typography marginTop={1} sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'12px', textAlign:'center'}}>
                     Followers: {artist.followers.total}
                   </Typography>
-                  <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
-                  <a href = {artist.external_urls.spotify} target="_blank" rel="noreferrer" style={{textDecoration:'none'}}>spotify</a>
+                  <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'12px', textAlign:'center'}}>
+                    <a href = {artist.external_urls.spotify} target="_blank" rel="noreferrer" style={{textDecoration:'none'}}>spotify</a>
                   </Typography>
                 </Grid>
               </Grid>
@@ -121,7 +121,7 @@ export const DisplayArtist = (props) => {
   return (
     artistsToDisplay["name"] &&
     <Grid item key={artistsToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-      <Grid container width='300px'>
+      <Grid container width='350px' justifyContent='center' alignItems='center'>
         <Grid item xs={6}>
           {
             artistsToDisplay.images && artistsToDisplay.images[0] ?
@@ -136,7 +136,7 @@ export const DisplayArtist = (props) => {
             Followers: {artistsToDisplay.followers.total}
           </Typography>
           <Typography sx={{fontFamily:'Outfit', fontWeight:700, fontSize:'16px', textAlign:'center'}}>
-          <a href = {artistsToDisplay.external_urls.spotify} target="_blank" rel="noreferrer" style={{textDecoration:'none'}}>spotify</a>
+            <a href = {artistsToDisplay.external_urls.spotify} target="_blank" rel="noreferrer" style={{textDecoration:'none'}}>spotify</a>
           </Typography>
         </Grid>
       </Grid>
