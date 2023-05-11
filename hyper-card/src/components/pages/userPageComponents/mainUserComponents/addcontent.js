@@ -4,11 +4,13 @@ import {
     Box,
     Grid,
 
+
     IconButton
 } from '@mui/material';
 import spotify from '../../../media/spotify.png';
 import twitch from '../../../media/twitch.png';
 import shoutouts from '../../../media/shoutouts.png';
+
 
 import { SpotifySearch } from '../spotify/spotifysearch'
 import { AddLink } from './addlink';
@@ -19,12 +21,16 @@ import Popover from '@mui/material/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import { useState , useEffect } from 'react';
 
+
 export const AddContent = (props) => {
     const {setUserCards , userCards} = props;
     const [addType, setAddType] = useState("link");
 
 
+
+
     const SelectedCard = () => {
+
 
         const getCardType = {
             "link": AddLink,
@@ -33,25 +39,33 @@ export const AddContent = (props) => {
             "shoutout": AddShoutOut
         };
 
+
         const CardType = getCardType[addType];
+
+
         if (addType.length > 0){
             return (
                 <div>
                     <CardType setUserCards={setUserCards} userCards={userCards}/>
                 </div>
 
+
             );
         }
         return;
     }
 
+
     useEffect(() => {
         SelectedCard();
     } , [addType])
+   
     return (
         <PopupState variant="popover" popupId="demo-popup-popover">
             {(popupState) => (
                 <Box display='flex' justifyContent='center'>
+
+
                 <Box sx={{
                     justifyContent: 'center',
                     height: 56,
@@ -65,9 +79,12 @@ export const AddContent = (props) => {
                             fontSize: 40,
                         }}/>
 
+
                     </IconButton>
 
+
                 </Box>
+
 
                 <Popover
                     {...bindPopover(popupState)}
@@ -86,18 +103,26 @@ export const AddContent = (props) => {
                     borderRadius: '10px',
                 }}>
 
-                <Grid container 
-                    direction='row' 
-                    justifyContent="space-content" 
-                    alignItems='center' 
+
+                <Grid container
+                    direction='row'
+                    justifyContent="space-content"
+                    alignItems='center'
                     xs={12} spacing={1}
                     >
 
+
                 <Grid item xs={12}>
-                    <Typography align='center'>
-                    Link Type
+                    <Typography align='center' sx={{
+                        fontSize: "5vh",
+                        alignText:'center',
+
+
+                    }}>
+                    link type.
                     </Typography>
                 </Grid>
+
 
                 <Grid item xs={4}>
                 <Button display='flex' justifyContent='center' onClick={() => {
@@ -119,6 +144,7 @@ export const AddContent = (props) => {
                 </Button>
                 </Grid>
 
+
                 <Grid item xs={4}>
                     <Button display='flex' justifyContent='center' onClick={() => {
                     setAddType("spotify");
@@ -136,6 +162,7 @@ export const AddContent = (props) => {
                         <img src={spotify} alt = "logo" style={{ width: "25px", height: "25px" }}/>    
                     </Button>
                 </Grid>
+
 
                 <Grid item xs={4}>
                 <Button display='flex' justifyContent='center' onClick={() => {
@@ -155,6 +182,7 @@ export const AddContent = (props) => {
                 </Button>
                 </Grid>
 
+
                 <Grid item xs={4}>
                 <Button display='flex' justifyContent='center' onClick={() => {
                     setAddType("shoutout")
@@ -173,19 +201,27 @@ export const AddContent = (props) => {
                 </Button>
                 </Grid>
 
+
                 <Grid item xs={12}>
                     <SelectedCard/>
                 </Grid>
 
-                </Grid>         
+
+                </Grid>        
+
 
                 </Box>
 
+
                 </Popover>
-                
+               
                 </Box>
             )}
         </PopupState>
     );
 }
+
+
+
+
 

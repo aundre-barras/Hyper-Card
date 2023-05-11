@@ -6,10 +6,12 @@ import {
     Stack,
 } from '@mui/material';
 
+
 import GlobalStyles from '@mui/material/GlobalStyles';
 import {ThemeProvider } from '@mui/material/styles';
 import {UserTheme} from "../usertheme";
 import { AddContent } from './addcontent';
+
 
 import { useState, useEffect } from 'react';
 import {EditDisplayName} from './editdisplayname';
@@ -20,6 +22,7 @@ import { ChangeTheme } from './changetheme';
 import { ChangeColor } from './changecolor';
 import { DisplayCard } from './displayCard';
 
+
 import {storage} from '../../firebase-config';
 import {ref, getDownloadURL} from 'firebase/storage'
 import { GetShoutOut } from './getshoutout';
@@ -28,29 +31,36 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { EditShoutOuts } from './editshoutouts';
 
 
+
+
 export const ProfileArea = (props) => {
     const {userData, isAuth, isEdit, setIsEdit} = props;
     const [ userCards , setUserCards ] = useState([]);
     const [userImage, setUserImage] = useState("");
 
+
     const getImage = async () => {
         try {
           const url = await getDownloadURL(ref(storage, `profile_images/${userData[0].profile_image}`));
           setUserImage(url);
-          
+         
         } catch (error) {
           console.error(error);
         }
     }
 
+
     const updateUserImage = (value) => {
         setUserImage(value);
       };
     useEffect(() => {
-        
+       
         getImage();
 
+
     }, [userData])
+
+
 
 
     return (
@@ -80,6 +90,7 @@ export const ProfileArea = (props) => {
                         {
                                 !isEdit ?
 
+
                                 <Box
                                 display="flex"
                                 justifyContent="center"
@@ -97,18 +108,14 @@ export const ProfileArea = (props) => {
                                 }}
                                 >
                                 </Box>
-                            
+                           
                             :
+
 
                             <EditProfileImage profileImage={userData[0].profile_image} textColor={user.colors.text_color} checkValue={updateUserImage} />
                             }
-                        </Grid>
-
-                            
+                        </Grid>        
                     </Grid>
-
-
-                    
                         {
                             !isEdit ?
                             <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
@@ -138,28 +145,30 @@ export const ProfileArea = (props) => {
                             </Typography>
                             </Box>
 
+
                         :
-                            <EditDisplayName 
+                            <EditDisplayName
                             displayname = {user.displayname}
                             button_color = {user.colors.button_color}
                             secondary_text_color = {user.colors.secondary_text_color}
                             />
                         }
-                    
+                   
+
 
                     {
                         isAuth ? (
-                        
+                       
                         <div>
+
 
                             {
                                 !isEdit?
-
-                                
                                 <Box display="flex" justifyContent="center" alignItems="center" sx={{
                                 height: 200
                             }}>
-
+                            {
+                            !user.content.length > 0 &&
                                 <Typography align='center' variant='h2' sx={{
                                     fontStyle: 'bold',
                                     width: '60%',
@@ -169,60 +178,70 @@ export const ProfileArea = (props) => {
                                 }}>
 
 
-                                {/* // add if statement once when content is done */}
-                                it looks like your profile is empty :/
+
+
+
+
+
+
+                                it looks like your profile page is empty :/
                                 </Typography>
+                            }
                             </Box>
                             :
                             <Box display='flex' sx={{
                                 justifyContent: 'center'}}>
 
-                            
-                                <EditDescription 
-                                description = {user.description} 
+
+                           
+                                <EditDescription
+                                description = {user.description}
                                 button_color = {user.colors.button_color}
                                 secondary_text_color = {user.colors.secondary_text_color}
                                 />
-                                
+                               
                             </Box>
                             }
-                            {isEdit && 
-                            
+                            {isEdit &&
+                           
                             <Grid container justifyContent="center" alignItems="center" columns={1} sx = {{padding: "5px"}}>
-                            <ChangeTheme 
-                                button_color = {user.colors.button_color} 
+                            <ChangeTheme
+                                button_color = {user.colors.button_color}
                                 secondary_text_color = {user.colors.secondary_text_color}
                                 main_color = {user.colors.main_color}
                                 secondary_color = {user.colors.secondary_color}
                             />
 
-                            
+
+                           
                             <ChangeColor
-                                button_color = {user.colors.button_color} 
+                                button_color = {user.colors.button_color}
                                 secondary_text_color = {user.colors.secondary_text_color}
                             />
                             </Grid>
                             }
-                            {
-                                userCards.length > 0 &&
-                                    <DisplayCard userCards={userCards}/>
-                            }
+   
+                            <DisplayCard userCards={user.content}/>
                             {
                                 isEdit &&
 
-                                    <AddContent userCards = {userCards} setUserCards = {setUserCards}/>
+
+                                    <AddContent userCards = {user.content} setUserCards = {setUserCards}/>
+
 
                             }
+
 
                             <Box display="flex" justifyContent="center"sx={{
                                 height: 400,
                             }}>
 
+
                                 { !isEdit ?
-                                    <Button 
-                                    
-                                    variant="contained" 
-                                    onClick={() => {setIsEdit(true);}} 
+                                    <Button
+                                   
+                                    variant="contained"
+                                    onClick={() => {setIsEdit(true);}}
                                     sx={{
                                     backgroundColor: `${user.colors.button_color}`,
                                     borderRadius: 5,
@@ -239,13 +258,13 @@ export const ProfileArea = (props) => {
                                     textTransform:'lowercase'
                                     }}>
 
-                                    lets change that
-                                    
+
+                                    {user.content.length > 0 ? "edit page" : "lets change that"}
                                     </Button>
                                     :
                                 <Button variant="contained" onClick={() => {
                                     setIsEdit(false);
-                                    }} 
+                                    }}
                                     sx={{
                                     backgroundColor: `${user.colors.button_color}`,
                                     borderRadius: 5,
@@ -265,21 +284,25 @@ export const ProfileArea = (props) => {
                                 stop editing
                                 </Button>
 
+
                                 }
+
 
                             </Box>
 
+
                         </div>
-                        ) : null
+                        ) : <DisplayCard userCards={user.content}/>
                     }
+                   
                     { user.shoutouts.length > 0 &&
                         <Box sx = {{
                         position: 'relative',
                         marginBottom: "130px"
                         }}>
                         <Box display="flex" justifyContent="center" alignItems="center">
-                            <Typography 
-                            variant='h4' 
+                            <Typography
+                            variant='h4'
                             sx = {{
                                 fontStyle: 'bold',
                                 color: `${user.colors.text_color}`,
@@ -290,8 +313,9 @@ export const ProfileArea = (props) => {
                             </Typography>
                         </Box>
 
-                        {!isEdit ? 
-                        
+
+                        {!isEdit ?
+                       
                         <Box display="flex" justifyContent="center" alignItems="center" flexDirection="row">
                             {user.shoutouts.map((shoutout, i) => {
                                 return(
@@ -304,33 +328,40 @@ export const ProfileArea = (props) => {
                                 </div>
                                 )
 
+
                             })}
                         </Box>
-                        
+                       
                         :
+
 
                         <EditShoutOuts shoutouts = {user.shoutouts} text_color = {user.colors.text_color}/>
                         }
 
+
                         </Box>
                     }
-                    
-                    <Typography display="flex" justifyContent="center" alignItems="center" variant='h1' color={user.colors.secondary_text_color} 
-                    component={Link} to="/" 
-                    style={{ 
+                   
+                    <Typography display="flex" justifyContent="center" alignItems="center" variant='h1' color={user.colors.secondary_text_color}
+                    component={Link} to="/"
+                    style={{
                         textDecoration:"none",
                         fontSize: "40px",
+
 
                     }}>
                     hypr
                     <span style={{color:`${user.colors.text_color}`}}>crd</span>
                     </Typography>
 
+
                     </Stack>
                     </ThemeProvider>
+
 
             </div>
             ))}
         </div>
     );
 }
+

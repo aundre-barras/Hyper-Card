@@ -5,6 +5,11 @@ import {
     TextField,
     Button
 } from '@mui/material';
+import {doc, updateDoc, getDoc} from "firebase/firestore";
+import { db, auth} from '../../firebase-config';
+
+
+
 
 export const AddLink = (props) => {
     const { userCards , setUserCards } = props;
@@ -12,6 +17,21 @@ export const AddLink = (props) => {
     let url = "";
     let tempUserCards = [];
 
+    const add = async () => {
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+            const ref = doc(db, "users", currentUser.uid);
+            const userDoc = await getDoc(ref);
+            const existingContent = userDoc.data().content || [];
+            const updatedcontent = [...tempUserCards];
+            console.log(tempUserCards);
+            console.log(updatedcontent);
+            await updateDoc(ref, { content: updatedcontent });
+          } else {
+            throw new Error("User is not authenticated");
+        }
+    }
+    
     return ( 
             <Grid container>
                 <Grid item xs={12} marginLeft={'10%'} marginTop={5}>
@@ -55,9 +75,9 @@ export const AddLink = (props) => {
                     </Box>   
                 </Grid>
                 <Grid item xs={6} bottom={0} left={'12px'} position={'absolute'} >
-                    <Button variant='contained' onClick={()=>{
+                    <Button variant='contained' onClick={async ()=>{
                                                 if(url == "" || title == ""){
-                                                    console.log("no");
+
                                                     return;
                                                 }
                                                 tempUserCards = [{"type": "link",
@@ -65,8 +85,7 @@ export const AddLink = (props) => {
                                                                 "title": title
                                                                 }, ...userCards];
                                                 setUserCards(tempUserCards);
-                                                console.log(url);
-                                                console.log(title);
+                                                await add();
                                                 }} 
                         sx={{
                             width:'100px',

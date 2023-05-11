@@ -1,14 +1,35 @@
-import { Box , Grid , Button } from "@mui/material";
+import { Grid , Button } from "@mui/material";
+import {doc, updateDoc, getDoc} from "firebase/firestore";
+import { db, auth} from '../../firebase-config';
+
 
 export const ConfirmCardButtons = (props) => {
     const { tempCard , userCards , setUserCards } = props;
     let newUserCards = [];
+
+
+    const addLinkToDB = async () => {
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+            const ref = doc(db, "users", currentUser.uid);
+            const userDoc = await getDoc(ref);
+            const existingContent = userDoc.data().content || [];
+            const updatedcontent = [...existingContent, ...newUserCards];
+            console.log("where am I")
+            await updateDoc(ref, { content: updatedcontent });
+          } else {
+            throw new Error("User is not authenticated");
+        }
+    }  
+
+
     return (
         <Grid container>
             <Grid item xs={6} bottom={0} left={'12px'} position={'absolute'} >
-                <Button variant='contained' onClick={() => {
-                newUserCards = [...tempCard, ...userCards];
+                <Button variant='contained' onClick={async () => {
+                newUserCards = [...tempCard];
                 setUserCards(newUserCards);
+                await addLinkToDB();
                 }}
                     sx={{
                         width:'100px',
@@ -40,6 +61,7 @@ export const ConfirmCardButtons = (props) => {
                 </Button>
             </Grid>
         </Grid>
-        
+       
     )
 }
+
