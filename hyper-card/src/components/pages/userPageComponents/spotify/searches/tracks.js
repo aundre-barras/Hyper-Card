@@ -118,11 +118,11 @@ export const DisplayTrack = (props) => {
     return (
         trackToDisplay["name"] &&
       <Grid item key={trackToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-        <Grid container width='400px' justifyContent='center'>
-          <Grid item xs={5}>
+        <Grid container width='400px' height='150px' justifyContent='center' style={{ borderRadius:'10px', background:'rgba(255, 255, 255, 0.8)'}}>
+          <Grid item xs={5} justifyContent='center' alignItems='center' display='flex'>
             {
               trackToDisplay.album.images && trackToDisplay.album.images[0] ?
-                <img src={trackToDisplay.album.images[0].url} width="125px" height='125px' alt={trackToDisplay.name} /> : null
+                <img src={trackToDisplay.album.images[0].url} width="125px" height='125px' style={{borderRadius:'10px'}} alt={trackToDisplay.name} /> : null
             }
           </Grid>
   
