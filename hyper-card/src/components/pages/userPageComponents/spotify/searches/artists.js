@@ -119,11 +119,11 @@ export const DisplayArtist = (props) => {
   return (
     artistsToDisplay["name"] &&
     <Grid item key={artistsToDisplay.id} align={"center"} xs={12}>
-      <Grid container width='400px' justifyContent='center'>
-        <Grid item xs={5}>
+      <Grid container width='400px' height='150px' justifyContent='center' style={{ borderRadius:'10px', background:'rgba(255, 255, 255, 0.8)'}}>
+        <Grid item xs={5} justifyContent='center' alignItems='center' display='flex'>
           {
             artistsToDisplay.images && artistsToDisplay.images[0] ?
-              <img src={artistsToDisplay.images[0].url} width="125px" height='125px' alt={artistsToDisplay.name} /> : null
+              <img src={artistsToDisplay.images[0].url} width="125px" height='125px' style={{borderRadius:'10px'}} alt={artistsToDisplay.name} /> : null
           }
         </Grid>
         <Grid item xs={5} justifyContent='center' alignItems='center' display='flex'>

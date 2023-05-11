@@ -119,11 +119,11 @@ export const DisplayAlbum = (props) => {
   return (
     albumToDisplay["name"] &&
     <Grid item key={albumToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-      <Grid container width='400px' justifyContent='center'>
-        <Grid item xs={5}>
+      <Grid container width='400px' height='150px' justifyContent='center' style={{ borderRadius:'10px', background:'rgba(255, 255, 255, 0.8)'}}>
+        <Grid item xs={5} justifyContent='center' alignItems='center' display='flex'>
           {
             albumToDisplay.images && albumToDisplay.images[0] ?
-              <img src={albumToDisplay.images[0].url} width="125px" height='125px' alt={albumToDisplay.name} /> : null
+              <img src={albumToDisplay.images[0].url} width="125px" height='125px' style={{borderRadius:'10px'}} alt={albumToDisplay.name} /> : null
           }
         </Grid>
 
