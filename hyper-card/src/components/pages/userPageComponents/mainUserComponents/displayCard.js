@@ -17,8 +17,8 @@ import { DisplayPodcast } from '../spotify/searches/podcastshows';
 import { DisplayTrack } from '../spotify/searches/tracks';
 
 export const DisplayCard = (props) => {
-    const {userCards} = props;
-
+    const {userCards , colors , isEdit} = props;
+    
     return (
         <Grid container direction='row' 
         justifyContent="space-content" 
@@ -26,40 +26,41 @@ export const DisplayCard = (props) => {
         xs={12} spacing={1}>
             {
                 userCards.map((card , idx) => {
+                    console.log( idx , card)
                     if(card["type"] == "link"){
                         return(
-                            <DisplayLink key={idx} card={card}/>
+                            <DisplayLink key={idx} card={card} isEdit={isEdit}/>
                         )
                     }
                     else if(card["type"] == "spotify"){
                         if(card["spotify_type"] == "artist"){
                             return (
-                                <DisplayArtist key={idx} card={card}/>
+                                <DisplayArtist idx={idx} card={card} isEdit={isEdit}/>
                             )
                         }
                         else if(card["spotify_type"] == "album"){
                             return (
-                                <DisplayAlbum key={idx} card={card}/>
+                                <DisplayAlbum idx={idx} card={card} isEdit={isEdit}/>
                             )
                         }
                         else if(card["spotify_type"] == "audiobook"){
                             return (
-                                <DisplayAudioBook key={idx} card={card}/>
+                                <DisplayAudioBook idx={idx} card={card} isEdit={isEdit}/>
                             )
                         }
                         else if(card["spotify_type"] == "playlist"){
                             return (
-                                <DisplayPlaylist key={idx} card={card}/>
+                                <DisplayPlaylist idx={idx} card={card} isEdit={isEdit}/>
                             )
                         }
                         else if(card["spotify_type"] == "podcast"){
                             return (
-                                <DisplayPodcast key={idx} card={card}/>
+                                <DisplayPodcast idx={idx} card={card} isEdit={isEdit}/>
                             )
                         }
                         else if(card["spotify_type"] == "track"){
                             return (
-                                <DisplayTrack key={idx} card={card}/>
+                                <DisplayTrack idx={idx} card={card} isEdit={isEdit}/>
                             )
                         }
                     }

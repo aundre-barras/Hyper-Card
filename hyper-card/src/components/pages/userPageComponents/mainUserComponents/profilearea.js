@@ -221,7 +221,7 @@ export const ProfileArea = (props) => {
                             </Grid>
                             }
    
-                            <DisplayCard userCards={user.content}/>
+                            <DisplayCard userCards={user.content} colors={user.colors} isEdit={isEdit}/>
                             {
                                 isEdit &&
 

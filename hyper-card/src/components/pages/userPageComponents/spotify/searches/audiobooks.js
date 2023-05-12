@@ -4,6 +4,7 @@ import { Grid, Box, Paper, Button, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons"
 import { SearchAudioBookId } from "../spotifysearchbyId";
 import spotify from '../../../../media/spotify.png';
+import { DeleteCardButton } from "../../mainUserComponents/deleteCard";
 
 export const Audiobooks = (props) => {
     const searchInput = props.to_search;
@@ -75,7 +76,9 @@ export const Audiobooks = (props) => {
 
     return (
         <div>
-            <Paper style={{ maxHeight:'285px', overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
+            {
+                audiobooks.length > 0 &&
+                <Paper style={{ maxHeight:'285px', overflow: 'auto', border:'2px solid #000000', borderRadius:'10px'}}>
                 {audiobooks.map((audiobook) => {
                     return (
                         <div key={audiobook.id} onClick={() => {
@@ -105,6 +108,7 @@ export const Audiobooks = (props) => {
                     )
                 })}
             </Paper>
+            }
             <ConfirmCardButtons tempCard={tempCard} userCards={userCards} setUserCards={setUserCards} />
         </div>
     )
@@ -112,12 +116,13 @@ export const Audiobooks = (props) => {
 
 export const DisplayAudioBook = (props) => {
     const [audioBookToDisplay, setAudioBookToDisplay] = useState([]);
-    const { card } = props;
+    const { card , idx , isEdit } = props;
     SearchAudioBookId(card["audioBookId"], setAudioBookToDisplay);
     
     return (
         audioBookToDisplay["name"] &&
       <Grid item key={audioBookToDisplay.id} width={"50vw"} align={"center"} xs={12}>
+        <Box width='400px' height='150px' justifyContent='center' style={{ borderRadius: '10px', background: 'rgba(255, 255, 255, 0.8)' }}>
         <Grid container width='400px' height='150px' justifyContent='center' style={{ borderRadius:'10px', background:'rgba(255, 255, 255, 0.8)'}}>
           <Grid item xs={5} justifyContent='center' alignItems='center' display='flex'>
             {
@@ -141,6 +146,11 @@ export const DisplayAudioBook = (props) => {
           </a>
         </Grid>
         </Grid>
+        {
+            isEdit && 
+            <DeleteCardButton idx={idx}/>
+        }
+        </Box>
       </Grid>
     )
   }

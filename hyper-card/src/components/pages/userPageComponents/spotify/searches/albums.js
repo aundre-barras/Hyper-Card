@@ -4,6 +4,7 @@ import { Grid, Box, Paper, Button, Typography } from "@mui/material";
 import { ConfirmCardButtons } from "../../mainUserComponents/confirmCardButtons";
 import { SearchAlbumId } from "../spotifysearchbyId";
 import spotify from '../../../../media/spotify.png';
+import { DeleteCardButton } from "../../mainUserComponents/deleteCard";
 
 export const Albums = (props) => {
   const searchInput = props.to_search;
@@ -75,37 +76,41 @@ export const Albums = (props) => {
   return (
 
     <div>
-      <Paper style={{ maxHeight: '285px', overflow: 'auto', border: '2px solid #000000', borderRadius: '10px' }}>
-        {albums.map((album) => {
-          return (
-            <div key={album.id} onClick={() => {
-              setTempCard([{
-                "type": "spotify",
-                "spotify_type": "album",
-                "albumId": album.id
-              }]);
-            }}>
-              <Grid container justifyContent='center' alignItems='center'>
-                <Grid item xs={6}>
-                  {
-                    album.images && album.images[0] ?
-                      <img src={album.images[0].url} width="125px" height='125px' alt={album.name} /> : null
-                  }
-                </Grid>
+      {
+        albums.length > 0 &&
+        <Paper style={{ maxHeight: '285px', overflow: 'auto', border: '2px solid #000000', borderRadius: '10px' }}>
+          {albums.map((album) => {
+            return (
+              <div key={album.id} onClick={() => {
+                setTempCard([{
+                  "type": "spotify",
+                  "spotify_type": "album",
+                  "albumId": album.id
+                }]);
+              }}>
+                <Grid container justifyContent='center' alignItems='center'>
+                  <Grid item xs={6}>
+                    {
+                      album.images && album.images[0] ?
+                        <img src={album.images[0].url} width="125px" height='125px' alt={album.name} /> : null
+                    }
+                  </Grid>
 
-                <Grid item xs={6}>
-                  <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '16px', textAlign: 'center' }}>
-                    {album.name}
-                    <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '12px', textAlign: 'center' }}>
-                      {album.artists[0].name}
+                  <Grid item xs={6}>
+                    <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '16px', textAlign: 'center' }}>
+                      {album.name}
+                      <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '12px', textAlign: 'center' }}>
+                        {album.artists[0].name}
+                      </Typography>
                     </Typography>
-                  </Typography>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </div>
-          )
-        })}
-      </Paper>
+              </div>
+            )
+          })}
+        </Paper>
+      }
+
       <ConfirmCardButtons tempCard={tempCard} userCards={userCards} setUserCards={setUserCards} />
     </div>
   )
@@ -113,35 +118,41 @@ export const Albums = (props) => {
 
 export const DisplayAlbum = (props) => {
   const [albumToDisplay, setAlbumToDisplay] = useState([]);
-  const { card } = props;
+  const { card, idx, isEdit } = props;
   SearchAlbumId(card["albumId"], setAlbumToDisplay);
 
   return (
     albumToDisplay["name"] &&
     <Grid item key={albumToDisplay.id} width={"50vw"} align={"center"} xs={12}>
-      <Grid container width='400px' height='150px' justifyContent='center' style={{ borderRadius:'10px', background:'rgba(255, 255, 255, 0.8)'}}>
-        <Grid item xs={5} justifyContent='center' alignItems='center' display='flex'>
-          {
-            albumToDisplay.images && albumToDisplay.images[0] ?
-              <img src={albumToDisplay.images[0].url} width="125px" height='125px' style={{borderRadius:'10px'}} alt={albumToDisplay.name} /> : null
-          }
-        </Grid>
+      <Box width='400px' height='150px' justifyContent='center' style={{ borderRadius: '10px', background: 'rgba(255, 255, 255, 0.8)' }}>
+        <Grid container width='400px' height='150px' justifyContent='center' style={{ borderRadius: '10px', background: 'rgba(255, 255, 255, 0.8)' }}>
+          <Grid item xs={5} justifyContent='center' alignItems='center' display='flex'>
+            {
+              albumToDisplay.images && albumToDisplay.images[0] ?
+                <img src={albumToDisplay.images[0].url} width="125px" height='125px' style={{ borderRadius: '10px' }} alt={albumToDisplay.name} /> : null
+            }
+          </Grid>
 
-        <Grid item xs={5} justifyContent='center' alignItems='center' display='flex'>
-          <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
-            {albumToDisplay.name} <br/>
-            <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '16px', textAlign: 'center' }}>
-              {albumToDisplay.artists[0].name}
+          <Grid item xs={5} justifyContent='center' alignItems='center' display='flex'>
+            <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
+              {albumToDisplay.name} <br />
+              <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '16px', textAlign: 'center' }}>
+                {albumToDisplay.artists[0].name}
+              </Typography>
             </Typography>
-          </Typography>
+          </Grid>
+
+          <Grid item xs={2} justifyContent='flex-end' alignItems='flex-start' display='flex'>
+            <a href={albumToDisplay.external_urls.spotify} target="_blank" rel="noreferrer">
+              <img src={spotify} alt="logo" style={{ width: "25px", height: "25px" }} />
+            </a>
+          </Grid>
         </Grid>
-        
-        <Grid item xs={2} justifyContent='flex-end' alignItems='flex-start' display='flex'>
-          <a href = {albumToDisplay.external_urls.spotify} target="_blank" rel="noreferrer">
-            <img src={spotify} alt="logo" style={{ width: "25px", height: "25px" }}/>
-          </a>
-        </Grid>
-      </Grid>
+        {
+          isEdit &&
+          <DeleteCardButton idx={idx} />
+        }
+      </Box>
     </Grid>
   )
 }
