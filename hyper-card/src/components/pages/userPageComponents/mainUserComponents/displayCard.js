@@ -29,7 +29,7 @@ export const DisplayCard = (props) => {
                     console.log( idx , card)
                     if(card["type"] == "link"){
                         return(
-                            <DisplayLink key={idx} card={card} isEdit={isEdit}/>
+                            <DisplayLink key={idx} card={card} isEdit={isEdit} colors={colors}/>
                         )
                     }
                     else if(card["type"] == "spotify"){
