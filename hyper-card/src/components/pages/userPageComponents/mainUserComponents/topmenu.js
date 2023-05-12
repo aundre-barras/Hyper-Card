@@ -17,6 +17,7 @@ const styles = {
     }
 }
 
+
 export const TopMenu = (props) => {
     const navigate = useNavigate();
     const { isAuth, userData } = props;
@@ -27,6 +28,7 @@ export const TopMenu = (props) => {
     if (isAuth) {
         const profile = "/u/" + userData[0].displayname
         const settings = profile + "/settings";
+        const qr = profile + "/qrcode"
         return (
             <div>
                 <div style={{ top: 0, right: 0, position: "fixed", zIndex: 3 }}>
@@ -43,14 +45,14 @@ export const TopMenu = (props) => {
                 >
                     <div style={{ 'fontSize': 30, 'display': 'flex', 'flexDirection': 'column', 'padding': 24 }}>
                         <Link to={profile} style={{ 'textDecoration': 'none', 'color': 'black', 'fontFamily': 'Outfit', 'marginBottom': 16 }}>profile</Link>
-                        <Link to="/qr" style={{ 'textDecoration': 'none', 'color': 'black', 'fontFamily': 'Outfit', 'marginBottom': 16  }}>qr code</Link>
+                        <Link to="" onClick={() => { navigate(qr); window.location.reload();}} style={{ 'textDecoration': 'none', 'color': 'black', 'fontFamily': 'Outfit', 'marginBottom': 16  }}>qr code</Link>
                         <Link to="" onClick={() => { navigate(settings); window.location.reload();}} style={{ 'textDecoration': 'none', 'color': 'black', 'fontFamily': 'Outfit', 'marginBottom': 16  }}>settings</Link>
                         <Link to="" onClick={() => {auth.signOut();  window.location.reload();}} style={{ 'textDecoration': 'none', 'color': 'black', 'fontFamily': 'Outfit', 'marginBottom': 16  }}>log out</Link>
                     </div>
                 </Drawer>
             </div>
         );
-    } 
+    }
     else {
         return (
             <div>
