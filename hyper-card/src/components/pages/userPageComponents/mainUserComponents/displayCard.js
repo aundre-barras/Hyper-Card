@@ -15,6 +15,7 @@ import { DisplayAudioBook } from '../spotify/searches/audiobooks';
 import { DisplayPlaylist } from '../spotify/searches/playlists';
 import { DisplayPodcast } from '../spotify/searches/podcastshows';
 import { DisplayTrack } from '../spotify/searches/tracks';
+import { DisplayTwitchUser } from '../twitch/twitchusersearch';
 
 export const DisplayCard = (props) => {
     const {userCards , colors , isEdit} = props;
@@ -62,6 +63,11 @@ export const DisplayCard = (props) => {
                                 <DisplayTrack idx={idx} card={card} isEdit={isEdit}/>
                             )
                         }
+                    }
+                    else if (card["type"] == "twitch"){
+                        return ( 
+                            <DisplayTwitchUser idx={idx} card={card} isEdit={isEdit}/>
+                        )
                     }
                     
                 })
