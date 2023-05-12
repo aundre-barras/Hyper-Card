@@ -36,7 +36,7 @@ export const AddLink = (props) => {
         <Grid container>
             <Grid item xs={12} marginLeft={'10%'} marginTop={5}>
                 <Typography variant='h4' marginLeft={4}>
-                    Title
+                    title
                 </Typography>
                 <Box display='flex' sx={{
                     border: 2,
@@ -56,7 +56,7 @@ export const AddLink = (props) => {
             </Grid>
             <Grid item xs={12} marginLeft={'10%'}>
                 <Typography variant='h4' marginLeft={4}>
-                    Url
+                    url
                 </Typography>
                 <Box display='flex' sx={{
                     border: 2,

@@ -37,6 +37,7 @@ export const Login = () => {
         const usersRef = doc(db, "users", userCredential.user.uid);
         const snap = await getDoc(usersRef);
         navigate ("/u/" + snap.data().displayname);
+        window.location.reload();
 
       } catch (error) {
 
@@ -55,6 +56,7 @@ export const Login = () => {
             const snap = await getDoc(usersRef);
           
             navigate ("/u/" + snap.data().displayname);
+            window.location.reload();
 
         } catch (error) {
             console.error(error);

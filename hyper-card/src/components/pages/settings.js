@@ -2,45 +2,44 @@ import { React, Fragment, useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import {ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
 import {
   useParams,
   useNavigate
 } from "react-router-dom"
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { TopMenu } from './userPageComponents/mainUserComponents/topmenu';
 import {theme} from "./theme";
 import { GlobalStyles } from "@mui/material";
 import { auth } from "./firebase-config";
 import { doc, getDoc } from "firebase/firestore";
-import {db, storage} from "./firebase-config";
+import {db} from "./firebase-config";
 
 export const Settings = (props) => {
   const [isAuth, setIsAuth] = useState();
+  const [newEmail, setNewEmail] = useState("");
   const [userData, setUserData] = useState([]);
-
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const getAuth = async () => {
     try {
       const userAuth = auth.currentUser;
       if (userAuth) { // check if userAuth is not null
-        console.log(userAuth.uid);
         const usersRef = doc(db, "users", userAuth.uid);
         const snap = await getDoc(usersRef);
         if (snap.data().displayname === id) {
           setUserData(snap.data());
           setIsAuth(true);
         } else {
-          // handle case where displayname does not match
+          navigate("/login");
+          window.location.reload();
         }
       } else {
-        // handle case where there is no authenticated user
+        navigate("/login");
+        window.location.reload();
       }
     } catch (error) {
       console.error(error);
@@ -113,30 +112,40 @@ export const Settings = (props) => {
             </text>
               </Grid>
               <Grid item xs={8}>
-                <TextField
+              <TextField
                 id="email"
                 label="email"
                 name="email"
                 autoComplete="email"
-                // onChange={(e) => setEmail(e.target.value)}
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
                 size="small"
                 InputProps={{sx:{height:"37px", borderRadius:"35px"}}}
-                />
+              />
               </Grid>
               <Grid item xs={4} >
-                <Button 
+              <Button 
                 type="submit"
                 variant="outlined"
-                // onClick={}
+                onClick={async () => {
+                  try {
+                    const auth = getAuth();
+                    await auth.updateEmail(auth.currentUser, newEmail);
+                    alert("Email updated successfully!");
+                  } catch (error) {
+                    console.error(error);
+                    alert("Error updating email. Please try again later.");
+                  }
+                }}
                 sx={{
                   height:"37px",
                   borderRadius:"35px",
                   color:"#000000",
                   textTransform:"lowercase",
                 }}
-                >
-                  submit
-                </Button>
+              >
+                submit
+              </Button>
               </Grid>
               <Grid item >
               <text style={{
