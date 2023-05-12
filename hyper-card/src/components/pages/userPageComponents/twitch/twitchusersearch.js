@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { TextField, Grid, Typography, Paper } from "@mui/material";
+import { TextField, Grid, Typography, Paper, Box } from "@mui/material";
 import live from "../../../media/live.png";
 import { TwitchUserSearchById } from "./twitchsearchbyId";
 import { ConfirmCardButtons } from "../mainUserComponents/confirmCardButtons";
+import { DeleteCardButton } from "../mainUserComponents/deleteCard";
 
 export const TwitchUserSearch = (props) => {
     const { userCards, setUserCards } = props;
@@ -102,7 +103,7 @@ export const TwitchUserSearch = (props) => {
 
 export const DisplayTwitchUser = (props) => {
     const [userToDisplay, setUserToDisplay] = useState([]);
-    const { card } = props;
+    const { card, idx, isEdit } = props;
     useEffect(() => {
         TwitchUserSearchById(card["userName"], setUserToDisplay);
     }, [card]);
@@ -115,21 +116,27 @@ export const DisplayTwitchUser = (props) => {
     return (
         userToDisplay["display_name"] &&
         <Grid item key={userToDisplay.id} align={"center"} xs={12}>
-            <Grid container width='400px' height='150px' justifyContent='center' style={{ borderRadius: '10px', background: 'rgba(255, 255, 255, 0.8)' }}>
-            <Grid item xs={12} key={userToDisplay.id}>
-                <Grid container justifyContent={'center'} marginTop={2}>
-                    <Grid item xs={6}>
-                        <img src={userToDisplay.thumbnail_url} width="125px" height="125px" />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
-                            {userToDisplay.display_name}
-                        </Typography>
-                        {userToDisplay.is_live ? <img src={live} width="25%" /> : null}
+            <Box width='400px' height='150px' justifyContent='center' style={{ borderRadius: '10px', background: 'rgba(255, 255, 255, 0.8)' }}>
+                <Grid container width='400px' height='150px' justifyContent='center' style={{ borderRadius: '10px', background: 'rgba(255, 255, 255, 0.8)' }}>
+                    <Grid item xs={12} key={userToDisplay.id}>
+                        <Grid container justifyContent={'center'} marginTop={2}>
+                            <Grid item xs={6}>
+                                <img src={userToDisplay.thumbnail_url} width="125px" height="125px" />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography sx={{ fontFamily: 'Outfit', fontWeight: 700, fontSize: '20px', textAlign: 'center' }}>
+                                    {userToDisplay.display_name}
+                                </Typography>
+                                {userToDisplay.is_live ? <img src={live} width="25%" /> : null}
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-            </Grid> 
+                {
+                    isEdit &&
+                    <DeleteCardButton idx={idx} />
+                }
+            </Box>
         </Grid>
     )
 }
