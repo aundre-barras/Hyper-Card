@@ -71,15 +71,17 @@ export const ProfileArea = (props) => {
                     <GlobalStyles
                         styles={{
                             body: {
-                                backgroundColor: `${user.theme.backgroundColor}`,
-                                backgroundImage: `${user.theme.backgroundImage} !important`,
-                                backgroundPosition: `${user.theme.backgroundPosition}`,
-                                backgroundSize: `${user.theme.backgroundSize}`,
-                                backgroundRepeat: `${user.theme.backgroundRepeat}`,
+                                backgroundColor: user.theme.backgroundColor,
+                                backgroundImage: `${user.theme.backgroundImage}`,
+                                backgroundPosition: user.theme.backgroundPosition,
+                                backgroundSize: user.theme.backgroundSize,
+                                backgroundRepeat: user.theme.backgroundRepeat,
                                 backgroundAttatchment: "relative",
                                 overflow: "scroll",
                                 scrollbarWidth: "none",
                                 overflowX: "hidden",
+                                height: "100%",
+                                width: "100%"
                             }
                         }}
                     />
@@ -334,6 +336,7 @@ export const ProfileArea = (props) => {
                    
                     <Typography display="flex" justifyContent="center" alignItems="center" variant='h1' color={user.colors.secondary_text_color}
                     component={Link} to="/"
+                    onClick={ () => {window.location.reload();}}
                     style={{
                         textDecoration:"none",
                         fontSize: "40px",

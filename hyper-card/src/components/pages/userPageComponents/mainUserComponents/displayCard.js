@@ -26,7 +26,6 @@ export const DisplayCard = (props) => {
         xs={12} spacing={1}>
             {
                 userCards.map((card , idx) => {
-                    console.log( idx , card)
                     if(card["type"] == "link"){
                         return(
                             <DisplayLink key={idx} card={card} isEdit={isEdit} colors={colors}/>

@@ -7,7 +7,7 @@ export const Themes = (background_color, secondary_color) => {
             "backgroundColor":`${hexToRGBA(background_color, 1)}`,
             "backgroundImage":`linear-gradient(${hexToRGBA(background_color, 1)}, ${hexToRGBA(background_color, 1)} 100%)`,
             "backgroundPosition":"0",
-            "backgroundSize":"",
+            "backgroundSize":"0em 0em",
             "backgroundRepeat":"",
 
         },
@@ -15,7 +15,7 @@ export const Themes = (background_color, secondary_color) => {
             "backgroundColor":`${hexToRGBA(background_color, 1)}`,
             "backgroundImage": `linear-gradient(180deg, ${hexToRGBA(background_color, 1)} 50%, ${hexToRGBA(secondary_color, 1)} 100%)`,
             "backgroundPosition":"0",
-            "backgroundSize":"",
+            "backgroundSize":"100vw 100vh",
             "backgroundRepeat":"",
 
         },

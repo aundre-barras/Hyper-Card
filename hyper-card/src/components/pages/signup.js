@@ -75,15 +75,16 @@ export const SignUp = () => {
                     displayname: user.email.substring(0, user.email.indexOf("@")),
                     description: "",
                     colors: {
-                        button_color: "#4c697d",
-                        main_color: "#eeeeee",
-                        secondary_color: "#96aebc",
-                        text_color: "#96aebc"
+                        main_color:"#e8eae8",
+                        secondary_color:"#646e73",
+                        text_color:"#2a312f",
+                        secondary_text_color:"#434b4e",
+                        button_color:"#c6cdcd"
                     },
                     profile_image: "ghost_icon.png",
                     content : [],
                     theme : {
-                        background_color: "#eeeeee",
+                        background_color: "#e8eae8",
                         background: "",
                         background_position: "",
                         background_size: "",
@@ -94,7 +95,7 @@ export const SignUp = () => {
                 });
 
                 navigate("/u/" + user.email.substring(0, user.email.indexOf("@")));
-
+                window.location.reload();
             });
         } catch (error) {
             console.error(error);
@@ -151,15 +152,16 @@ export const SignUp = () => {
                         displayname: username,
                         description: "",
                         colors: {
-                            button_color: "#4c697d",
-                            main_color: "#eeeeee",
-                            secondary_color: "#96aebc",
-                            text_color: "#eeeeee"
+                            main_color:"#e8eae8",
+                            secondary_color:"#646e73",
+                            text_color:"#2a312f",
+                            secondary_text_color:"#434b4e",
+                            button_color:"#c6cdcd"
                         },
                         profile_image: "ghost_icon.png",
                         content : [],
                         theme : {
-                            background_color: "#eeeeee",
+                            background_color: "#e8eae8",
                             background: "",
                             background_position: "",
                             background_size: "",
