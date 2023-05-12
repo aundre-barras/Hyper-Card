@@ -164,26 +164,16 @@ export const ProfileArea = (props) => {
 
                             {
                                 !isEdit?
-                                <Box display="flex" justifyContent="center" alignItems="center" sx={{
-                                height: 200
-                            }}>
+                                <Box display="flex" justifyContent="center" alignItems="center">
                             {
                             !user.content.length > 0 &&
                                 <Typography align='center' variant='h2' sx={{
                                     fontStyle: 'bold',
                                     width: '60%',
-                                    height: 'auto',
+                                    height: 100,
                                     fontSize: "5vh",
                                     color: `${user.colors.text_color}`
                                 }}>
-
-
-
-
-
-
-
-
                                 it looks like your profile page is empty :/
                                 </Typography>
                             }
@@ -232,8 +222,8 @@ export const ProfileArea = (props) => {
                             }
 
 
-                            <Box display="flex" justifyContent="center"sx={{
-                                height: 400,
+                            <Box marginTop={5} display="flex" justifyContent="center"sx={{
+                                height: 100,
                             }}>
 
 
